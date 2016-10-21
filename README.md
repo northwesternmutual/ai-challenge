@@ -1,4 +1,4 @@
-# AI Challenge [![Build Status](https://img.shields.io/travis/northwesternmutual/ai-challenge/master.svg?style=flat)](https://travis-ci.org/facebook/react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests)
+# AI Challenge [![Build Status](https://travis-ci.com/northwesternmutual/ai-challenge.svg?token=MkdavBWRqQGB4gWqK2cR&branch=master)](https://travis-ci.org/facebook/react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests)
 
 AI Challenge is a framework for fascilitating artificial intelligence (AI) tournaments.
 
