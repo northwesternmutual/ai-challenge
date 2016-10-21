@@ -1,0 +1,4 @@
+node_modules/
+LICENSE
+npm-debug.log
+mongo_data/

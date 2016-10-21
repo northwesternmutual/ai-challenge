@@ -1,0 +1,164 @@
+---
+  #ENVIRONMENTS
+  env: 
+    #Define globals exposed by modern browers
+    browser: true
+    #Define globals exposed by jQuery
+    jquery: true
+    #Define globals exposed by Node.js
+    node: true
+    #Define globals exposed by Jasmine
+    jasmine: true
+    #Tell JSHint that your code needs to adhere to ECMAScript 6 spec
+    es6: true
+
+  #GLOBALS
+  globals: 
+    define: false
+    require: false
+    JSON: false
+    describe: false
+    beforeEach: false
+    afterEach: false
+    expect: false
+    it: false
+    jasmine: false
+    spyOn: false
+
+  #PARSER OPTIONS
+  parserOptions: 
+    #Specify that we want to use the ECMAScript 6 version
+    ecmaVersion: 6
+    #Specify that our code is in ECMAScript modules
+    sourceType: "module"
+
+  #RULES
+  rules:
+    #No spaces inside array brackets
+    array-bracket-spacing:
+        - "error"
+        - "never"
+    #Force all variable names to use either camelCase style or UPPER_CASE with underscores
+    camelcase: "error"
+    #No dangling commas
+    comma-dangle:
+        - "error"
+        - "never"
+    #No space before comma
+    comma-spacing:
+        - "error"
+        -
+            "before": false
+            "after": true
+    #Require comman before new line
+    comma-style:
+        - "error"
+        - "last"
+    #Always put curly braces around blocks in loops and conditionals
+    curly: "error"
+    #Enforce dot notation
+    dot-notation: "error"
+    #Require new line at end of file (EOF)
+    eol-last: "error"
+    #Prohibit use of == and != in favor of === and !==
+    eqeqeq: "error"
+    #require for in loops to filter object's items
+    guard-for-in: "error"
+    #Enforce tab width of 4 spaces
+    indent: 
+        - "error"
+        - 4
+        - 
+            SwitchCase: 1
+    #Forbid space between key and `:`
+    key-spacing:
+        - "error"
+        -
+            "beforeColon": false
+            "afterColon": true
+    #Require space after keyword 
+    keyword-spacing:
+        - "error"
+        -
+            "before": true
+            "after": true
+    #Prohibit use of arguments.caller and arguments.callee
+    no-caller: "error"
+    #Require capitalized names for constructor functions
+    new-cap:
+        - "error"
+        -
+            "properties": false
+    #Disallow empty blocks with the exception of the `catch` block
+    no-empty:
+        - "error"
+        -
+            "allowEmptyCatch": true
+    #Suppress warnings about == null comparisons
+    no-eq-null: "error"
+    #Prohibit overwriting prototypes of native objects such as Array, Date, and so on
+    no-extend-native: "error"
+    #Warns about "non-breaking whitespace" characters
+    no-irregular-whitespace: "error"
+    #No mixed spaces and tabs
+    no-mixed-spaces-and-tabs: "error"
+    #No consecutive line breaks
+    no-multiple-empty-lines:
+        - "error"
+        -
+            "max": 1
+    #No space between function name and parenthesis
+    no-spaced-func: "error"
+    #No trailing whitespace except to an empty line
+    no-trailing-spaces:
+        - "error"
+        - 
+            "skipBlankLines": true
+    #Prohibit use of explicitly undeclared variables
+    no-undef: "error"
+    #No unnedded ternary
+    no-unneeded-ternary: "error"
+    #Warn when variables are defined but never used
+    no-unused-vars: "error"
+    #Prohibit use of a variable before it is defined
+    no-use-before-define: "error"
+    #No use of the `with` keyword
+    no-with: "error"
+    #Must use variable declaration for each variable
+    one-var:
+        - "error"
+        - "never"
+    #Enforce use of single quotation marks for strings
+    quotes:
+        - "error"
+        - "single"
+    #Require space after `;` but not before
+    semi-spacing: "error"
+    #Must have a space before a block
+    space-before-blocks: "error"
+    space-before-function-paren:
+        - "error"
+        -
+            "anonymous": "always"
+            "named": "never"
+    #Disallow spaces inside parenthesis
+    space-in-parens:
+        - "error"
+        - "never"
+    #Requires space around infix operators
+    space-infix-ops: "error"
+    #Prohibits space around unary operators
+    space-unary-ops: "error"
+    #Enforce placing 'use strict' at the top function scope
+    strict:
+        - "error"
+        - "function"
+    #Wrap IIFE call on the outside
+    wrap-iife:
+        - "error"
+        - "outside"
+    #Never allow a yoda condition
+    yoda: "error"
+
+
+

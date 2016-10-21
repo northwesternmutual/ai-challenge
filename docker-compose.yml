@@ -1,0 +1,45 @@
+---
+version: '2'
+
+services:
+
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - "8080:80"
+    networks:
+      - ai_challenge
+
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - ./algorithmService/mongo_data:/data/db
+    ports:
+      - "27017"
+    networks:
+      - ai_challenge
+
+  algorithm:
+    build: ./algorithmService
+    ports:
+      - "80"
+    networks:
+      - ai_challenge
+
+  simulator:
+    build: ./simulatorService
+    ports:
+      - "80"
+    networks:
+      - ai_challenge
+
+  tournament:
+    build: ./tournamentService
+    ports:
+      - "80"
+    networks:
+      - ai_challenge
+
+networks:
+  ai_challenge:

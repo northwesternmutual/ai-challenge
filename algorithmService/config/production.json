@@ -1,0 +1,10 @@
+{
+	"mongodb": {
+		"hosts": [
+	        {
+	            "host": "mongodb",
+	            "port": "27017"
+	        }
+	    ]
+	}
+}

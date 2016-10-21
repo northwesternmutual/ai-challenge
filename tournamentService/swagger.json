@@ -1,0 +1,233 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Tournament Service",
+    "description": "Fascilitaes a tournament of AI implementations"
+  },
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/matches/{collection}": {
+      "get": {
+        "description": "get matches for a given collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "title": "matches",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/match"
+              }
+            }
+          },
+          "204": {
+            "description": "collection does not exist"
+          },
+          "500": {
+            "description": "internal error"
+          }
+        }
+      }
+    },
+    "/play/{collection}": {
+      "get": {
+        "description": "initiate a tournament",
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/status"
+            }
+          },
+          "204": {
+            "description": "collection does not exist"
+          },
+          "500": {
+            "description": "internal error"
+          }
+        }
+      }
+    },
+    "/tournament/{id}": {
+      "get": {
+        "description": "get the status of a tournament",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "success",
+            "schema": {
+              "type": "object",
+              "required": [
+                "_id",
+                "status",
+                "lastUpdated"
+              ],
+              "properties": {
+                "_id": {
+                  "description": "The id of the user",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "The first name of the user",
+                  "type": "string"
+                },
+                "lastUpdated": {
+                  "description": "The last name of the user",
+                  "type": "string"
+                },
+                "results": {
+                  "$ref": "#/definitions/results"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "collection does not exist"
+          },
+          "500": {
+            "description": "internal error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "match": {
+      "type": "object",
+      "properties": {
+        "algorithmOne": {
+          "$ref": "#/definitions/algorithm"
+        },
+        "algorithmTwo": {
+          "$ref": "#/definitions/algorithm"
+        },
+        "url": {
+          "description": "url for the simulation",
+          "type": "string"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "required": [
+        "_id",
+        "status",
+        "lastUpdated"
+      ],
+      "properties": {
+        "_id": {
+          "description": "The id of the user",
+          "type": "string"
+        },
+        "status": {
+          "description": "The first name of the user",
+          "type": "string"
+        },
+        "lastUpdated": {
+          "description": "The last name of the user",
+          "type": "string"
+        }
+      }
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "wins",
+          "losses",
+          "email",
+          "id"
+        ],
+        "properties": {
+          "wins": {
+            "type": "integer"
+          },
+          "losses": {
+            "type": "integer"
+          },
+          "email": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "algorithm": {
+      "type": "object",
+      "required": [
+        "_id",
+        "initializeSimulation",
+        "execute",
+        "email",
+        "initializeGame",
+        "startGame",
+        "date",
+        "name"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "initializeSimulation": {
+          "type": "string"
+        },
+        "execute": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "initializeGame": {
+          "type": "string"
+        },
+        "startGame": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "collection": {
+      "name": "collection",
+      "description": "collection the algorithms are in",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "id": {
+      "name": "id",
+      "description": "tournament id",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

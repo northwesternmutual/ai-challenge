@@ -1,0 +1,4 @@
+{
+	"simulationEndpiont": "http://simulator/simulation",
+	"algorithmEndpoint": "http://algorithm/algorithms/"	
+}

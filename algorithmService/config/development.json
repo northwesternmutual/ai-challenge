@@ -1,0 +1,12 @@
+{
+	"mongodb": {
+		"hosts": [
+	        {
+	            "host": "localhost",
+	            "port": "27017"
+	        }
+	    ]
+	},
+	"httpPort": "8000",
+	"httpsPort": "8443"
+}

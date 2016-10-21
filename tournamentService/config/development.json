@@ -1,0 +1,6 @@
+{
+	"simulationEndpiont": "http://localhost:8001/simulation",
+	"algorithmEndpoint": "http://localhost:8000/algorithms/",
+	"httpPort": "8002",
+	"httpsPort": "8445"
+}

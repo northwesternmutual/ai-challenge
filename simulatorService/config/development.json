@@ -1,0 +1,5 @@
+{
+	"algorithmEndpoint": "http://localhost:8000/algorithm/",
+	"httpPort": "8001",
+	"httpsPort": "8444"
+}

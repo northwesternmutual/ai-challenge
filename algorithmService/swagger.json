@@ -1,0 +1,277 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Algorithm Service",
+    "description": "Fascilitates create/retrieve/update/delete operations on AI implementations"
+  },
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/algorithms/{collection}": {
+      "get": {
+        "description": "Get all algorithms in the for a given collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "title": "algorithms",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/algorithm"
+              }
+            }
+          },
+          "204": {
+            "description": "No algorithms for a given collection"
+          },
+          "500": {
+            "description": "Databse error"
+          }
+        }
+      },
+      "post": {
+        "description": "Insert one algorithm into the given collection of algorithms",
+        "parameters": [
+          {
+            "$ref": "#/parameters/algorithm"
+          },
+          {
+            "$ref": "#/parameters/collection"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "headers": {
+              "location": {
+                "description": "ID retured by the database",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/algorithm"
+            }
+          },
+          "400": {
+            "description": "The algorithm entry was not valid"
+          },
+          "500": {
+            "description": "Databse error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete all algorithms from a given collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/collection"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful response"
+          },
+          "500": {
+            "description": "Databse error"
+          }
+        }
+      }
+    },
+    "/algorithm/{collection}/{id}": {
+      "get": {
+        "description": "Get one algorithm from a given collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id"
+          },
+          {
+            "$ref": "#/parameters/collection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/algorithm"
+            }
+          },
+          "204": {
+            "description": "No algorithm in the given collection by given ID"
+          },
+          "400": {
+            "description": "Collection may not exist"
+          },
+          "500": {
+            "description": "Databse error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update one algorithm in the given collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id"
+          },
+          {
+            "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/algorithm"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/algorithm"
+            }
+          },
+          "400": {
+            "description": "The algorithm update entry was not valid"
+          },
+          "500": {
+            "description": "Databse error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete one algorithm from the given collection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id"
+          },
+          {
+            "$ref": "#/parameters/collection"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful response"
+          },
+          "400": {
+            "description": "The `Algorithm` was not deleted"
+          },
+          "500": {
+            "description": "Databse error"
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "description": "Test the health of the host",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "title": "Host",
+              "type": "object",
+              "properties": {
+                "Node Host": {
+                  "description": "Host that the Node process is running on",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "algorithm": {
+      "type": "object",
+      "required": [
+        "name",
+        "date",
+        "initializeSimulation",
+        "initializeGame",
+        "shoot",
+        "startGame",
+        "endGame",
+        "email"
+      ],
+      "properties": {
+        "_id": {
+          "description": "The ID of the `Algorithm`",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name associated with the `Algorithm`",
+          "type": "string"
+        },
+        "date": {
+          "description": "The date the algorithm was submitted in milliseconds`",
+          "type": "integer"
+        },
+        "initializeSimulation": {
+          "description": "The algorithm for placing ships",
+          "type": "string"
+        },
+        "initializeGame": {
+          "description": "The algorithm for placing ships",
+          "type": "string"
+        },
+        "startGame": {
+          "description": "The algorithm for placing ships",
+          "type": "string"
+        },
+        "endGame": {
+          "description": "The algorithm for placing ships",
+          "type": "string"
+        },
+        "shoot": {
+          "description": "The algorithm for shooting",
+          "type": "string"
+        },
+        "email": {
+          "description": "The email associated with the algorithm",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "algorithm": {
+      "name": "algorithm",
+      "in": "body",
+      "description": "Algorithm to be added",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/algorithm"
+      }
+    },
+    "collection": {
+      "name": "collection",
+      "in": "path",
+      "description": "collection where the algorithms live",
+      "required": true,
+      "type": "string"
+    },
+    "id": {
+      "name": "id",
+      "in": "path",
+      "description": "id of the algorithm",
+      "required": true,
+      "type": "integer"
+    }
+  }
+}
