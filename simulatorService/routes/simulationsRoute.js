@@ -76,15 +76,7 @@ router.route('/')
                       result.playerOneName = algOneName;
                       result.playerTwoName = algTwoName;
                       
-                      if(process.env.NM_ENV === 'production') {
-                        res.status(code.HTTP_OK).json(result);
-                      } else {
-                        setTimeout( () => {
-
-                            res.status(code.HTTP_OK).json(result);
-
-                        }, 3000);
-                      }
+                      res.status(code.HTTP_OK).json(result);
                   });
               });
           }

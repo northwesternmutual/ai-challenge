@@ -1,14 +1,14 @@
 const Cell = require('./Cell.js');
-const Ship = require('./Ship.js');
-const Fleet = require('./Fleet.js');
+const Block = require('./Block.js');
+const Collection = require('./Collection.js');
 
 function Grid() {
-	this.fleet = new Fleet();
+	this.collection = new Collection();
 	this.initialize();
 }
 
 Grid.prototype.initialize = function() {
-	this.fleet.initialize();
+	this.collection.initialize();
 	this.create();
 };
 
@@ -27,25 +27,25 @@ Grid.prototype.getCell = function(x, y) {
 	return invalid ? null : this.cells[x][y];	
 };
 
-Grid.prototype.dockShip = function(x, y, direction, shipType) {
-	var ship = this.fleet.getShipByType(shipType);
+Grid.prototype.placeBlock = function(x, y, direction, blockType) {
+	var block = this.collection.getBlockByType(blockType);
 
-    //see is it is valid to pace the ship there
-    if(this.inBounds(x, y, direction, ship) && !this.doesCollide(x, y, direction, ship) && !ship.isUsed) {
+    //see is it is valid to pace the block there
+    if(this.inBounds(x, y, direction, block) && !this.doesCollide(x, y, direction, block) && !block.isUsed) {
 
-        //dock the ship
-        ship.isUsed = true;
-        ship.location.x = x;
-        ship.location.y = y;
-        ship.location.direction = direction;
+        //dock the block
+        block.isUsed = true;
+        block.location.x = x;
+        block.location.y = y;
+        block.location.direction = direction;
 
-        var bound = direction === Ship.HORIZONTAL ? x : y;
+        var bound = direction === Block.HORIZONTAL ? x : y;
 
-        for( var i = bound; i < bound + ship.length; ++i ) {
-            var cell = this.getCell(direction === Ship.HORIZONTAL ? i : x, direction === Ship.HORIZONTAL ? y : i);  
-            cell.setShip(ship);
-            cell.state = Cell.TYPE_SHIP;
-            ship.cells.push(cell);
+        for( var i = bound; i < bound + block.length; ++i ) {
+            var cell = this.getCell(direction === Block.HORIZONTAL ? i : x, direction === Block.HORIZONTAL ? y : i);  
+            cell.setBlock(block);
+            cell.state = Cell.TYPE_BLOCK;
+            block.cells.push(cell);
         }   
 
     } else {
@@ -54,13 +54,13 @@ Grid.prototype.dockShip = function(x, y, direction, shipType) {
     return true;
 };
 
-Grid.prototype.doesCollide = function (x, y, direction, ship) {
-	var bound = direction === Ship.HORIZONTAL ? x : y;
+Grid.prototype.doesCollide = function (x, y, direction, block) {
+	var bound = direction === Block.HORIZONTAL ? x : y;
 
-    for( var i = bound; i < bound + ship.length; ++i ) {
-        var cell = this.getCell(direction === Ship.HORIZONTAL ? i : x, direction === Ship.HORIZONTAL ? y : i);
+    for( var i = bound; i < bound + block.length; ++i ) {
+        var cell = this.getCell(direction === Block.HORIZONTAL ? i : x, direction === Block.HORIZONTAL ? y : i);
         //even though there are other cell states, since we only place ships
-        //when the board is empty, if the cell is not empty, it must have another ship
+        //when the board is empty, if the cell is not empty, it must have another block
         if(cell.state !== Cell.TYPE_EMPTY) {
             return true;
         }
@@ -68,17 +68,17 @@ Grid.prototype.doesCollide = function (x, y, direction, ship) {
     return false;
 };
 
-Grid.prototype.getShipByCoord = function(x, y) {
-	return this.getCell(x, y) === null ? null : this.getCell(x, y).ship;
+Grid.prototype.getBlockByCoord = function(x, y) {
+	return this.getCell(x, y) === null ? null : this.getCell(x, y).block;
 };
 
-Grid.prototype.inBounds = function(x, y, direction, ship) {
+Grid.prototype.inBounds = function(x, y, direction, block) {
 	//are the corrdinates in bounds?
     if(x < 0 || x > 9 || y < 0 || y > 9) {
         return false;
     }
 
-    return direction === Ship.VERTICAL ? (y + (ship.length - 1) <= 9) : (x + (ship.length - 1) <= 9);
+    return direction === Block.VERTICAL ? (y + (block.length - 1) <= 9) : (x + (block.length - 1) <= 9);
 };
 
 module.exports = Grid;

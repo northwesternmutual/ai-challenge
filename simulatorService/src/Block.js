@@ -6,7 +6,7 @@ function Block(type, length) {
 
 Block.prototype.initialize = function() {
 	this.damage = 0;
-	this.isSunk = false;
+	this.isConquered = false;
 	this.isUsed = false;
 	this.location = {
 		x: null,
@@ -18,7 +18,7 @@ Block.prototype.initialize = function() {
 
 Block.prototype.hit = function() {
 	if(++this.damage === this.length) {
-		this.isSunk = true;
+		this.isConquered = true;
 	}
 };
 

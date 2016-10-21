@@ -3,16 +3,16 @@ const Grid = require('./Grid.js');
 function Player(type) {
 	this.type = type;
 	this.grid = new Grid();
-	this.shotsTaken = 0;
+	this.hitsTaken = 0;
 	this.hitsDealt = 0;
 	this.accuracy = function() {
-		return this.hitsDealt / this.shotsTaken;
+		return this.hitsDealt / this.hitsTaken;
 	};
 }
 
 Player.prototype.initialize = function() {
 	this.grid.initialize();
-	this.shotsTaken = 0;
+	this.hitsTaken = 0;
 	this.hitsDealt = 0;
 };
 

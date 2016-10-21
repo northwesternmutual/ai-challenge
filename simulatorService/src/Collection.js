@@ -42,7 +42,7 @@ Collection.prototype.isSunk = function() {
 	} else { return false; }
 };
 
-Collection.prototype.getShipByType = function(type) {
+Collection.prototype.getBlockByType = function(type) {
 	switch(type) {
 		case Collection.ONEBYTWO:
 			return this.blocks.ONEBYTWO;

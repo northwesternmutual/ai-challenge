@@ -1,4 +1,4 @@
-# AI Challenge [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)]() [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests) [![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)](https://github.com/northwesternmutual/ai-challenge) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)]()
+# AI Challenge [![Build Status](https://img.shields.io/travis/facebook/react/master.svg?style=flat)](https://travis-ci.org/facebook/react) [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)]() [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests) [![DUB](https://img.shields.io/dub/l/vibe-d.svg)]()
 
 AI Challenge is a framework for fascilitating artificial intelligence (AI) tournaments.
 
@@ -6,7 +6,11 @@ AI Challenge is a framework for fascilitating artificial intelligence (AI) tourn
 * **Component-Based:** This framework is composed of three primary components. While each is needed to utilize all the benefits of AI Challenge, they can be used independently as they each offer a unique set of functionality. Based on how you implement the framework for your application specific needs, you may choose to swap out or modify each component as needed.
 * **Dockerized:** Each component of the framework contains a [Dockerfile](https://docs.docker.com/engine/reference/builder/) which will create a Docker container for that component. Docker Compose is used to run this multi-container framework.
 
-## Framework Uses
+## Example Framework Uses
+
+* **Recruiting:**
+* **Kids:**
+* **Competitions:**
 
 ## Components
 

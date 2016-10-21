@@ -61,10 +61,10 @@ Game.shoot = function(player, x, y) {
 	var cell = opponent.grid.getCell(x, y);
 
 	//has this cell already been hit
-	if( cell.state === Cell.TYPE_MISS || cell.state === Cell.TYPE_HIT || cell.state === Cell.TYPE_SUNK ) {
+	if( cell.state === Cell.TYPE_MISS || cell.state === Cell.TYPE_HIT || cell.state === Cell.TYPE_CONQUERED ) {
 		return {
 			state: null,
-			ship: null
+			block: null
 		};
 	}
 
@@ -74,13 +74,13 @@ Game.shoot = function(player, x, y) {
 	//increase the temperature of that cell by 1
 	++cell.temperature;
 
-	if( cell.state === Cell.TYPE_SHIP ) {
+	if( cell.state === Cell.TYPE_BLOCK ) {
 		++player.hitsDealt;
 		cell.state = Cell.TYPE_HIT;
-		cell.ship.hit();
-		if( cell.ship.isSunk ) {
-			cell.ship.cells.filter( function(cell) {
-				cell.state = Cell.TYPE_SUNK;
+		cell.block.hit();
+		if( cell.block.isConquered ) {
+			cell.block.cells.filter( function(cell) {
+				cell.state = Cell.TYPE_CONQUERED;
 			});
 		}
 	} else { //cell.state === TYPE_EMPTY
@@ -89,24 +89,24 @@ Game.shoot = function(player, x, y) {
 
 	return {
 		state: cell.state,
-		ship: cell.ship === null ? null : cell.ship.type
+		block: cell.block === null ? null : cell.block.type
 	};
 };
 
 Game.prototype.isOver = function() {
-	if(one.grid.fleet.isSunk()) {
+	if(one.grid.collection.isConquered()) {
 		return two;
-	} else if(two.grid.fleet.isSunk()) {
+	} else if(two.grid.collection.isConquered()) {
 		return one;
-	} else if(!one.grid.fleet.isPlaced() && two.grid.fleet.isPlaced()) {
+	} else if(!one.grid.collection.isPlaced() && two.grid.collection.isPlaced()) {
 		return two;
-	} else if(one.grid.fleet.isPlaced() && !two.grid.fleet.isPlaced()) {
+	} else if(one.grid.collection.isPlaced() && !two.grid.collection.isPlaced()) {
 		return one;
-	} else if (!one.grid.fleet.isPlaced() && !two.grid.fleet.isPlaced()) {
+	} else if (!one.grid.collection.isPlaced() && !two.grid.collection.isPlaced()) {
 		return this.getRandomPlayer();
-	} else if(one.grid.fleet.hasMoved(this.playerOneState)) {
+	} else if(one.grid.collection.hasMoved(this.playerOneState)) {
 		return two;
-	} else if(two.grid.fleet.hasMoved(this.playerTwoState)) {
+	} else if(two.grid.collection.hasMoved(this.playerTwoState)) {
 		return one;
 	} else {
 		return false;
