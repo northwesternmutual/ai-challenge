@@ -16,13 +16,13 @@ before_install:
   - npm install -g npm@3
 
 install:
-  - cd /algorithmService && npm install
-  - cd /simulatorService && npm install
-  - cd /tournamentService && npm install
+  - cd TRAVIS_BUILD_DIR/algorithmService && npm install
+  - cd TRAVIS_BUILD_DIR/simulatorService && npm install
+  - cd TRAVIS_BUILD_DIR/tournamentService && npm install
 
 script:
-  - cd /algorithmService && npm test
-  - cd /simulatorService && npm test
-  - cd /tournamentService && npm test
+  - cd TRAVIS_BUILD_DIR/algorithmService && npm test
+  - cd TRAVIS_BUILD_DIR/simulatorService && npm test
+  - cd TRAVIS_BUILD_DIR/tournamentService && npm test
 
   
