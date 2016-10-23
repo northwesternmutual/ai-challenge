@@ -1,5 +1,5 @@
-import Block from '../../src/Block';
-import Collection from '../../src/Collection';
+import Block from '../../src/game/Block';
+import Collection from '../../src/game/Collection';
 
 describe('Block', () => {
 

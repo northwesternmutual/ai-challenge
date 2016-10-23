@@ -1,7 +1,7 @@
-import Block from '../../src/Block';
-import Cell from '../../src/Cell';
-import Collection from '../../src/Collection';
-import Grid from '../../src/Grid';
+import Block from '../../src/game/Block';
+import Cell from '../../src/game/Cell';
+import Collection from '../../src/game/Collection';
+import Grid from '../../src/game/Grid';
 
 describe('Collection', () => {
 

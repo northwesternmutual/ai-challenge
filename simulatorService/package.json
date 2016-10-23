@@ -26,7 +26,9 @@
     "eslint": "^3.7.1",
     "jasmine-node": "^1.14.5",
     "node-inspector": "^0.12.8",
-    "nodemon": "^1.9.2"
+    "nodemon": "^1.9.2",
+    "proxyquire": "^1.7.10",
+    "supertest": "^2.0.0"
   },
   "dependencies": {
     "async": "^2.0.0-rc.6",
