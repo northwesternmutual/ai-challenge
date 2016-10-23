@@ -1,4 +1,12 @@
 {
+	"mongodb": {
+		"hosts": [
+	        {
+	            "host": "localhost",
+	            "port": "27017"
+	        }
+	    ]
+	},
 	"simulationEndpiont": "http://simulator/simulation",
 	"algorithmEndpoint": "http://algorithm/algorithms/"	
 }

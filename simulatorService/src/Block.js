@@ -17,9 +17,12 @@ Block.prototype.initialize = function() {
 };
 
 Block.prototype.hit = function() {
-	if(++this.damage === this.length) {
+	if(this.damage === this.length) {
+		return false;
+	} else if(++this.damage === this.length) {
 		this.isConquered = true;
 	}
+	return true;
 };
 
 Block.HORIZONTAL = 0;

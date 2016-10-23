@@ -1,8 +1,8 @@
 'use strict';
-import express from 'express';
-import os from 'os';
+var express = require('express');
+var os = require('os');
 
-let router = express.Router();
+const router = express.Router();
 
 /* Health check for app. */
 router.get('/', function (req, res) {
@@ -11,4 +11,4 @@ router.get('/', function (req, res) {
     });
 });
 
-export default router;
+module.exports = router;

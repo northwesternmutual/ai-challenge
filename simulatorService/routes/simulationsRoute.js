@@ -75,8 +75,25 @@ router.route('/')
                       result.playerTwoID = algTwoID;
                       result.playerOneName = algOneName;
                       result.playerTwoName = algTwoName;
+
+                      var toReturn = {
+                        playerOne: {
+                          wins: result.scorecard.playerOne,
+                          losses: result.scorecard.playerTwo,
+                          accuracy: result.accuracy.playerOne,
+                          name: algOneName,
+                          id: algOneID
+                        },
+                        playerTwo: {
+                          wins: result.scorecard.playerTwo,
+                          losses: result.scorecard.playerOne,
+                          accuracy: result.accuracy.playerTwo,
+                          name: algTwoName,
+                          id: algTwoID
+                        }
+                      };
                       
-                      res.status(code.HTTP_OK).json(result);
+                      res.status(code.HTTP_OK).json(toReturn);
                   });
               });
           }

@@ -3,8 +3,8 @@ const express = require('express');
 const code = require('http-response-codes');
 const memwatch = require('memwatch-next');
 const simulationsRouter = require('./routes/simulationsRoute.js');
-const healthRouter = require('./routes/health');
-const docRouter = require('./routes/doc');
+const healthRouter = require('./routes/health.js');
+const docRouter = require('./routes/doc.js');
 const log = require('./utils/logger');
 
 const app = express();

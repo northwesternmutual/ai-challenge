@@ -39,7 +39,26 @@ describe('Block', () => {
 	});
 
 	describe('hit', () => {
-		
+		let block = new Block(Collection.ONEBYFIVE, 5);
+
+		it('should have been damaged', () => {
+			block.hit();
+			expect(block.damage).toBe(1);
+		});
+
+		it('should have been damaged', () => {
+			for(var i=0; i<4; ++i) {
+				block.hit();
+			}
+			expect(block.damage).toBe(5);
+			expect(block.isConquered).toBe(true);
+		});
+
+		it('shouldn\'t be able to be hit after it\'s conquered', () => {
+			block.hit();
+			expect(block.damage).toBe(5);
+			expect(block.isConquered).toBe(true);
+		});
 	});
 
 	describe('constants', () => {

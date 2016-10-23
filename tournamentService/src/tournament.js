@@ -3,7 +3,6 @@ import code from 'http-response-codes';
 import config from '../utils/config.js';
 import request from 'request';
 import qs from 'qs';
-import fetch from 'request-promise';
 import Mongo from '../controllers/mongo.js';
 import { mergeSort } from '../utils/mergeSort';
 import Bluebird from 'bluebird';

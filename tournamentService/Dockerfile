@@ -17,7 +17,7 @@ RUN cd /usr/bin \
 COPY ./ /tmp/app/
 
 RUN cd /tmp/app \
-  && npm run build
+  && npm install
 
 WORKDIR /tmp/app
 

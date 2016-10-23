@@ -25,8 +25,8 @@ Game.prototype.playGame = function() {
 	this.AITwo.startGame();
 
 	//get the current state of the fleet
-	this.playerOneState = one.grid.fleet.ships;
-	this.playerTwoState = two.grid.fleet.ships;
+	this.playerOneState = one.grid.collection.blocks;
+	this.playerTwoState = two.grid.collection.blocks;
 
 	//pick a random player to go first
 	var firstPlayer 	= this.getRandomPlayer();

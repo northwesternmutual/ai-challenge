@@ -5,9 +5,9 @@ function Collection() {
 	this.blocks 			= {};
 	this.blocks.ONEBYTWO 	= new Block(Collection.ONEBYTWO, 2);
 	this.blocks.ONEBYTHREE 	= new Block(Collection.ONEBYTHREE, 3);
-	this.blocks.ONEBYFOUR 	= new BlockBlock(Collection.ONEBYFOUR, 4);
-	this.blocks.ONEBYFIVE 	= new BlockBlock(Collection.ONEBYFIVE, 5);
-	this.blocks.ONEBYSIX 	= new BlockBlock(Collection.ONEBYSIX, 6);
+	this.blocks.ONEBYFOUR 	= new Block(Collection.ONEBYFOUR, 4);
+	this.blocks.ONEBYFIVE 	= new Block(Collection.ONEBYFIVE, 5);
+	this.blocks.ONEBYSIX 	= new Block(Collection.ONEBYSIX, 6);
 }
 
 Collection.prototype.initialize = function() {
@@ -30,12 +30,12 @@ Collection.prototype.isPlaced = function() {
     } else { return false; }
 };
 
-Collection.prototype.isSunk = function() {
-	if( this.blocks.ONEBYTWO.isSunk && 
-		this.blocks.ONEBYTHREE.isSunk &&
-		this.blocks.ONEBYFOUR.isSunk &&
-		this.blocks.ONEBYFIVE.isSunk &&
-		this.blocks.ONEBYSIX.isSunk ) {
+Collection.prototype.isConquered = function() {
+	if( this.blocks.ONEBYTWO.isConquered && 
+		this.blocks.ONEBYTHREE.isConquered &&
+		this.blocks.ONEBYFOUR.isConquered &&
+		this.blocks.ONEBYFIVE.isConquered &&
+		this.blocks.ONEBYSIX.isConquered ) {
 
 		return true;
 
@@ -77,6 +77,9 @@ Collection.prototype.hasMoved = function(state) {
                 stateChanged = true;
                 break;
             }
+        } else if(!({}.hasOwnProperty.call(this.blocks, key)) || !({}.hasOwnProperty.call(state, key))) {
+        	stateChanged = true;
+            break;
         }
     }
     return stateChanged;
