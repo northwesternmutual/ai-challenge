@@ -1,93 +1,68 @@
-const AI = require('./AI.js');
-const Game = require('./Game.js');
-const Player = require('./Player.js');
+const Bluebird = require('bluebird');
+const Simulator = require('../src/game/Simulator.js');
+const async = require('async');
+const request = require('request');
+const config = require('../config.js');
 
-function Simulator( algOneObj, algTwoObj, numSims ) {
-	this.playerOne = new Player(Player.PLAYERONE);
-	this.playerTwo = new Player(Player.PLAYERTWO);
-
-	this.AIOne = new AI(algOneObj, this.playerOne);
-	this.AITwo = new AI(algTwoObj, this.playerTwo);
-
-	this.game = new Game(this.playerOne, this.playerTwo, this.AIOne, this.AITwo);
-
-	this.numSimulations = numSims;
-
-	this.scorecard = {
-		playerOne: 0,
-		playerTwo: 0
-	};
-
-	this.accuracyByGame = {
-		playerOne: [],
-		playerTwo: []
-	};
-
-	this.shotsByGame = {
-		playerOne: [],
-		playerTwo: []
-	};
-
-	this.hitsByGame = {
-		playerOne: [],
-		playerTwo: []
-	};
-
-	this.averageAccuracy = function() {
-		var playerOne = 0;
-		var playerTwo = 0;
-
-		for(var i=0; i<numSims; ++i) {
-			playerOne += this.accuracyByGame.playerOne[i];
-			playerTwo += this.accuracyByGame.playerTwo[i];
-		}
-
-		return {
-			playerOne: playerOne/numSims,
-			playerTwo: playerTwo/numSims
-		};
-	};
+export function getAlgorithms({ response }) {
+	return new Bluebird(function(resolve, reject) {
+		async.parallel({
+			algOne: function(callback) {
+				request(`${config.algorithmEndpoint}${response.collection}/${response.algorithmOneID}`, function(err, res, body) {
+				    if(err || res.statusCode !== 200) {
+				        err.status = res.statusCode;
+				        return callback(err);
+				    }
+				    return callback(null, body);
+				});
+			},
+			algTwo: function(callback) {
+				request(`${config.algorithmEndpoint}${response.collection}/${response.algorithmTwoID}`, function(err, res, body) {
+				    if(err || res.statusCode !== 200) {
+				        err.status = res.statusCode;
+				        return callback(err);
+				    }
+				    return callback(null, body);
+				});
+			}
+		}, function(err, algorithms) {
+			if(err) {
+				return reject(err);
+			}
+			return resolve({ response, algorithms });
+		});
+	});
 }
 
-Simulator.prototype.startSimulation = function( callback ) {
-	//initialize the AI's
-	this.AIOne.initializeSimulation();
-	this.AITwo.initializeSimulation();
+export function conductSimulation({ response, algorithms }) {
 
-	//for every simulation...
-	for(var i=0; i<this.numSimulations; ++i) {
-		//games should be played in parallel in case
-		//the users AI adapts from previous games
-		this.game.initialize(); //reset stuff for new game;
-		this.game.playGame();
+	return new Bluebird(function(resolve, reject) {
+		new Simulator(JSON.parse(algorithms.algOne), JSON.parse(algorithms.algTwo), response.simulations).startSimulation( function(err, simulation) {
+	        if(err) {
+		        return reject(err);
+			}
+			return resolve({ response, algorithms, simulation });
+	    });
+	});
 
-		//update scorecard
-		if( this.game.winner.type === Player.PLAYERONE ) {
-			++this.scorecard.playerOne;
-		} else {
-			++this.scorecard.playerTwo;
+}
+
+export function parseResponse({ response, algorithms, simulation }) {
+
+	return {
+		playerOne: {
+		  wins: simulation.scorecard.playerOne,
+		  losses: simulation.scorecard.playerTwo,
+		  accuracy: simulation.accuracy.playerOne,
+		  name: JSON.parse(algorithms.algOne).name,
+		  id: response.algorithmOneID
+		},
+		playerTwo: {
+		  wins: simulation.scorecard.playerTwo,
+		  losses: simulation.scorecard.playerOne,
+		  accuracy: simulation.accuracy.playerTwo,
+		  name: JSON.parse(algorithms.algTwo).name,
+		  id: response.algorithmTwoID
 		}
-
-		//update accuracy
-		this.accuracyByGame.playerOne.push(this.playerOne.accuracy());
-		this.accuracyByGame.playerTwo.push(this.playerTwo.accuracy());
-
-		this.shotsByGame.playerOne.push(this.playerOne.shotsTaken);
-		this.shotsByGame.playerTwo.push(this.playerTwo.shotsTaken);
-
-		this.hitsByGame.playerOne.push(this.playerOne.hitsDealt);
-		this.hitsByGame.playerTwo.push(this.playerTwo.hitsDealt);
-
-		this.AIOne.endGame();
-		this.AITwo.endGame();
-	}
-
-	//handle error stuff...maybe timeout stuff
-
-	return callback( null, {
-		scorecard: this.scorecard,
-		accuracy: this.averageAccuracy()
-	} );
-};
-
-module.exports = Simulator;
+	};
+}

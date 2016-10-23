@@ -1,5 +1,7 @@
 const rules = require('./rules.js');
 const async = require('async');
+const Bluebird = require('bluebird');
+const { ValidationError } = require('../src/errors');
 
 function Validator() { }
 
@@ -33,13 +35,19 @@ Validator.prototype._createTasks = function(data) {
     }
 };
 
-Validator.validateIncoming = function(data, callback){
+Validator.validateIncoming = function(data){
     var tasks = Validator.prototype._createTasks(data);
     if (!data._id) {
         delete tasks._id;
     }
-    async.parallel(tasks, function(err, result) {
-        return callback(err ? err : null, err ? null : result);
+
+    return new Bluebird((resolve, reject) => {
+        async.parallel(tasks, function(err, result) {
+            if (err) {
+                return reject(new ValidationError(err.message));
+            }
+            return resolve({ response: result });
+        });
     });
 };
 
