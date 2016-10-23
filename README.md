@@ -41,11 +41,22 @@ Because of it's microservice architecture, AI Challenge can be successfully depl
 
 <img src="./documentation/architecture.png" width="50%">
 
+## API
+Each component has their own [Swagger](http://swagger.io/) schema. See each component's documentation for details.
+
+If you are utilizing the default architure, here are the base paths:
+
+component | base path
+--------- | ------- 
+algorithm | `http://localhost:8080/algorithmservice/` 
+simulator | `http://localhost:8080/simulatorservice/`  
+tournament | `http://localhost:8080/tournamentservice/`
+
 ## Example
 
 We'll assume you've installed the framework using the install instructions above.
 
-#### Algorithm Component
+### Algorithm Component
 In order to fascilitate a tournament, AI implementations are needed. The following illustrates how an implementation might be submitted. See the full [documentation](./algorithmService/README.md) for more details.
 
 ```js
@@ -107,7 +118,7 @@ $.ajax({
 });
 ```
 
-#### Simulator Component
+### Simulator Component
 The simulator component is used to conduct a simulation of two AI implementations. The following illustrates a sample API call and JSON response. See the full [documentation](./simulatorService/README.md) for AI implementation details.
 
 ```sh
@@ -133,12 +144,12 @@ http://localhost:8080/simulatorservice/simulation?algorithmOneID=580bee73f2c4c40
 }
 ```
 
-#### Tournament Component
+### Tournament Component
 See the full [documentation](./tournamentService/README.md) for more details.
 
 There are two ways that the tournament component can be used (the following example has two submitted AI implementations):  
 
-##### 1. Play the tournament
+#### 1. Play the tournament
 Since the time that it will take to complete a tournament may be longer than we want to keep an HTTP request open, we use the following sequence:
  1. Initiate a tournament.
  2. Request responds immediately with the id of the tournament and the current status.
@@ -178,7 +189,7 @@ http://localhost:8080/tournamentservice/tourament/580c0d45bd3b84574d930c99
   ]
 }
 ```
-##### 2. Get matches list
+#### 2. Get matches list
 This option appeals in situations where a potential UI might want more control of the tournament. By returning a list of matches, the UI can execute the simulations individually.
 ```sh
 http://localhost:8080/tournamentservice/matches/test
@@ -214,8 +225,6 @@ http://localhost:8080/tournamentservice/matches/test
   ]
 }
 ```
-
-## API
 
 ## Contributing
 
