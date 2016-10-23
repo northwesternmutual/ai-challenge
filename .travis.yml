@@ -16,13 +16,13 @@ before_install:
   - npm install -g npm@3
 
 install:
-  - cd ~/algorithmService && npm install
-  - cd ~/simulatorService && npm install
-  - cd ~/tournamentService && npm install
+  - cd /algorithmService && npm install
+  - cd /simulatorService && npm install
+  - cd /tournamentService && npm install
 
 script:
-  - cd ~/algorithmService && npm test
-  - cd ~/simulatorService && npm test
-  - cd ~/tournamentService && npm test
+  - cd /algorithmService && npm test
+  - cd /simulatorService && npm test
+  - cd /tournamentService && npm test
 
   
