@@ -1,6 +1,6 @@
 {
   "name": "simulation_service",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Preforms a simulation of two AI implementations",
   "author": "Frank B Greco Jr <frankgreco@northwesternmutual.com>",
   "main": "index.js",

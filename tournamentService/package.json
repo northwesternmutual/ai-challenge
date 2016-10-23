@@ -1,6 +1,6 @@
 {
   "name": "tournament_service",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "fascilitaes a tournament of AI implementations",
   "author": "Frank B Greco Jr <frankgreco@northwesternmutual.com>",
   "main": "index.js",

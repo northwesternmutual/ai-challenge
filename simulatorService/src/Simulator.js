@@ -3,13 +3,19 @@ const Simulator = require('../src/game/Simulator.js');
 const async = require('async');
 const request = require('request');
 const config = require('../config.js');
+const code = require('http-response-codes');
+const {
+	NoSuchCollectionError
+} = require('./errors');
 
 export function getAlgorithms({ response }) {
 	return new Bluebird(function(resolve, reject) {
 		async.parallel({
 			algOne: function(callback) {
 				request(`${config.algorithmEndpoint}${response.collection}/${response.algorithmOneID}`, function(err, res, body) {
-				    if(err || res.statusCode !== 200) {
+				    if(!err && res.statusCode === code.HTTP_NO_CONTENT) {
+				    	return callback(new NoSuchCollectionError('collection does not exist'));
+				    } else if (err) {
 				        err.status = res.statusCode;
 				        return callback(err);
 				    }
@@ -18,7 +24,9 @@ export function getAlgorithms({ response }) {
 			},
 			algTwo: function(callback) {
 				request(`${config.algorithmEndpoint}${response.collection}/${response.algorithmTwoID}`, function(err, res, body) {
-				    if(err || res.statusCode !== 200) {
+				    if(!err && res.statusCode === code.HTTP_NO_CONTENT) {
+				    	return callback(new NoSuchCollectionError('collection does not exist'));
+				    } else if (err) {
 				        err.status = res.statusCode;
 				        return callback(err);
 				    }

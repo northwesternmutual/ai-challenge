@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "0.1.0",
     "title": "Tournament Service",
     "description": "Fascilitaes a tournament of AI implementations"
   },
@@ -108,9 +108,42 @@
           }
         }
       }
+    },
+    "/doc": {
+      "get": {
+        "description": "get the swagger schema",
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "description": "check the health of the host node",
+        "responses": {
+          "200": {
+            "description": "service is up and running",
+            "schema": {
+              "$ref": "#/definitions/node"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "node": {
+      "type": "object",
+      "required": ["Node Host"],
+      "properties": {
+        "Node Host": {
+          "description": "the name of the host node",
+          "type": "string"
+        }
+      }
+    },
     "match": {
       "type": "object",
       "properties": {

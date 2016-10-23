@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "0.1.0",
     "title": "Algorithm Service",
     "description": "Fascilitates create/retrieve/update/delete operations on AI implementations"
   },
@@ -172,31 +172,41 @@
         }
       }
     },
-    "/health": {
+    "/doc": {
       "get": {
-        "description": "Test the health of the host",
+        "description": "get the swagger schema",
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "description": "check the health of the host node",
+        "responses": {
+          "200": {
+            "description": "service is up and running",
             "schema": {
-              "title": "Host",
-              "type": "object",
-              "properties": {
-                "Node Host": {
-                  "description": "Host that the Node process is running on",
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/node"
             }
-          },
-          "500": {
-            "description": "Internal server error"
           }
         }
       }
     }
   },
   "definitions": {
+    "node": {
+      "type": "object",
+      "required": ["Node Host"],
+      "properties": {
+        "Node Host": {
+          "description": "the name of the host node",
+          "type": "string"
+        }
+      }
+    },
     "algorithm": {
       "type": "object",
       "required": [

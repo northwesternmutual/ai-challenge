@@ -1,6 +1,6 @@
 {
   "name": "algorithm_service",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "fascilitates create/retrieve/update/delete operations on AI implementations",
   "author": "Frank B Greco Jr <frankgreco@northwesternmutual.com>",
   "main": "index.js",

@@ -29,9 +29,3 @@ export class SimulationError extends Bluebird.OperationalError {
         super(message);
     }
 }
-
-export class InitializationError extends Bluebird.OperationalError {
-    constructor(message) {
-        super(message);
-    }
-}

@@ -1,12 +1,15 @@
 const code = require('http-response-codes');
 const express = require('express');
-const Simulator = require('../src/Simulator.js');
 const Validator = require('../validation/validator.js');
 const {
   getAlgorithms,
   conductSimulation,
   parseResponse
 } = require('../src/simulator');
+const {
+  ValidationError,
+  NoSuchCollectionError
+} = require('../src/errors');
 
 const router = express.Router();
 
@@ -16,7 +19,12 @@ router.route('/')
         .then(getAlgorithms)
         .then(conductSimulation)
         .then(parseResponse)
-        .then(response => res.status(code.HTTP_OK).json(response));
+        .then(response => res.status(code.HTTP_OK).json(response))
+        .catch(ValidationError, err => {
+          err.status = code.HTTP_BAD_REQUEST;
+          return next(err);
+        })
+        .catch(NoSuchCollectionError, err => res.sendStatus(code.HTTP_NO_CONTENT))
   });
 
 module.exports = router;
