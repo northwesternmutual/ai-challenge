@@ -41,7 +41,7 @@ app.use((req, res, next) => {
     err.status = 400;
     next(err);
 }, (err, req, res, next) => { // eslint-disable-line no-unused-vars
-	req.log.error(err);
+    req.log.error(err);
     res.status(err.status || code.HTTP_INTERNAL_SERVER_ERROR).end();
 });
 

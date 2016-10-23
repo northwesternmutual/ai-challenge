@@ -1,4 +1,3 @@
-'use strict';
 var bunyan = require('bunyan');
 var path = require('path');
 var basePath = '';
