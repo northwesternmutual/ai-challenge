@@ -30,7 +30,12 @@ Grid.prototype.getCell = function(x, y) {
 Grid.prototype.placeBlock = function(x, y, direction, blockType) {
 	var block = this.collection.getBlockByType(blockType);
 
-    //see is it is valid to pace the block there
+    //check to see if the block exists
+    if(block == null) {
+        return false;
+    }
+
+    //see is it is valid to place the block there
     if(this.inBounds(x, y, direction, block) && !this.doesCollide(x, y, direction, block) && !block.isUsed) {
 
         //dock the block
@@ -39,7 +44,18 @@ Grid.prototype.placeBlock = function(x, y, direction, blockType) {
         block.location.y = y;
         block.location.direction = direction;
 
-        var bound = direction === Block.HORIZONTAL ? x : y;
+        var bound;
+
+        switch(direction) {
+            case Block.HORIZONTAL:
+                bound = x;
+                break;
+            case Block.VERTICAL:
+                bound = y;
+                break;
+            default:
+                return false;
+        }
 
         for( var i = bound; i < bound + block.length; ++i ) {
             var cell = this.getCell(direction === Block.HORIZONTAL ? i : x, direction === Block.HORIZONTAL ? y : i);  

@@ -1,25 +1,26 @@
-'use strict';
-var request = require('supertest');
-var proxyquire = require('proxyquire');
-var express = require('express');
-var fakeOS = {
+import request from 'supertest';
+import proxyquire from 'proxyquire';
+import express from 'express';
+
+const fakeOS = {
     hostname: function () {
         return 'testOS';
     }
 };
 
-var app = express();
+const app = express();
 
-var route = proxyquire('../routes/health.js', { 'os': fakeOS });
+const route = proxyquire('../routes/health.js', { 'os': fakeOS });
+
 app.use(route);
 
-describe('health', function () {
-    it('should return the node server name', function (done) {
+describe('health', () => {
+    it('should return the node server name', done => {
         request(app)
             .get('/')
             .expect('Content-Type', /json/)
             .expect(200)
-            .end(function (err, res) {
+            .end((err, res) => {
                 if (err) {
                     return done(err);
                 }
@@ -28,3 +29,5 @@ describe('health', function () {
             });
     });
 });
+
+
