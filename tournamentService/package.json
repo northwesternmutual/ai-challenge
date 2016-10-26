@@ -11,6 +11,7 @@
     "lint:dev": "node ./node_modules/eslint/bin/eslint.js . -f stylish --ext .js --cache --color",
     "lint:prod": "node ./node_modules/eslint/bin/eslint.js . --ext .js --color",
     "test": "./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/jasmine-node spec",
+    "test:coverage": "./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/jasmine-node spec",
     "docker:build": "docker build -t ai_challenge/tournament-service ."
   },
   "license": "MIT",
@@ -22,6 +23,7 @@
     "url": "https://github.com/northwesternmutual/ai-challenge/issues"
   },
   "devDependencies": {
+    "babel-istanbul": "^0.11.0",
     "concurrently": "^3.1.0",
     "eslint": "^3.7.1",
     "jasmine-node": "^1.14.5",

@@ -2,3 +2,4 @@ node_modules/
 npm-debug.log
 eslintcache
 .DS_Store
+coverage/

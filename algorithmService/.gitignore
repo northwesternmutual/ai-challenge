@@ -3,3 +3,4 @@ npm-debug.log
 eslintcache
 mongo_data/
 .DS_Store
+coverage/

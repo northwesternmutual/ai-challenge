@@ -60,15 +60,15 @@ describe('Grid', () => {
 		});
 	});
 
-	describe('doesCollide', () => {
+	describe('#doesCollide', () => {
 
 	});
 
-	describe('getBlockByCoord', () => {
+	describe('#getBlockByCoord', () => {
 
 	});
 
-	describe('inBounds', () => {
+	describe('#inBounds', () => {
 
 	});
 
