@@ -59,6 +59,25 @@ export class Mongo {
         return callback( null, document);
     }
 
+    updateOne(collection, _id, update, callback) {
+        let old = _.find(data.items, {_id});
+        let index = _.indexOf(data.items, old);
+
+        console.log(index);
+
+        data.items.splice(index, 1, Object.assign({}, old, update));
+        return callback(null, old, true);
+    }
+
+    deleteOne(collection, _id, callback) {
+        let item = _.find(data.items, {_id});
+        if(!item) {
+            return callback(null, null);
+        }
+        _.remove(data.items, {_id});
+        return callback(null, item);
+    }
+
     deleteAll(collection, callback) {
         data.items = [];
         return callback( null, data.items );

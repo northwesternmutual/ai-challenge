@@ -22,7 +22,8 @@ app.use((req, res, next) => {
     req.log = log.child({
         requestPath: req.url,
         httpVerb: req.method,
-        params: req.params
+        params: req.params,
+        headers: req.headers
     });
     req.log.info('Request received');
     next();
@@ -43,4 +44,4 @@ app.use((req, res, next) => {
     res.status(err.status || code.HTTP_INTERNAL_SERVER_ERROR).end();
 });
 
-export default app;
+module.exports = app;

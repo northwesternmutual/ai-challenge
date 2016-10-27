@@ -56,4 +56,4 @@ router.route('/:collection/:id')
       });
   });
 
-export default router;
+module.exports = router;
