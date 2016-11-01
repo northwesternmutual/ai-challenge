@@ -1,0 +1,10 @@
+instrumentation:
+    root: .
+    extensions:
+        - .js
+    default-excludes: true
+    excludes:
+        - coverage/*
+        - node_modules/*
+        - mock/*
+        - spec/*

@@ -20,4 +20,4 @@ router.route('/:id')
       });
   });
 
-export default router;
+module.exports = router;

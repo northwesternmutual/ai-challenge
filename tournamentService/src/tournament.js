@@ -82,6 +82,7 @@ export function createTasks({ matches, id }) {
             });
         };
     });
+
     return { matches, tasks, id };
 }
 
@@ -94,6 +95,7 @@ export function executeTasks({ matches, tasks, id }) {
                 error.id = id;
                 return reject(error);
             }
+            console.log(result);
             resolve({ matches, result, id });
         })
     });
@@ -101,11 +103,13 @@ export function executeTasks({ matches, tasks, id }) {
 
 export function parseResults({ matches, result, id }) {
 
+    console.log(JSON.parse(result['match_0']));
+
     let scorecard = {};
 
     for (let i = 0; i < matches.length; ++i) {
-        let playerOneWins = JSON.parse(result['match_' + i]).scorecard.playerOne;
-        let playerTwoWins = JSON.parse(result['match_' + i]).scorecard.playerTwo;
+        let playerOneWins = JSON.parse(result['match_' + i]).playerOne;
+        let playerTwoWins = JSON.parse(result['match_' + i]).playerTwo;
 
         if (scorecard[matches[i].algorithmOne._id] === undefined) {
             scorecard[matches[i].algorithmOne._id] = {

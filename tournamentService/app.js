@@ -2,9 +2,9 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import code from 'http-response-codes';
 import memwatch from 'memwatch-next';
-import playRouter from './routes/playRoute.js';
-import tournamentsRouter from './routes/tournamentsRoute.js';
-import matchesRouter from './routes/matchesRoute.js';
+import playRouter from './routes/playRoute';
+import tournamentsRouter from './routes/tournamentsRoute';
+import matchesRouter from './routes/matchesRoute';
 import healthRouter from './routes/health';
 import docRouter from './routes/doc';
 import log from './utils/logger';
@@ -23,7 +23,8 @@ app.use((req, res, next) => {
     req.log = log.child({
         requestPath: req.url,
         httpVerb: req.method,
-        params: req.params
+        params: req.params,
+        headers: req.headers
     });
     req.log.info('Request received');
     next();
@@ -45,5 +46,5 @@ app.use((req, res, next) => {
     res.status(err.status || code.HTTP_INTERNAL_SERVER_ERROR).end();
 });
 
-export default app;
+module.exports = app;
 

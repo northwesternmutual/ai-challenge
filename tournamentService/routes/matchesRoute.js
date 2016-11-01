@@ -15,4 +15,4 @@ router.route('/:collection')
 
   });
 
-export default router;
+module.exports = router;
