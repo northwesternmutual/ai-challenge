@@ -3,7 +3,7 @@ FROM mhart/alpine-node:6.9
 RUN apk add --update \
               musl \
               build-base \
-              python \
+              python && \
   	rm /var/cache/apk/* && \
   	cd /usr/bin && \
   	ln -sf easy_install-2.7 easy_install && \
