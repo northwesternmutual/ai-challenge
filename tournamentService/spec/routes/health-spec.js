@@ -10,7 +10,7 @@ var fakeOS = {
 
 var app = express();
 
-var route = proxyquire('../routes/health.js', { 'os': fakeOS });
+var route = proxyquire('../../routes/health.js', { 'os': fakeOS });
 app.use(route);
 
 describe('health', function () {

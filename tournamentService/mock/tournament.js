@@ -1,4 +1,7 @@
 import Bluebird from 'bluebird';
+import fs from 'fs';
+
+const root = process.cwd();
 
 export let data = {
     response: {
@@ -6,40 +9,13 @@ export let data = {
         status: 'tournament in progress',
         lastUpdated: Date.now(),
         results: []
-    },
-    matches:  [
-        {
-            algorithmOne: {
-                _id: '123abc',
-                email: 'frankgreco@northwesternmutual.com',
-                name: 'frank greco jr',
-                initializeSimulation: 'this is my function body',
-                initializeGame: 'this is my function body',
-                startGame: 'this is my function body',
-                shoot: 'this is my function body',
-                endGame: 'this is my function body',
-                date: Date.now(),
-            },
-            algorithmTwo: {
-                _id: '456def',
-                email: 'frankgreco@northwesternmutual.com',
-                name: 'frank greco jr',
-                initializeSimulation: 'this is my function body',
-                initializeGame: 'this is my function body',
-                startGame: 'this is my function body',
-                shoot: 'this is my function body',
-                endGame: 'this is my function body',
-                date: Date.now(),
-            },
-            url: '?paramOne=one&paramTwo=two'
-        }
-    ]
+    }
 };
 
 export function getMatches(numGames = 1000, collection) {
 
     return new Bluebird((resolve, reject) => {
-        resolve({ matches: data.matches });
+        resolve({ matches: JSON.parse(fs.readFileSync(root + '/mock/data/matches.json').toString()) });
     });
 }
 

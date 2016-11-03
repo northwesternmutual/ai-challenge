@@ -1,7 +1,7 @@
 import request from 'supertest';
 import proxyquire from 'proxyquire';
 import express from 'express';
-import log from '../utils/logger';
+import log from '../../utils/logger';
 
 const fake = express.Router();
 
@@ -13,7 +13,7 @@ fake.use('/', function (req, res, next) {
     res.cookie('cookie', req.cookies);
     res.json({});
 });
-var app = proxyquire('../app', {
+var app = proxyquire('../../app', {
     './routes/matchesRoute': fake,
     './routes/playRoute': fake,
     './routes/tournamentsRoute': fake,
