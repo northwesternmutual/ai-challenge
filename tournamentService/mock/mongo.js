@@ -42,8 +42,6 @@ export class Mongo {
         let old = _.find(data.items, {_id});
         let index = _.indexOf(data.items, old);
 
-        console.log(index);
-
         data.items.splice(index, 1, Object.assign({}, old, update));
         return callback(null, old, true);
     }

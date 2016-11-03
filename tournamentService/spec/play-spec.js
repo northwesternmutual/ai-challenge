@@ -19,7 +19,7 @@ import {
   postResults as postResultsError,
   initialize as initializeError,
   postError as postErrorError
-} from '../mock/tournament_errors.js';
+} from '../mock/errors.js';
 import log from '../utils/logger';
 
 let app;

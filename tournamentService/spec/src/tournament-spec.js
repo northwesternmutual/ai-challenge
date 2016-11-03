@@ -18,9 +18,12 @@ import {
   AlgorithmError,
   InitializationError
 } from '../../src/errors';
-import matchesList from '../../mock/data/matches.json';
 import fs from 'fs';
 import _ from 'lodash';
+import { results } from '../../mock/data/results.js';
+import { tasks } from '../../mock/data/tasks.js';
+import { scorecard } from '../../mock/data/scorecard.js';
+import { sorted } from '../../mock/data/sorted.js';
 
 const tournament = proxyquire
 	.noCallThru()
@@ -30,6 +33,7 @@ const tournament = proxyquire
 	});
 
 const root = process.cwd();
+const matches = JSON.parse(fs.readFileSync(root + '/mock/data/matches.json').toString());
 
 describe('tournament function', () => { 
 
@@ -73,9 +77,8 @@ describe('tournament function', () => {
 	describe('initialize', () => {
 		
 		it('should insert the tournament into the database', done => {
-			const before = JSON.parse(fs.readFileSync(root + '/mock/data/matches.json').toString());
-			tournament.initialize({ matches: before }).then(({ matches: after, result }) => {
-				expect(before).toEqual(after);
+			tournament.initialize({ matches }).then(({ matches: after, result }) => {
+				expect(matches).toEqual(after);
 				expect(result).toEqual(data.items[data.items.length-1]);
 				done();
 			});
@@ -83,7 +86,6 @@ describe('tournament function', () => {
 	});
 
 	describe('createTasks', () => {
-		const matches = JSON.parse(fs.readFileSync(root + '/mock/data/matches.json').toString());
 		it('should return a list of tasks', done => {
 			let result = tournament.createTasks({ matches, id: '789ghi' });
 			expect(result.id).toBe('789ghi');
@@ -99,22 +101,69 @@ describe('tournament function', () => {
 
 	describe('executeTasks', () => {
 		
+		it('should return the results', done => {
+			tournament.executeTasks({ matches, tasks, id: '789ghi' }).then(({ matches: after, result, id }) => {
+				expect(after).toEqual(matches);
+				expect(id).toBe('789ghi');
+				expect(result).toEqual(results);
+				done();
+			});
+		});
+
 	});
 
 	describe('parseResults', () => {
 		
+		it('should parse the results', done => {
+			let result = tournament.parseResults({matches, result: results, id: '789ghi'});
+			expect(result.id).toBe('789ghi');
+			expect(result.scorecard).toEqual(scorecard);
+			done();
+		});
+
 	});
 
 	describe('sortResults', () => {
 		
+		it('should properly sort the results', done => {
+			let result = tournament.sortResults({ scorecard, id: '789ghi' });
+			expect(result.id).toBe('789ghi');
+			if(result.results.length < 2) done();
+			for(let i=1; i<result.results.length; ++i) {
+				expect(result.results[i-1].wins >= result.results[i].wins).toEqual(true);
+			}
+			done();
+		})
+
 	});
 
 	describe('postResults', () => {
-		
+		it('should update the tournament in the database', done => {
+			tournament.postResults({ results: sorted, id: '789ghi' }).then(() => {
+				expect(data.items[data.items.length-1]).toEqual({
+					_id: '789ghi',
+		            status: 'tournament completed',
+		            lastUpdated: data.items[data.items.length-1].lastUpdated,
+		            results: sorted
+				});
+				done();
+			});
+		});
 	});
 
 	describe('postError', () => {
-		
+		it('should update the tournament in the database to show an error', done => {
+			tournament.postError({
+				id: '789ghi',
+				message: 'this is an error'
+			}).then(() => {
+				let updatedEntry = data.items[data.items.length-1];
+				expect(updatedEntry._id).toBe('789ghi');
+				expect(updatedEntry.status).toBe('this is an error');
+				expect(updatedEntry.lastUpdated).toBeTruthy();
+				done();
+			});
+		});
 	});
 
 });

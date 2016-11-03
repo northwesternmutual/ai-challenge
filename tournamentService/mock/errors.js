@@ -10,7 +10,6 @@ import {
 export function getMatches(numGames = 1000, collection) {
 
     return new Bluebird((resolve, reject) => {
-        console.log('hihihih');
         reject(new NoSuchCollectionError('collection does not exist'));
     });
 }

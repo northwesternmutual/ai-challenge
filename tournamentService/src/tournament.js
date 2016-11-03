@@ -100,38 +100,41 @@ export function executeTasks({ matches, tasks, id }) {
 
 export function parseResults({ matches, result, id }) {
 
-    console.log(JSON.parse(result['match_0']));
-
     let scorecard = {};
+    let playerOneWins;
+    let playerTwoWins;
 
-    for (let i = 0; i < matches.length; ++i) {
-        let playerOneWins = JSON.parse(result['match_' + i]).playerOne;
-        let playerTwoWins = JSON.parse(result['match_' + i]).playerTwo;
+    matches.forEach((match, index, arr) => {
+        playerOneWins = JSON.parse(result[`match_${index}`]).playerOne.wins;
+        playerTwoWins = JSON.parse(result[`match_${index}`]).playerTwo.wins;
 
-        if (scorecard[matches[i].algorithmOne._id] === undefined) {
-            scorecard[matches[i].algorithmOne._id] = {
+        if (scorecard[matches[index].algorithmOne._id] === undefined) {
+            scorecard[matches[index].algorithmOne._id] = {
                 wins: playerOneWins,
                 losses: playerTwoWins,
-                email: matches[i].algorithmOne.email,
-                id: matches[i].algorithmOne._id
+                name: matches[index].algorithmOne.name,
+                email: matches[index].algorithmOne.email,
+                id: matches[index].algorithmOne._id
             }
         } else {
-            scorecard[matches[i].algorithmOne._id].wins = scorecard[matches[i].algorithmOne._id].wins += playerOneWins,
-            scorecard[matches[i].algorithmOne._id].losses = scorecard[matches[i].algorithmOne._id].losses += playerTwoWins
+            scorecard[matches[index].algorithmOne._id].wins += playerOneWins;
+            scorecard[matches[index].algorithmOne._id].losses += playerTwoWins;
         }
 
-        if (scorecard[matches[i].algorithmTwo._id] === undefined) {
-            scorecard[matches[i].algorithmTwo._id] = {
+        if (scorecard[matches[index].algorithmTwo._id] === undefined) {
+            scorecard[matches[index].algorithmTwo._id] = {
                 wins: playerTwoWins,
                 losses: playerOneWins,
-                email: matches[i].algorithmTwo.email,
-                id: matches[i].algorithmTwo._id
+                name: matches[index].algorithmOne.name,
+                email: matches[index].algorithmTwo.email,
+                id: matches[index].algorithmTwo._id
             }
         } else {
-            scorecard[matches[i].algorithmTwo._id].wins = scorecard[matches[i].algorithmTwo._id].wins += playerTwoWins,
-            scorecard[matches[i].algorithmTwo._id].losses = scorecard[matches[i].algorithmTwo._id].losses += playerOneWins
+            scorecard[matches[index].algorithmTwo._id].wins += playerTwoWins;
+            scorecard[matches[index].algorithmTwo._id].losses += playerOneWins;
         }
-    }
+    });
+
     return { scorecard, id };
 }
 
