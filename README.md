@@ -200,23 +200,23 @@ http://localhost:8080/tournamentservice/matches/test
     {
       "algorithmOne": {
         "_id": "580bf21cf2c4c40015fdd8bf",
-        "initializeSimulation": "\n\n",
-        "shoot": "\n    var coords = this.getNextCoord();\n    var result = this.player.shoot(coords.x, coords.y);\n    //result is one of Cell.<type> so that you can re-shoot if necessary. (e.g. you are shooting someplace you already shot)\n",
+        "initializeSimulation": "",
+        "shoot": "var coords=this.getNextCoord();var result=this.player.shoot(coords.x, coords.y);",
         "email": "frankgreco@northwesternmutual.com",
-        "initializeGame": "\n    var x = -1, y = 0;\n    this.getNextCoord = function() {\n        if (++x > 9) {\n            x = 0;\n            ++y;\n        }\n        return {\n            x: x,\n            y: y\n        };\n    }\n",
-        "startGame": "\n    this.player.grid.placeBlock(0, 0, Block.VERTICAL, Collection.ONEBYTWO);\n    this.player.grid.placeBlock(1, 0, Block.VERTICAL, Collection.ONEBYTHREE);\n    this.player.grid.placeBlock(2, 0, Block.VERTICAL, Collection.ONEBYFOUR);\n    this.player.grid.placeBlock(3, 0, Block.VERTICAL, Collection.ONEBYFIVE);\n    this.player.grid.placeBlock(4, 0, Block.VERTICAL, Collection.ONEBYSIX);\n",
-        "endGame": "\n\n",
+        "initializeGame": "var x=-1,y=0;this.getNextCoord=function(){if(++x>9){x=0;++y;}return{x:x,y:y};}",
+        "startGame": "this.player.grid.placeBlock(0,0,Block.VERTICAL,Collection.ONEBYTWO);this.player.grid.placeBlock(1,0,Block.VERTICAL,Collection.ONEBYTHREE);this.player.grid.placeBlock(2,0,Block.VERTICAL,Collection.ONEBYFOUR);this.player.grid.placeBlock(3,0,Block.VERTICAL,Collection.ONEBYFIVE);this.player.grid.placeBlock(4,0,Block.VERTICAL,Collection.ONEBYSIX);",
+        "endGame": "",
         "date": "1475186162289",
         "name": "Frank B Greco Jr"
       },
       "algorithmTwo": {
         "_id": "580bf21df2c4c40015fdd8c0",
-        "initializeSimulation": "\n\n",
-        "shoot": "\n    var coords = this.getNextCoord();\n    var result = this.player.shoot(coords.x, coords.y);\n    //result is one of Cell.<type> so that you can re-shoot if necessary. (e.g. you are shooting someplace you already shot)\n",
+        "initializeSimulation": "",
+        "shoot": "var coords=this.getNextCoord();var result=this.player.shoot(coords.x, coords.y);",
         "email": "frankgreco@northwesternmutual.com",
-        "initializeGame": "\n    var x = -1, y = 0;\n    this.getNextCoord = function() {\n        if (++x > 9) {\n            x = 0;\n            ++y;\n        }\n        return {\n            x: x,\n            y: y\n        };\n    }\n",
-        "startGame": "\n    this.player.grid.placeBlock(0, 0, Block.VERTICAL, Collection.ONEBYTWO);\n    this.player.grid.placeBlock(1, 0, Block.VERTICAL, Collection.ONEBYTHREE);\n    this.player.grid.placeBlock(2, 0, Block.VERTICAL, Collection.ONEBYFOUR);\n    this.player.grid.placeBlock(3, 0, Block.VERTICAL, Collection.ONEBYFIVE);\n    this.player.grid.placeBlock(4, 0, Block.VERTICAL, Collection.ONEBYSIX);\n",
-        "endGame": "\n\n",
+        "initializeGame": "var x=-1,y=0;this.getNextCoord=function(){if(++x>9){x=0;++y;}return{x:x,y:y};}",
+        "startGame": "this.player.grid.placeBlock(0,0,Block.VERTICAL,Collection.ONEBYTWO);this.player.grid.placeBlock(1,0,Block.VERTICAL,Collection.ONEBYTHREE);this.player.grid.placeBlock(2,0,Block.VERTICAL,Collection.ONEBYFOUR);this.player.grid.placeBlock(3,0,Block.VERTICAL,Collection.ONEBYFIVE);this.player.grid.placeBlock(4,0,Block.VERTICAL,Collection.ONEBYSIX);",
+        "endGame": "",
         "date": "1475186162289",
         "name": "Frank B Greco Jr"
       },
