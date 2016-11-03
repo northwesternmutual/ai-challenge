@@ -14,7 +14,7 @@ import {
 	InitializationError
 } from '../src/errors';
 
-export function getMatches(numGames = 1000, collection) {
+export function getMatches(collection, numGames = 1000,) {
 
     let matches = [];
     let algorithms = [];
@@ -50,7 +50,6 @@ export function getMatches(numGames = 1000, collection) {
 }
 
 export function initialize({ matches }) {
-
     return new Bluebird((resolve, reject) => {
         new Mongo('ai_challenge').insertOne('tournaments', {
             status: 'tournament in progress',
@@ -74,8 +73,7 @@ export function createTasks({ matches, id }) {
                 uri: `${config.simulationEndpiont}${match.url}`
             }, (error, response, body) => {
                 if (error || (response.statusCode !== 200)) {
-                    error = new Error('simulation service call failed');
-                    return callback(error);
+                    return callback(new Error('simulation service call failed'));
                 } else {
                     return callback(null, body);
                 }
@@ -95,7 +93,6 @@ export function executeTasks({ matches, tasks, id }) {
                 error.id = id;
                 return reject(error);
             }
-            console.log(result);
             resolve({ matches, result, id });
         })
     });

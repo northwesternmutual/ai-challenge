@@ -22,7 +22,7 @@ const router = express.Router();
 router.route('/:collection')
   .get((req, res, next) => {
 
-      getMatches(req.query.games, req.params.collection)
+      getMatches(req.params.collection, req.query.games)
           .then(initialize)
           .then(({ matches, result }) => {
               res.location(`${result._id}`);

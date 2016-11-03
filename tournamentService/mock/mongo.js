@@ -34,8 +34,8 @@ export class Mongo {
     }
 
     insertOne(collection, document, callback) {
-        data.items.push(document);
-        return callback( null, document);
+        data.items.push(Object.assign(document, { _id: '789ghi' }));
+        return callback( null, document );
     }
 
     updateOne(collection, _id, update, callback) {
