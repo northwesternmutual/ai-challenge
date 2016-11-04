@@ -7,11 +7,11 @@
   "scripts": {
     "clean": "rm -rf node_modules",
     "dev": "concurrently -p \"[{name}]\" -n \"NODE INSPECTOR,NODEMON\" -c \"bgBlue.bold,bgGreen.bold\" \"node-inspector --web-port=8081 --debug-port=5860 --preload\" \"cross-env NODE_ENV=development nodemon ./node_modules/babel-cli/bin/babel-node.js --max-old-space-size=512 --debug=5860 ./index.js\"",
-    "start": "NODE_ENV=production ./node_modules/babel-cli/bin/babel-node.js ./index.js",
+    "start": "cross-env NODE_ENV=production ./node_modules/babel-cli/bin/babel-node.js ./index.js",
     "lint:dev": "node ./node_modules/eslint/bin/eslint.js . -f stylish --ext .js --cache --color",
     "lint:prod": "node ./node_modules/eslint/bin/eslint.js . --ext .js --color",
-    "test": "NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/jasmine-node spec",
-    "coverage": "NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/jasmine-node spec",
+    "test": "cross-env NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/jasmine-node spec",
+    "coverage": "cross-env NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/jasmine-node spec",
     "docker:build": "docker build -t ai_challenge/tournament-service ."
   },
   "license": "MIT",
