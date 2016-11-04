@@ -3,8 +3,4 @@ instrumentation:
     extensions:
         - .js
     default-excludes: true
-    excludes:
-        - coverage/*
-        - node_modules/*
-        - mock/*
-        - spec/*
+    excludes: ["*-spec.js", "mock/**"]

@@ -29,11 +29,14 @@ describe('Cell', () => {
 	});
 
 	describe('constants', () => {
-		expect(Cell.TYPE_EMPTY).toBe(0);
-		expect(Cell.TYPE_BLOCK).toBe(1);
-		expect(Cell.TYPE_MISS).toBe(2);
-		expect(Cell.TYPE_CONQUERED).toBe(4);
-		expect(Cell.TYPE_HIT).toBe(3);
+		it('should equal the right number', done => {
+			expect(Cell.TYPE_EMPTY).toBe(0);
+			expect(Cell.TYPE_BLOCK).toBe(1);
+			expect(Cell.TYPE_MISS).toBe(2);
+			expect(Cell.TYPE_CONQUERED).toBe(4);
+			expect(Cell.TYPE_HIT).toBe(3);
+			done();
+		});
 	});
 
 });

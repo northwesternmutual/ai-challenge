@@ -3,4 +3,4 @@ instrumentation:
     extensions:
         - .js
     default-excludes: true
-    excludes: ["*-spec.js", "mock/**"]
+    excludes: ['*-spec.js', '**/mock/**']

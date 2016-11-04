@@ -62,8 +62,11 @@ describe('Block', () => {
 	});
 
 	describe('constants', () => {
-		expect(Block.HORIZONTAL).toBe(0);
-		expect(Block.VERTICAL).toBe(1);
+		it('should equal the right number', done => {
+			expect(Block.HORIZONTAL).toBe(0);
+			expect(Block.VERTICAL).toBe(1);
+			done();
+		});
 	});
 
 });

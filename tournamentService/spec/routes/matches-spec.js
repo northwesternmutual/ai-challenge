@@ -6,12 +6,12 @@ import { data, getMatches } from '../../mock/tournament.js';
 import { getMatches as getMatchesError } from '../../mock/errors.js';
 import log from '../../utils/logger';
 import fs from 'fs';
+import path from 'path';
 
 let app;
 let route;
 
 const basePath = '/matches';
-const root = process.cwd();
 
 function setupFakeRouter(dependencies) {
     app = express();
@@ -39,7 +39,7 @@ describe('tournament route', () => {
                 if (err) {
                     return done(err);
                 }
-                expect(res.body).toEqual({ matches: JSON.parse(fs.readFileSync(root + '/mock/data/matches.json').toString()) });
+                expect(res.body).toEqual({ matches: JSON.parse(fs.readFileSync(path.join(__dirname + '/../../mock/data/matches.json')).toString()) });
                 done();
             });
     });

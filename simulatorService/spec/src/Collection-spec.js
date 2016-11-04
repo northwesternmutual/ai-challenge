@@ -145,11 +145,14 @@ describe('Collection', () => {
 	});
 
 	describe('constants', () => {
-		expect(Collection.ONEBYTWO).toBe(0);
-		expect(Collection.ONEBYTHREE).toBe(1);
-		expect(Collection.ONEBYFOUR).toBe(2);
-		expect(Collection.ONEBYFIVE).toBe(3);
-		expect(Collection.ONEBYSIX).toBe(4);
+		it('should equal the right number', done => {
+			expect(Collection.ONEBYTWO).toBe(0);
+			expect(Collection.ONEBYTHREE).toBe(1);
+			expect(Collection.ONEBYFOUR).toBe(2);
+			expect(Collection.ONEBYFIVE).toBe(3);
+			expect(Collection.ONEBYSIX).toBe(4);
+			done();
+		});
 	});
 
 });

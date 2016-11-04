@@ -1,7 +1,6 @@
 import Bluebird from 'bluebird';
 import fs from 'fs';
-
-const root = process.cwd();
+import path from 'path';
 
 export let data = {
     response: {
@@ -15,7 +14,7 @@ export let data = {
 export function getMatches(numGames = 1000, collection) {
 
     return new Bluebird((resolve, reject) => {
-        resolve({ matches: JSON.parse(fs.readFileSync(root + '/mock/data/matches.json').toString()) });
+        resolve({ matches: JSON.parse(fs.readFileSync(path.join(__dirname + '/data/matches.json')).toString()) });
     });
 }
 

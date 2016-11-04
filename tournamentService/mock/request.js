@@ -1,5 +1,6 @@
 import fs from 'fs';
 import _ from 'lodash';
+import path from 'path';
 
 let validCollections = [
 	'my_collection'
@@ -51,6 +52,6 @@ export default function request(endpoint, callback) {
 
 		return callback(null, {
 			statusCode: 200
-		}, fs.readFileSync(__dirname + '/data/algorithms.json').toString());
+		}, fs.readFileSync(path.join(__dirname + '/data/algorithms.json')).toString());
 	}
 }

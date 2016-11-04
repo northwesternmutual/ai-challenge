@@ -19,6 +19,7 @@ import {
   InitializationError
 } from '../../src/errors';
 import fs from 'fs';
+import path from 'path';
 import _ from 'lodash';
 import { results } from '../../mock/data/results.js';
 import { tasks } from '../../mock/data/tasks.js';
@@ -32,22 +33,22 @@ const tournament = proxyquire
 		'request': request
 	});
 
-const root = process.cwd();
-const matches = JSON.parse(fs.readFileSync(root + '/mock/data/matches.json').toString());
+//const root = process.cwd();
+const matches = JSON.parse(fs.readFileSync(path.join(__dirname + '/../../mock/data/matches.json')).toString());
 
 describe('tournament function', () => { 
 
 	describe('getMatches', () => {
 
 		it('should create a list of matches', () => {
-			tournament.getMatches('my_collection', 1000).then(({ matches }) => {
-				expect(matches).toEqual(JSON.parse(fs.readFileSync(root + '/mock/data/matches.json').toString()));
+			tournament.getMatches('my_collection', 1000).then(({ matches: after }) => {
+				expect(after).toEqual(matches);
 			});
 		});
 
 		it('should create a list of matches even though we haven\'t specified how many games to play', () => {
-			tournament.getMatches('my_collection').then(({ matches }) => {
-				expect(matches).toEqual(JSON.parse(fs.readFileSync(root + '/mock/data/matches.json').toString()));
+			tournament.getMatches('my_collection').then(({ matches: after }) => {
+				expect(after).toEqual(matches);
 			});
 		});
 

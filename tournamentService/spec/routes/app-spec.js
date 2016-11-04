@@ -2,6 +2,7 @@ import request from 'supertest';
 import proxyquire from 'proxyquire';
 import express from 'express';
 import log from '../../utils/logger';
+import path from 'path';
 
 const fake = express.Router();
 
@@ -88,7 +89,7 @@ describe('the application path', function () {
     });
 
     it('should set child logger on request', function (done) {
-        spyOn(log, 'child').andCallThrough();
+        spyOn(log, 'child').and.callThrough();
         request(app)
             .get('/health')
             .set('host', 'testHost')

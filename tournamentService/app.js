@@ -11,6 +11,9 @@ import log from './utils/logger';
 
 const app = express();
 
+
+console.log(process.cwd());
+
 //watch for memory leaks
 memwatch.on('leak', info => log.warn(info, 'Memory leak was detected'));
 

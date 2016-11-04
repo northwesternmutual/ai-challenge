@@ -74,7 +74,7 @@ describe('the algorithm application path', function () {
     });
 
     it('should set child logger on request', function (done) {
-        spyOn(log, 'child').andCallThrough();
+        spyOn(log, 'child').and.callThrough();
         request(app)
             .get('/health')
             .set('host', 'testHost')
