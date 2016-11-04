@@ -21,7 +21,7 @@ Environment configuration is fasciliated through `./confg/NODE_ENV.json`
 
 ## API
 #### Documentation
-[Swagger Schema](swagger.json)
+[Swagger Schema](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/northwesternmutual/ai-challenge/master/algorithmService/swagger.json?token=AVjpyTf2x5v493zN6qI4ZPKyJIso0ulcks5YJma3wA%3D%3D)
 
 ## Docker
 A `Dockerfile` and `.dockerignore` are included that can be used to run this application in a docker container. The base image is [alpine](https://alpinelinux.org/) and is `292.4MB`

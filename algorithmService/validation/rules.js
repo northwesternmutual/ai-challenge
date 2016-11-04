@@ -1,73 +1,99 @@
-const shallowValidate = (data, callback) => {
-    if (data === undefined) {
-        return callback(new Error('field is undefined'));
-    } else if (data === null) {
-        return callback(new Error('field is null'));
-    } else if (data.length < 1) {
-        return callback(new Error('field does not meet the minimum length requirement'));
-    }
-    return callback(null, data);
-};
+const checkIfUndefined = data => {
+    return new Promise((resolve, reject) => {
+        if(data == undefined) {
+            return reject(new Error('field is undefined'));
+        } else {
+            return resolve(data);
+        }
+    });
+}
+
+const checkIfNull = data => {
+    return new Promise((resolve, reject) => {
+        if(data == null) {
+            return reject(new Error('field is null'));
+        } else {
+            return resolve(data);
+        }
+    });
+}
+
+const checkIfMinLength = data => {
+    return new Promise((resolve, reject) => {
+        if(data.length < 1) {
+            return reject(new Error('field does not meet the minimum length requirement'));
+        } else {
+            return resolve(data);
+        }
+    });
+}
 
 export function id(id, callback) {
-    return shallowValidate(id, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
+    return checkIfUndefined(id)
+        .then(checkIfNull)
+        .then(checkIfMinLength)
+        .then( data => callback(null, data) )
+        .catch( err => callback(err) );
 }
 
 export function email(email, callback) {
-    return shallowValidate(email, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
+    return checkIfUndefined(email)
+        .then(checkIfNull)
+        .then(checkIfMinLength)
+        .then( data => callback(null, data) )
+        .catch( err => callback(err) );
 }
 
 export function name(name, callback) {
-    return shallowValidate(name, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
+    return checkIfUndefined(name)
+        .then(checkIfNull)
+        .then(checkIfMinLength)
+        .then( data => callback(null, data) )
+        .catch( err => callback(err) );
 }
 
 export function initializeSimulation(initializeSimulation, callback) {
-    return shallowValidate(initializeSimulation, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
+    return checkIfUndefined(initializeSimulation)
+        .then(checkIfNull)
+        .then( data => callback(null, data) )
+        .catch( err => callback(err) );
 }
 
 export function initializeGame(initializeGame, callback) {
-    return shallowValidate(initializeGame, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
+    return checkIfUndefined(initializeGame)
+        .then(checkIfNull)
+        .then(checkIfMinLength)
+        .then( data => callback(null, data) )
+        .catch( err => callback(err) );
 }
 
 export function startGame(startGame, callback) {
-    return shallowValidate(startGame, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
+    return checkIfUndefined(startGame)
+        .then(checkIfNull)
+        .then(checkIfMinLength)
+        .then( data => callback(null, data) )
+        .catch( err => callback(err) );
 }
 
 export function shoot(shoot, callback) {
-    return shallowValidate(shoot, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
+    return checkIfUndefined(shoot)
+        .then(checkIfNull)
+        .then(checkIfMinLength)
+        .then( data => callback(null, data) )
+        .catch( err => callback(err) );
 }
 
 export function endGame(endGame, callback) {
-    return shallowValidate(endGame, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
+    return checkIfUndefined(endGame)
+        .then(checkIfNull)
+        .then( data => callback(null, data) )
+        .catch( err => callback(err) );
 }
 
 export function date(date, callback) {
-    return shallowValidate(date, (err, result) => {
-        //add buisness logic here
-        return callback(err ? err : null, err ? null : result);
-    });
+    return checkIfUndefined(date)
+        .then(checkIfNull)
+        .then(checkIfMinLength)
+        .then( data => callback(null, data) )
+        .catch( err => callback(err) );
 }

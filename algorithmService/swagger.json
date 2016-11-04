@@ -2,10 +2,28 @@
   "swagger": "2.0",
   "info": {
     "version": "0.1.0",
+    "contact": {
+      "name": "Frank B Greco Jr",
+      "email": "frankgreco@northwesternmutual.com"
+    },
     "title": "Algorithm Service",
     "description": "Fascilitates create/retrieve/update/delete operations on AI implementations"
   },
   "basePath": "/",
+  "tags": [
+    {
+      "name": "algorithm",
+      "description": "perform CRUD operations on a single algorithm"
+    },
+    {
+      "name": "algorithms",
+      "description": "perform CRUD operations on all the algorithms"
+    },
+    {
+      "name": "utilities",
+      "description": "utility endpoints"
+    }
+  ],
   "consumes": [
     "application/json"
   ],
@@ -19,6 +37,9 @@
   "paths": {
     "/algorithms/{collection}": {
       "get": {
+        "tags": [
+          "algorithms"
+        ],
         "description": "Get all algorithms in the for a given collection",
         "parameters": [
           {
@@ -45,6 +66,9 @@
         }
       },
       "post": {
+        "tags": [
+          "algorithms"
+        ],
         "description": "Insert one algorithm into the given collection of algorithms",
         "parameters": [
           {
@@ -76,6 +100,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "algorithms"
+        ],
         "description": "Delete all algorithms from a given collection",
         "parameters": [
           {
@@ -94,6 +121,9 @@
     },
     "/algorithm/{collection}/{id}": {
       "get": {
+        "tags": [
+          "algorithm"
+        ],
         "description": "Get one algorithm from a given collection",
         "parameters": [
           {
@@ -122,6 +152,9 @@
         }
       },
       "put": {
+        "tags": [
+          "algorithm"
+        ],
         "description": "Update one algorithm in the given collection",
         "parameters": [
           {
@@ -150,6 +183,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "algorithm"
+        ],
         "description": "Delete one algorithm from the given collection",
         "parameters": [
           {
@@ -174,6 +210,9 @@
     },
     "/doc": {
       "get": {
+        "tags": [
+          "utilities"
+        ],
         "description": "get the swagger schema",
         "responses": {
           "200": {
@@ -184,6 +223,9 @@
     },
     "/health": {
       "get": {
+        "tags": [
+          "utilities"
+        ],
         "description": "check the health of the host node",
         "responses": {
           "200": {

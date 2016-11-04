@@ -2,6 +2,10 @@
   "swagger": "2.0",
   "info": {
     "version": "0.1.0",
+    "contact": {
+      "name": "Frank B Greco Jr",
+      "email": "frankgreco@northwesternmutual.com"
+    },
     "title": "Tournament Service",
     "description": "Fascilitaes a tournament of AI implementations"
   },
