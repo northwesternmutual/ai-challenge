@@ -1,5 +1,7 @@
 FROM mhart/alpine-node:6.9
 
+RUN npm install -g yarn@latest
+
 RUN apk add --update \
               musl \
               build-base \
@@ -12,9 +14,9 @@ RUN apk add --update \
 
 WORKDIR /tmp/app
 
-COPY package.json /tmp/app/package.json
+COPY yarn.lock package.json .yarnrc /tmp/app/
 
-RUN npm install
+RUN yarn
 
 COPY ./ /tmp/app/
 

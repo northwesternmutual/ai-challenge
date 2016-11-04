@@ -48,7 +48,6 @@
     "memwatch-next": "^0.2.10",
     "mongodb-uri": "^0.9.7",
     "mongojs": "^2.4.0",
-    "path": "^0.12.7",
     "qs": "^6.2.1",
     "request": "^2.72.0"
   }
