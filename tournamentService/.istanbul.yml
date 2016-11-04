@@ -1,6 +1,6 @@
-# instrumentation:
-#     root: .
-#     extensions:
-#         - .js
-#     default-excludes: true
-#     excludes: ["*-spec.js", "**/mock/**", "algorithmService/mock/*.js", "simulatorService/mock/*", "tournamentService/mock/*"]
+instrumentation:
+    root: .
+    extensions:
+        - .js
+    default-excludes: true
+    excludes: ['*-spec.js', 'mock/**']
