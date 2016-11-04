@@ -4,3 +4,4 @@ eslintcache
 mongo_data/
 .DS_Store
 coverage/
+yarn-error.log
