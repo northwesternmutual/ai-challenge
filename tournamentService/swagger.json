@@ -198,6 +198,9 @@
           "losses": {
             "type": "integer"
           },
+          "name": {
+            "type": "string"
+          },
           "email": {
             "type": "string"
           },
