@@ -1,0 +1,16 @@
+{
+  "name": "ai_challenge",
+  "description": "a framework for fascilitating AI tournaments.",
+  "author": "Frank B Greco Jr <frankgreco@northwesternmutual.com>",
+  "scripts": {
+    "test": "NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/jasmine-node */spec",
+    "coverage": "NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/jasmine-node */spec",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls && rm -rf ./coverage"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.7.7",
+    "babel-istanbul": "^0.11.0",
+    "coveralls": "^2.11.14",
+    "jasmine-node": "^2.0.0"
+  }
+}
