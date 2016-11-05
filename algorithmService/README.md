@@ -6,12 +6,14 @@
 Fascilitates create/retrieve/update/delete operations on AI implementations
 
 ## Quick Start
-`npm install && npm run dev`
+* **npm** `npm install && npm run dev`
+* **yarn** `yarn && yarn run dev`
 
 ## Commands
 * `npm run dev`: transpile es6 -> es5 and handle live changes via [nodemon](http://nodemon.io/) and enable debugging via [node-inspector](http://127.0.0.1:8080/?port=5858) 
 * `npm run start`: transpile es6 -> es5 and start the application 
 * `npm run test`: run all `*spec.js` files in the `spec/` directory
+* `npm run coverage`: uses istanbul to determine the code coverage of the unit tests
 * `npm run lint:dev`: cache the results in a `.eslintcache` file so that only changed files are checked  
 * `npm run lint:prod`: lint files without results being cached 
 * `npm run docker:build`: builds your Docker image. [Docker](https://www.docker.com/) is a dependency for this command.

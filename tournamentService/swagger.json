@@ -14,9 +14,26 @@
     "http",
     "https"
   ],
+  "tags": [
+    {
+      "name": "matches",
+      "description": "get all of the necesssary info to fascilite a tournament"
+    },
+    {
+      "name": "tournament",
+      "description": "perform the tournament"
+    },
+    {
+      "name": "utilities",
+      "description": "utility endpoints"
+    }
+  ],
   "paths": {
     "/matches/{collection}": {
       "get": {
+        "tags": [
+          "matches"
+        ],
         "description": "get matches for a given collection",
         "parameters": [
           {
@@ -45,6 +62,9 @@
     },
     "/play/{collection}": {
       "get": {
+        "tags": [
+          "tournament"
+        ],
         "description": "initiate a tournament",
         "parameters": [
           {
@@ -69,6 +89,9 @@
     },
     "/tournament/{id}": {
       "get": {
+        "tags": [
+          "tournament"
+        ],
         "description": "get the status of a tournament",
         "parameters": [
           {
@@ -115,6 +138,9 @@
     },
     "/doc": {
       "get": {
+        "tags": [
+          "utilities"
+        ],
         "description": "get the swagger schema",
         "responses": {
           "200": {
@@ -125,6 +151,9 @@
     },
     "/health": {
       "get": {
+        "tags": [
+          "utilities"
+        ],
         "description": "check the health of the host node",
         "responses": {
           "200": {

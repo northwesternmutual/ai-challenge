@@ -10,6 +10,16 @@
     "description": "Preforms a simulation of two AI implementations"
   },
   "basePath": "/",
+  "tags": [
+    {
+      "name": "simulation",
+      "description": "perform a simulation of two AIs"
+    },
+    {
+      "name": "utilities",
+      "description": "utility endpoints"
+    }
+  ],
   "schemes": [
     "http",
     "https"
@@ -23,6 +33,9 @@
   "paths": {
     "/simulation": {
       "get": {
+        "tags": [
+          "simulation"
+        ],
         "description": "preforms a simulation of two AI implementations",
         "parameters": [
           {
@@ -68,6 +81,9 @@
     },
     "/doc": {
       "get": {
+        "tags": [
+          "utilities"
+        ],
         "description": "get the swagger schema",
         "responses": {
           "200": {
@@ -78,6 +94,9 @@
     },
     "/health": {
       "get": {
+        "tags": [
+          "utilities"
+        ],
         "description": "check the health of the host node",
         "responses": {
           "200": {
