@@ -4,9 +4,7 @@ const async = require('async');
 const request = require('request');
 const config = require('../config.js');
 const code = require('http-response-codes');
-const {
-	NoSuchCollectionError
-} = require('./errors');
+const { NoSuchCollectionError } = require('./errors');
 
 export function getAlgorithms({ response }) {
 	return new Bluebird(function(resolve, reject) {

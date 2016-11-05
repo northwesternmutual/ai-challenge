@@ -141,7 +141,6 @@ describe('Collection', () => {
 		it('should have not moved', () => {
 			expect(collection.hasMoved(collection.blocks)).toBe(false);
 		});
-
 	});
 
 	describe('constants', () => {
