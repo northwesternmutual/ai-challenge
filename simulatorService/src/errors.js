@@ -29,3 +29,15 @@ export class SimulationError extends Bluebird.OperationalError {
         super(message);
     }
 }
+
+export class PlayerOneError extends Error {
+    constructor(message) {
+        super(message);
+    }
+}
+
+export class PlayerTwoError extends Error {
+    constructor(message) {
+        super(message);
+    }
+}

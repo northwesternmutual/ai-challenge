@@ -10,11 +10,11 @@
     "start": "cross-env NODE_ENV=production ./node_modules/babel-cli/bin/babel-node.js ./index.js",
     "lint:dev": "node ./node_modules/eslint/bin/eslint.js . -f stylish --ext .js --cache --color",
     "lint:prod": "node ./node_modules/eslint/bin/eslint.js . --ext .js --color",
-    "test": "./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/jasmine-node spec",
-    "coverage": "./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/jasmine-node spec",
+    "test": "cross-env NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/jasmine-node spec",
+    "coverage": "cross-env NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/jasmine-node spec",
     "docker:build": "docker build -t ai_challenge/simulator-service ."
   },
-  "license": "MIT",
+  "license": "MIT", 
   "repository": {
     "type": "git",
     "url": "https://github.com/northwesternmutual/ai-challenge"

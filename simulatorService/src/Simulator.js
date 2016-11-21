@@ -2,7 +2,7 @@ const Bluebird = require('bluebird');
 const Simulator = require('../src/game/Simulator.js');
 const async = require('async');
 const request = require('request');
-const config = require('../config.js');
+const config = require('../utils/config.js');
 const code = require('http-response-codes');
 const { NoSuchCollectionError } = require('./errors');
 

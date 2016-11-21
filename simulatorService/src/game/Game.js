@@ -1,6 +1,7 @@
 const Player = require('./Player.js');
 const AI = require('./AI.js');
 const Cell = require('./Cell.js');
+const { PlayerOneError, PlayerTwoError } = require('../errors.js');
 
 var one, two;
 
@@ -16,13 +17,31 @@ Game.prototype.initialize = function() {
 	this.winner = null;
 	one.initialize();
 	two.initialize();
-	this.AIOne.initializeGame();
-	this.AITwo.initializeGame();
+	try {
+		this.AIOne.initializeGame();
+	} catch (e) {
+		throw new PlayerOneError();
+	}
+
+	try {
+		this.AITwo.initializeGame();
+	} catch (e) {
+		throw new PlayerTwoError();
+	}
 };
 
 Game.prototype.playGame = function() {
-	this.AIOne.startGame();
-	this.AITwo.startGame();
+	try {
+		this.AIOne.startGame();
+	} catch (e) {
+		throw new PlayerOneError();
+	}
+
+	try {
+		this.AITwo.startGame();
+	} catch (e) {
+		throw new PlayerTwoError();
+	}
 
 	//get the current state of the fleet
 	this.playerOneState = one.grid.collection.blocks;
@@ -36,19 +55,37 @@ Game.prototype.playGame = function() {
 	this.winner 		= this.isOver();
 
 	while( this.winner === false ) {
-		firstAI.shoot();
+		try {
+			firstAI.shoot();
+		} catch (e) {
+			throw new PlayerOneError();
+		}
 		this.winner = this.isOver();
 		if( this.winner !== false ) { break; }
-		secondAI.shoot();
+		try {
+			secondAI.shoot();
+		} catch (e) {
+			throw new PlayerTwoError();
+		}
 		this.winner = this.isOver();
 	}
 
 	//Call each AI's endGame() function
-	this.AIOne.endGame();
-	this.AITwo.endGame();
+	try {
+		this.AIOne.endGame();
+	} catch (e) {
+		throw new PlayerOneError();
+	}
+
+	try {
+		this.AITwo.endGame();
+	} catch (e) {
+		throw new PlayerTwoError();
+	}
 };
 
 Game.shoot = function(player, x, y) {
+
 	//are the corrdinates in bounds?
 	if(x < 0 || x > 9 || y < 0 || y > 9) {
 		return false;

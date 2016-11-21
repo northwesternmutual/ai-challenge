@@ -1,7 +1,7 @@
-import Block from '../../src/game/Block';
-import Cell from '../../src/game/Cell';
-import Collection from '../../src/game/Collection';
-import Grid from '../../src/game/Grid';
+import Block from '../../../src/game/Block';
+import Cell from '../../../src/game/Cell';
+import Collection from '../../../src/game/Collection';
+import Grid from '../../../src/game/Grid';
 
 let grid;
 

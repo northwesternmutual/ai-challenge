@@ -1,6 +1,6 @@
-import Player from '../../src/game/Player';
-import Grid from '../../src/game/Grid';
-import Game from '../../src/game/Game';
+import Player from '../../../src/game/Player';
+import Grid from '../../../src/game/Grid';
+import Game from '../../../src/game/Game';
 
 let player;
 let grid;
