@@ -1,0 +1,129 @@
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: algorithm
+  name: algorithm-deployment
+  namespace: ai-challenge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: algorithm-pod
+  template:
+    metadata:
+      labels:
+        app: algorithm
+    spec:
+      containers:
+      - name: algorithm
+        image: fbgrecojr/kubernetes-nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+      hostName: algorithm
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: algorithm
+  name: algorithm-service
+  namespace: ai-challenge
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+  selector:
+    app: algorithm-pod
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: simulator
+  name: simulator-deployment
+  namespace: ai-challenge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simulator-pod
+  template:
+    metadata:
+      labels:
+        app: simulator
+    spec:
+      containers:
+      - name: simulator
+        image: fbgrecojr/kubernetes-nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+      hostName: simulator
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: simulator
+  name: simulator-service
+  namespace: ai-challenge
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: simulator-pod
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: tournament
+  name: tournament-deployment
+  namespace: ai-challenge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tournament-pod
+  template:
+    metadata:
+      labels:
+        app: tournament
+    spec:
+      containers:
+      - name: tournament
+        image: fbgrecojr/kubernetes-nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+      hostName: tournament
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: tournament
+  name: tournament-service
+  namespace: ai-challenge
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+  selector:
+    app: tournament-pod
+          
