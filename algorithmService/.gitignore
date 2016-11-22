@@ -1,7 +1,6 @@
 node_modules/
-npm-debug.log
 eslintcache
 mongo_data/
 .DS_Store
 coverage/
-yarn-error.log
+*.log

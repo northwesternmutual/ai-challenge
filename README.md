@@ -5,6 +5,29 @@ AI Challenge is a framework for fascilitating artificial intelligence (AI) tourn
 * **Microservice Architecture:** The AI Challenge framework conforms to a microservice architecture. As a result, each component can be deployed, swapped, maintained, implemented, tested, and scaled independently.
 * **Component-Based:** This framework is composed of three primary components. While each is needed to utilize all the benefits of AI Challenge, they can be used independently as they each offer a unique set of functionality. Based on how you implement the framework for your application specific needs, you may choose to swap out or modify each component as needed.
 * **Dockerized:** Each component of the framework contains a [Dockerfile](https://docs.docker.com/engine/reference/builder/) which will create a Docker container for that component. Docker Compose is used to run this multi-container framework.
+* **Production Ready:** This framework is ready to be deployed out of the box with either Kubernetes or Docker-Compose.
+
+## Table of Contents
+* [Framework Uses](#framework-uses)
+* [Components](#components)
+* [Installation](#installation)
+  * [Docker-Compose](#docker-compose)
+  * [Kubernetes](#kubernetes)
+  * [Local](#local)
+* [Architecture](#architecure)
+  * [Docker-Compose](#docker-compose-1)
+  * [Kubernetes](kubernetes-1)
+* [API](#installation)
+  * [Docker-Compose](#docker-compose-2)
+  * [Kubernetes](kubernetes-2)
+* [Example](#installation)
+  * [Algorithm Component](#algorithm-component)
+  * [Simulator Component](#simulator-component)
+  * [Tournament Component](#tournament-component)
+    * [Play the tournament](#play-the-tournament)
+    * [Get matches list](#get-matches-list)
+* [Contributing](#contributing)
+* [License](#license)
 
 ## Framework Uses
 
@@ -26,25 +49,47 @@ Nginx is used with Docker Compose to proxy requests to and between the services.
 
 ## Installation
 
+#### Docker-Compose
+
 The fastest way to get started is to bring up the framework using [Docker Compose](https://docs.docker.com/compose/). You can use [Docker Native](https://www.docker.com/products/overview) to accomplish this locally:
 
 ```sh
 <!-- From the directory that hosts your docker-compose.yml file -->
 docker-compose up
 ```
-Note that you can also run the individual components separately. See their respective README files for setup instructions.
+
+#### Kubernetes 
+
+#### Local
+You can also run the individual components separately. See their respective README files for setup instructions.
 
 ## Architecure
-Because of it's microservice architecture, AI Challenge can be successfully deployed in many ways! Below is the default architecture. Each microservice is Dockerized and Docker Compose is used to run this multi-container setup. Nginx is used to proxy external service discovery. Internal service discovery is accomplished via an overlay network that Docker Compose provides.
+Because of it's microservice architecture, AI Challenge can be successfully deployed in many ways!
+
+#### Docker-Compose
+
+Each microservice is Dockerized and Docker Compose is used to run this multi-container setup. Nginx is used to proxy external service discovery. Internal service discovery is accomplished via an overlay network that Docker Compose provides.
 
 *NOTE:* This is not intended to be a production architecture as it ignores security and container orchestration.
 
 <img src="./documentation/architecture.png" width="50%">
 
+#### Kubernetes
+
 ## API
 Each component has their own [Swagger](http://swagger.io/) schema. See each component's documentation for details.
 
-If you are utilizing the default architure, here are the base paths:
+Here are the base paths for the above architectures:
+
+#### Docker-Compose
+
+component | base path
+--------- | ------- 
+algorithm | `http://localhost:8080/algorithmservice/` 
+simulator | `http://localhost:8080/simulatorservice/`  
+tournament | `http://localhost:8080/tournamentservice/`
+
+#### Kubernetes
 
 component | base path
 --------- | ------- 
