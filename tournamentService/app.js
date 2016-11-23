@@ -15,6 +15,7 @@ const app = express();
 console.log(process.cwd());
 
 //watch for memory leaks
+/* istanbul ignore next */
 memwatch.on('leak', info => log.warn(info, 'Memory leak was detected'));
 
 // parse application/x-www-form-urlencoded

@@ -1,6 +1,11 @@
 const AI = require('./AI.js');
 const Game = require('./Game.js');
 const Player = require('./Player.js');
+const { 
+	PlayerOneError,
+	PlayerTwoError,
+	PlayerAllError 
+} = require('../errors.js');
 
 function Simulator( algOneObj, algTwoObj, numSims ) {
 	this.playerOne = new Player(Player.PLAYERONE);
@@ -51,15 +56,95 @@ function Simulator( algOneObj, algTwoObj, numSims ) {
 
 Simulator.prototype.startSimulation = function( callback ) {
 	//initialize the AI's
-	this.AIOne.initializeSimulation();
-	this.AITwo.initializeSimulation();
+	try { this.AIOne.initializeSimulation(); }
+	catch (e1) {
+		try { this.AITwo.initializeSimulation(); }
+		catch(e2) { 
+			return callback( null, {
+				scorecard: {
+					playerOne: 0,
+					playerTwo: 0
+				},
+				accuracy: {
+					playerOne: 0,
+					playerTwo: 0
+				}
+			});
+		}
+		return callback( null, {
+			scorecard: {
+				playerOne: 0,
+				playerTwo: this.numSimulations
+			},
+			accuracy: {
+				playerOne: 0,
+				playerTwo: 0
+			}
+		});
+	}
+
+	try { this.AITwo.initializeSimulation(); }
+	catch (e) { 
+		return callback( null, {
+			scorecard: {
+				playerOne: this.numSimulations,
+				playerTwo: 0
+			},
+			accuracy: {
+				playerOne: 0,
+				playerTwo: 0
+			}
+		});
+	}
 
 	//for every simulation...
 	for(var i=0; i<this.numSimulations; ++i) {
-		//games should be played in parallel in case
+		//games should be played in sync in case
 		//the users AI adapts from previous games
-		this.game.initialize(); //reset stuff for new game;
-		this.game.playGame();
+		try { 
+			this.game.initialize(); 
+			this.game.playGame();
+		} //reset stuff for new game;
+		catch(e) {
+			switch(e.name) {
+				case 'PlayerOneError':
+					return callback( null, {
+						scorecard: {
+							playerOne: 0,
+							playerTwo: numSimulations
+						},
+						accuracy: {
+							playerOne: 0,
+							playerTwo: 0
+						}
+					});
+				break;
+				case 'PlayerTwoError':
+					return callback( null, {
+						scorecard: {
+							playerOne: numSimulations,
+							playerTwo: 0
+						},
+						accuracy: {
+							playerOne: 0,
+							playerTwo: 0
+						}
+					});
+				break;
+				default:
+					return callback( null, {
+						scorecard: {
+							playerOne: 0,
+							playerTwo: 0
+						},
+						accuracy: {
+							playerOne: 0,
+							playerTwo: 0
+						}
+					});
+				break;
+			}
+		}
 
 		//update scorecard
 		if( this.game.winner.type === Player.PLAYERONE ) {
@@ -77,17 +162,12 @@ Simulator.prototype.startSimulation = function( callback ) {
 
 		this.hitsByGame.playerOne.push(this.playerOne.hitsDealt);
 		this.hitsByGame.playerTwo.push(this.playerTwo.hitsDealt);
-
-		this.AIOne.endGame();
-		this.AITwo.endGame();
 	}
-
-	//handle error stuff...maybe timeout stuff
 
 	return callback( null, {
 		scorecard: this.scorecard,
 		accuracy: this.averageAccuracy()
-	} );
+	});
 };
 
 module.exports = Simulator;

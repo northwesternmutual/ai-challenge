@@ -1,11 +1,5 @@
 import Bluebird from 'bluebird';
 
-export class MongoError extends Bluebird.OperationalError {
-    constructor(message) {
-        super(message);
-    }
-}
-
 export class ValidationError extends Bluebird.OperationalError {
     constructor(message) {
         super(message);
@@ -24,20 +18,26 @@ export class AlgorithmError extends Bluebird.OperationalError {
     }
 }
 
-export class SimulationError extends Bluebird.OperationalError {
-    constructor(message) {
-        super(message);
-    }
-}
-
 export class PlayerOneError extends Error {
     constructor(message) {
         super(message);
+        this.message = message;
+        this.name = 'PlayerOneError';
     }
 }
 
 export class PlayerTwoError extends Error {
     constructor(message) {
         super(message);
+        this.message = message;
+        this.name = 'PlayerTwoError';
+    }
+}
+
+export class PlayerAllError extends Error {
+    constructor(message) {
+        super(message);
+        this.message = message;
+        this.name = 'PlayerAllError';
     }
 }

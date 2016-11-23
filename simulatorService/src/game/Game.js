@@ -1,7 +1,7 @@
 const Player = require('./Player.js');
 const AI = require('./AI.js');
 const Cell = require('./Cell.js');
-const { PlayerOneError, PlayerTwoError } = require('../errors.js');
+const { PlayerOneError, PlayerTwoError, PlayerAllError } = require('../errors.js');
 
 var one, two;
 
@@ -17,31 +17,33 @@ Game.prototype.initialize = function() {
 	this.winner = null;
 	one.initialize();
 	two.initialize();
-	try {
-		this.AIOne.initializeGame();
-	} catch (e) {
+
+	//to be fair....
+	//we'll first try player one's algorithm
+	//if it fails, we'll see if player two's algorithm is valid
+	//if it does, then both AI's are faulty.tbh it'
+	try { this.AIOne.initializeGame(); }
+	catch (e1) {
+		try { this.AITwo.initializeGame(); }
+		catch(e2) { throw new PlayerAllError(); }
 		throw new PlayerOneError();
 	}
 
-	try {
-		this.AITwo.initializeGame();
-	} catch (e) {
-		throw new PlayerTwoError();
-	}
+	try { this.AITwo.initializeGame(); }
+	catch (e) { throw new PlayerTwoError(); }
 };
 
 Game.prototype.playGame = function() {
-	try {
-		this.AIOne.startGame();
-	} catch (e) {
+	
+	try { this.AIOne.startGame(); }
+	catch (e1) {
+		try { this.AITwo.startGame(); }
+		catch(e2) { throw new PlayerAllError(); }
 		throw new PlayerOneError();
 	}
 
-	try {
-		this.AITwo.startGame();
-	} catch (e) {
-		throw new PlayerTwoError();
-	}
+	try { this.AITwo.startGame(); }
+	catch (e) { throw new PlayerTwoError(); }
 
 	//get the current state of the fleet
 	this.playerOneState = one.grid.collection.blocks;
@@ -55,33 +57,33 @@ Game.prototype.playGame = function() {
 	this.winner 		= this.isOver();
 
 	while( this.winner === false ) {
-		try {
-			firstAI.shoot();
-		} catch (e) {
-			throw new PlayerOneError();
+
+		try { firstAI.shoot(); }
+		catch (e1) {
+			try { secondAI.shoot(); }
+			catch(e2) { throw new PlayerAllError(); }
+			throw firstAI.type === Player.PLAYERONE ? new PlayerOneError : new PlayerTwoError;
 		}
+
 		this.winner = this.isOver();
 		if( this.winner !== false ) { break; }
-		try {
-			secondAI.shoot();
-		} catch (e) {
-			throw new PlayerTwoError();
-		}
+		
+		try { secondAI.shoot(); }
+		catch (e) { throw firstAI.type === Player.PLAYERONE ? new PlayerOneError : new PlayerTwoError; }
+
 		this.winner = this.isOver();
 	}
 
 	//Call each AI's endGame() function
-	try {
-		this.AIOne.endGame();
-	} catch (e) {
+	try { this.AIOne.endGame(); }
+	catch (e1) {
+		try { this.AITwo.endGame(); }
+		catch(e2) { throw new PlayerAllError(); }
 		throw new PlayerOneError();
 	}
 
-	try {
-		this.AITwo.endGame();
-	} catch (e) {
-		throw new PlayerTwoError();
-	}
+	try { this.AITwo.endGame(); }
+	catch (e) { throw new PlayerTwoError(); }
 };
 
 Game.shoot = function(player, x, y) {

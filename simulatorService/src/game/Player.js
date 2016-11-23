@@ -1,4 +1,5 @@
 const Grid = require('./Grid.js');
+const Cell = require('./Cell.js');
 
 function Player(type) {
 	this.type = type;
@@ -17,8 +18,9 @@ Player.prototype.initialize = function() {
 };
 
 Player.prototype.shoot = function(x, y) {
-	return require('./Game.js').shoot(this, x, y);
-	//return Game.shoot(this, x, y);
+	let shotResult = require('./Game.js').shoot(this, x, y);
+
+	return shotResult;
 };
 
 Player.PLAYERONE = 1;

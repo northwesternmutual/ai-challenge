@@ -45,6 +45,7 @@
     "express": "^4.13.4",
     "http-response-codes": "^1.0.4",
     "memwatch-next": "^0.2.10",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "qs": "^6.2.1"
   }
 }

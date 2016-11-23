@@ -10,6 +10,7 @@ const log = require('./utils/logger');
 const app = express();
 
 //watch for memory leaks
+/* istanbul ignore next */
 memwatch.on('leak', function(info) {
     console.log(info, 'Memory leak was detected');
 });

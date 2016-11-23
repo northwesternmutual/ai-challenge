@@ -10,6 +10,8 @@ let validCollections = [
 
 export default function request(endpoint, callback) {
 
+	//console.log(endpoint);
+
 	let uri;
 
 	uri = _.split(endpoint, '/');

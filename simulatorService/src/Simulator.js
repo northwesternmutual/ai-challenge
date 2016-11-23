@@ -14,7 +14,6 @@ export function getAlgorithms({ response }) {
 				    if(!err && res.statusCode === code.HTTP_NO_CONTENT) {
 				    	return callback(new NoSuchCollectionError('collection does not exist'));
 				    } else if (err) {
-				        err.status = res.statusCode;
 				        return callback(err);
 				    }
 				    return callback(null, body);
@@ -25,7 +24,6 @@ export function getAlgorithms({ response }) {
 				    if(!err && res.statusCode === code.HTTP_NO_CONTENT) {
 				    	return callback(new NoSuchCollectionError('collection does not exist'));
 				    } else if (err) {
-				        err.status = res.statusCode;
 				        return callback(err);
 				    }
 				    return callback(null, body);
