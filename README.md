@@ -45,8 +45,6 @@ AI Challenge is composed of three primary components which are explained below. 
 * **Simulator Service:** Preforms a simulation of two AI implementations. Reference the [documentation](./simulationEngine/README.md) for detailed information.
 * **Tournament Service:** Fascilitaes a tournament of AI implementations. Reference the [documentation](./tournamentEngine/README.md) for detailed information.
 
-Nginx is used with Docker Compose to proxy requests to and between the services.
-
 ## Installation
 
 #### Docker-Compose
@@ -77,7 +75,7 @@ Each microservice is Dockerized and Docker Compose is used to run this multi-con
 #### Kubernetes
 
 ## API
-Each component has their own [Swagger](http://swagger.io/) schema. See each component's documentation for details.
+Each component has its own [Swagger](http://swagger.io/) schema. See each component's documentation for details.
 
 Here are the base paths for the above architectures:
 
@@ -99,7 +97,7 @@ tournament | `http://localhost:8080/tournamentservice/`
 
 ## Example
 
-We'll assume you've installed the framework using the install instructions above.
+We'll assume you've installed the framework using the Docker-Compose option above.
 
 ### Algorithm Component
 In order to fascilitate a tournament, AI implementations are needed. The following illustrates how an implementation might be submitted. See the full [documentation](./algorithmService/README.md) for more details.
