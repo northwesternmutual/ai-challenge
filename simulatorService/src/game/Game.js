@@ -3,7 +3,7 @@ const AI = require('./AI.js');
 const Cell = require('./Cell.js');
 const { PlayerOneError, PlayerTwoError, PlayerAllError } = require('../errors.js');
 
-var one, two;
+var one, two, turn;
 
 function Game(playerOne, playerTwo, AIOne, AITwo) {
 	this.winner = null;
@@ -15,6 +15,7 @@ function Game(playerOne, playerTwo, AIOne, AITwo) {
 
 Game.prototype.initialize = function() {
 	this.winner = null;
+	turn = null;
 	one.initialize();
 	two.initialize();
 
@@ -56,6 +57,8 @@ Game.prototype.playGame = function() {
 	var secondAI 		= firstPlayer.type === Player.PLAYERONE ? this.AITwo : this.AIOne;
 	this.winner 		= this.isOver();
 
+	turn = firstPlayer;
+
 	while( this.winner === false ) {
 
 		try { firstAI.shoot(); }
@@ -88,9 +91,21 @@ Game.prototype.playGame = function() {
 
 Game.shoot = function(player, x, y) {
 
+	//should the player be able to shoot?
+	if( turn && (player.type !== turn.type) ) {
+		return {
+			state: null,
+			block: null
+		};
+	}
+
 	//are the corrdinates in bounds?
 	if(x < 0 || x > 9 || y < 0 || y > 9) {
-		return false;
+		turn = null;
+		return {
+			state: null,
+			block: null
+		};
 	}
 
 	//get a pointer to the opponent
@@ -101,11 +116,14 @@ Game.shoot = function(player, x, y) {
 
 	//has this cell already been hit
 	if( cell.state === Cell.TYPE_MISS || cell.state === Cell.TYPE_HIT || cell.state === Cell.TYPE_CONQUERED ) {
+		turn = 0;
 		return {
 			state: null,
 			block: null
 		};
 	}
+
+	turn = opponent;
 
 	//hit the cell
 	++player.shotsTaken;

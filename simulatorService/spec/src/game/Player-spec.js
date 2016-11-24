@@ -38,10 +38,6 @@ describe('Player', () => {
 		});
 	});
 
-	describe('shoot', () => {
-		
-	});
-
 	describe('constants', () => {
 		it('should equal the right number', done => {
 			expect(Player.PLAYERONE).toBe(1);

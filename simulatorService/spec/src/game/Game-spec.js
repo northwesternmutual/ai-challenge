@@ -220,6 +220,35 @@ describe('Game', () => {
 			aiOne.startGame();
 			expect(Game.shoot(playerTwo, 0, 0)).toEqual({ state : 3, block : 0 });
 		});
+
+		it('should not be able to shoot twice', () => {
+			aiOne = new AI(algorithm, playerOne);
+			aiTwo = new AI(algorithm, playerTwo);
+			game = new Game(playerOne, playerTwo, aiOne, aiTwo);
+			game.initialize();
+			Game.shoot(playerOne, 0, 0);
+			expect(Game.shoot(playerOne, 0, 0)).toEqual({ state: null, block: null });
+		});
+
+		it('should still be able to shoot if shot is invalid', () => {
+			aiOne = new AI(algorithm, playerOne);
+			aiTwo = new AI(algorithm, playerTwo);
+			game = new Game(playerOne, playerTwo, aiOne, aiTwo);
+			game.initialize();
+			Game.shoot(playerOne, -1, 0);
+			expect(Game.shoot(playerOne, 0, 0)).toEqual({ state: 2, block: null });
+		});
+
+		it('opponent should still be able to shoot if shot is invalid', () => {
+			aiOne = new AI(algorithm, playerOne);
+			aiTwo = new AI(algorithm, playerTwo);
+			game = new Game(playerOne, playerTwo, aiOne, aiTwo);
+			game.initialize();
+			Game.shoot(playerOne, -1, 0);
+			aiOne.startGame();
+			expect(Game.shoot(playerTwo, 0, 0)).toEqual({ state: 3, block: 0 });
+			expect(Game.shoot(playerTwo, 0, 0)).toEqual({ state: null, block: null });
+		});
 	});
 
 	describe('isOver', () => {

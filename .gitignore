@@ -1,5 +1,5 @@
 .DS_Store
 *.log
-
+mongo_data/
 node_modules/
 coverage/
