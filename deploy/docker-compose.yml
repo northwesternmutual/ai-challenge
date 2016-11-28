@@ -5,7 +5,7 @@ services:
 
   nginx:
     restart: always
-    build: ./nginx
+    image: northwesternmutual/kubernetes-nginx
     ports:
       - "8080:80"
     networks:
@@ -21,21 +21,21 @@ services:
       - ai_challenge
 
   algorithm:
-    build: ./algorithmService
+    image: northwesternmutual/kubernetes-algorithm
     ports:
       - "80"
     networks:
       - ai_challenge
 
   simulator:
-    build: ./simulatorService
+    image: northwesternmutual/kubernetes-simulator
     ports:
       - "80"
     networks:
       - ai_challenge
 
   tournament:
-    build: ./tournamentService
+    image: northwesternmutual/kubernetes-tournament
     ports:
       - "80"
     networks:

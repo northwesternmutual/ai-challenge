@@ -61,7 +61,7 @@ spec:
     spec:
       containers:
       - name: algorithm
-        image: fbgrecojr/kubernetes-algorithm
+        image: northwesternmutual/kubernetes-algorithm
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -104,7 +104,7 @@ spec:
     spec:
       containers:
       - name: simulator
-        image: fbgrecojr/kubernetes-simulator
+        image: northwesternmutual/kubernetes-simulator
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -147,7 +147,7 @@ spec:
     spec:
       containers:
       - name: tournament
-        image: fbgrecojr/kubernetes-tournament
+        image: northwesternmutual/kubernetes-tournament
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -190,7 +190,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: fbgrecojr/kubernetes-nginx
+        image: northwesternmutual/kubernetes-nginx
         imagePullPolicy: Always
         ports:
         - containerPort: 80

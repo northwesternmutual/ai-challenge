@@ -8,26 +8,36 @@ AI Challenge is a framework for fascilitating artificial intelligence (AI) tourn
 * **Production Ready:** This framework is ready to be deployed out of the box with either Kubernetes or Docker-Compose.
 
 ## Table of Contents
+* [Quick Start](#quickstart)
 * [Framework Uses](#framework-uses)
 * [Components](#components)
-* [Installation](#installation)
-  * [Docker-Compose](#docker-compose)
-  * [Kubernetes](#kubernetes)
-  * [Local](#local)
-* [Architecture](#architecure)
-  * [Docker-Compose](#docker-compose-1)
-  * [Kubernetes](kubernetes-1)
-* [API](#installation)
-  * [Docker-Compose](#docker-compose-2)
-  * [Kubernetes](kubernetes-2)
-* [Example](#installation)
+* [API](#api)
+* [Example](#example)
   * [Algorithm Component](#algorithm-component)
   * [Simulator Component](#simulator-component)
   * [Tournament Component](#tournament-component)
     * [Play the tournament](#play-the-tournament)
     * [Get matches list](#get-matches-list)
+* [Deployment](#deployment)
+  * [Docker-Compose](#docker-compose)
+  * [Minikube](#minikube)
+  * [Kubernetes](#kubernetes)
 * [Contributing](#contributing)
 * [License](#license)
+
+## Quickstart
+
+1. `npm install -g concurrently`
+2. `npm run build`
+3. `npm run dev`
+
+This will install all of the dependencies and start each component in development mode. Each microservice will be accessible from the following endpoints:
+
+component | base path
+--------- | ------- 
+algorithm | `http://localhost:8000/` 
+simulator | `http://localhost:8001/`  
+tournament | `http://localhost:8002/`
 
 ## Framework Uses
 
@@ -45,59 +55,12 @@ AI Challenge is composed of three primary components which are explained below. 
 * **Simulator Service:** Preforms a simulation of two AI implementations. Reference the [documentation](./simulationEngine/README.md) for detailed information.
 * **Tournament Service:** Fascilitaes a tournament of AI implementations. Reference the [documentation](./tournamentEngine/README.md) for detailed information.
 
-## Installation
-
-#### Docker-Compose
-
-The fastest way to get started is to bring up the framework using [Docker Compose](https://docs.docker.com/compose/). You can use [Docker Native](https://www.docker.com/products/overview) to accomplish this locally:
-
-```sh
-<!-- From the directory that hosts your docker-compose.yml file -->
-docker-compose up
-```
-
-#### Kubernetes 
-
-#### Local
-You can also run the individual components separately. See their respective README files for setup instructions.
-
-## Architecure
-Because of it's microservice architecture, AI Challenge can be successfully deployed in many ways!
-
-#### Docker-Compose
-
-Each microservice is Dockerized and Docker Compose is used to run this multi-container setup. Nginx is used to proxy external service discovery. Internal service discovery is accomplished via an overlay network that Docker Compose provides.
-
-*NOTE:* This is not intended to be a production architecture as it ignores security and container orchestration.
-
-<img src="./documentation/architecture.png" width="50%">
-
-#### Kubernetes
-
 ## API
 Each component has its own [Swagger](http://swagger.io/) schema. See each component's documentation for details.
 
-Here are the base paths for the above architectures:
-
-#### Docker-Compose
-
-component | base path
---------- | ------- 
-algorithm | `http://localhost:8080/algorithmservice/` 
-simulator | `http://localhost:8080/simulatorservice/`  
-tournament | `http://localhost:8080/tournamentservice/`
-
-#### Kubernetes
-
-component | base path
---------- | ------- 
-algorithm | `http://localhost:8080/algorithmservice/` 
-simulator | `http://localhost:8080/simulatorservice/`  
-tournament | `http://localhost:8080/tournamentservice/`
-
 ## Example
 
-We'll assume you've installed the framework using the Docker-Compose option above.
+**NOTE:** The official rules and objectives for the current game engine can be found in [GAME.md](GAME.md). Of course this framework can easily be extended to support more game implementations.
 
 ### Algorithm Component
 In order to fascilitate a tournament, AI implementations are needed. The following illustrates how an implementation might be submitted. See the full [documentation](./algorithmService/README.md) for more details.
@@ -122,7 +85,7 @@ function initializeGame() {
 }
 
 function startGame() {
-	this.player.grid.placeBlock(0, 0, Block.VERTICAL, Collection.ONEBYTWO);
+    this.player.grid.placeBlock(0, 0, Block.VERTICAL, Collection.ONEBYTWO);
     this.player.grid.placeBlock(1, 0, Block.VERTICAL, Collection.ONEBYTHREE);
     this.player.grid.placeBlock(2, 0, Block.VERTICAL, Collection.ONEBYFOUR);
     this.player.grid.placeBlock(3, 0, Block.VERTICAL, Collection.ONEBYFIVE);
@@ -147,7 +110,7 @@ function getBody(func) {
 
 $.ajax({
     type: "POST",
-    url: "http://localhost:8080/algorithmservice/algorithms/test",
+    url: "http://< base path >/algorithmservice/algorithms/test",
     data: { 
         email: 'frankgreco@northwesternmutual.com',
         name: 'Frank B Greco Jr',
@@ -165,7 +128,7 @@ $.ajax({
 The simulator component is used to conduct a simulation of two AI implementations. The following illustrates a sample API call and JSON response. See the full [documentation](./simulatorService/README.md) for AI implementation details.
 
 ```sh
-http://localhost:8080/simulatorservice/simulation?algorithmOneID=580bee73f2c4c40015fdd8b8&algorithmTwoID=580bee79f2c4c40015fdd8b9&collection=test&simulations=1000
+http://< base path >/simulatorservice/simulation?algorithmOneID=580bee73f2c4c40015fdd8b8&algorithmTwoID=580bee79f2c4c40015fdd8b9&collection=test&simulations=1000
 ```
 
 ```json
@@ -199,7 +162,7 @@ Since the time that it will take to complete a tournament may be longer than we 
  3. Check at any time for the status of the tournament using the tournament id.
 
 ```sh
-http://localhost:8080/tournamentservice/play/test?games=1000
+http://< base path >/tournamentservice/play/test?games=1000
 ```
 ```json
 {
@@ -209,7 +172,7 @@ http://localhost:8080/tournamentservice/play/test?games=1000
 }
 ```
 ```sh
-http://localhost:8080/tournamentservice/tourament/580c0d45bd3b84574d930c99
+http://< base path >/tournamentservice/tourament/580c0d45bd3b84574d930c99
 ```
 ```json
 {
@@ -235,7 +198,7 @@ http://localhost:8080/tournamentservice/tourament/580c0d45bd3b84574d930c99
 #### 2. Get matches list
 This option appeals in situations where a potential UI might want more control of the tournament. By returning a list of matches, the UI can execute the simulations individually.
 ```sh
-http://localhost:8080/tournamentservice/matches/test
+http://< base path >/tournamentservice/matches/test
 ```
 ```json
 {
@@ -268,6 +231,90 @@ http://localhost:8080/tournamentservice/matches/test
   ]
 }
 ```
+
+## Deployment
+AI-Challenge offers three solutions for out-of-the-box deployment. All of them depend on the the Dockerization of each component. The last solution, Kubernetes, is the recommendation for a production deployment.
+
+### Docker-Compose
+[Docker-Compose](https://docs.docker.com/compose/) is a great and easy tool for orchestrating a multi-container application. The `deploy/docker-compose.yml` file contains all the necessary configuration to define each microservice and connect them to each other.
+
+Each service is externally exposed through an nginx proxy (basepath's illistrated below). Each service communicates to each other via an overlay network provided by Docker.
+
+See the [official Docker-Compose documentation](https://docs.docker.com/compose/) to get up and running. Then, use the following command to deploy AI-Challenge.
+
+
+```sh
+<!-- From the directory that hosts your docker-compose.yml file -->
+$ docker-compose up
+```
+
+*NOTE:* Since the mongodb data is stored inside of a Docker container, it persists only as long as the container is healthy. Consider mapping a data directory outside of the container for more persistency.
+
+component | base path
+--------- | ------- 
+algorithm | `http://localhost:8080/algorithmservice/` 
+simulator | `http://localhost:8080/simulatorservice/`  
+tournament | `http://localhost:8080/tournamentservice/`
+
+### Minikube
+[Minikube](https://github.com/kubernetes/minikube) allows you to deploy a kubernetes cluster locally on your machine. The `deploy/kubernetes.yml` file defines how your cluster will be configured.
+
+Like Docker-Compose, each service is externally exposed through an nginx proxy (basepath's illistrated below). Each service communicates to each other via a pod overlay network provided by Kubernetes.
+
+See the [minikube installation instructions](https://github.com/kubernetes/minikube/releases) to install minikube. You will also need to install the `kubectl` tool:
+```sh
+$ wget https://storage.googleapis.com/kubernetes-release/release/v1.2.0/bin/darwin/amd64/kubectl
+$ chmod +x kubectl
+$ mv kubectl /usr/local/bin/
+```
+
+Then, create your minikube cluster: `minikube start`
+
+You can either create your kubernetes cluster using the kubernetes dashboard found at `minikube dashboard` or by executing the following commands:
+
+```sh
+$ kubectl create namespace ai-challenge
+$ kubectl create -f deploy/kubernetes.yml
+```
+
+**Base Path:** run the following command to determine the basepath for the externally exposed nginx proxy.
+
+```sh
+$ echo $(minikube ip):$(kubectl get service nginx --namespace=ai-challenge -o jsonpath='{.spec.ports[*].nodePort}')
+```
+
+component | base path
+--------- | ------- 
+algorithm | `http://< base path >/algorithmservice/` 
+simulator | `http://< base path >/simulatorservice/`  
+tournament | `http://< base path >/tournamentservice/`
+
+### Kubernetes
+
+*NOTE:* This is the recommended production deployment option.
+
+[Kubernetes](http://kubernetes.io/) is an open-source system for automating deployment, scaling, and management of containerized applications.
+
+There are many ways to deploy a kubernetes cluster. However, [these instructions](http://kubernetes.io/docs/getting-started-guides/kubeadm/) offer the fastest way to get up and running.
+
+Once you have your cluster deployed, creating the services defined in `deploy/kubernetes.yml` is done using the same steps as in minikube:
+
+```sh
+$ kubectl create namespace ai-challenge
+$ kubectl create -f deploy/kubernetes.yml
+```
+
+**Base Path:** The IP address of externally exposed nginx proxy will depend on how implement ingress into your kubernetes cluster. The port that this service is running on can be determined by executing the following command
+
+```sh
+$ echo $(kubectl get service nginx --namespace=ai-challenge -o jsonpath='{.spec.ports[*].nodePort}')
+```
+
+component | base path
+--------- | ------- 
+algorithm | `http://< ingress endpoint >/algorithmservice/` 
+simulator | `http://< ingress endpoint >/simulatorservice/`  
+tournament | `http://< ingress endpoint >/tournamentservice/`
 
 ## Contributing
 

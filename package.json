@@ -3,14 +3,19 @@
   "description": "a framework for fascilitating AI tournaments.",
   "author": "Frank B Greco Jr <frankgreco@northwesternmutual.com>",
   "scripts": {
-    "test": "NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/jasmine-node */spec",
-    "coverage": "NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/jasmine-node */spec",
+    "build": "concurrently -p \"[{name}]\" -n \"ALGORITHM,SIMULATOR,TOURNAMENT\" -c \"bgBlue.bold,bgGreen.bold,bgYellow.bold\" \"cd algorithmService && npm install\" \"cd simulatorService && npm install\" \"cd tournamentService && npm install\"",
+    "clean": "concurrently -p \"[{name}]\" -n \"ALGORITHM,SIMULATOR,TOURNAMENT\" -c \"bgBlue.bold,bgGreen.bold,bgYellow.bold\" \"cd algorithmService && rm -rf node_modules\" \"cd simulatorService && rm -rf node_modules\" \"cd tournamentService && rm -rf node_modules\"",
+    "dev": "concurrently -p \"[{name}]\" -n \"ALGORITHM,SIMULATOR,TOURNAMENT\" -c \"bgBlue.bold,bgGreen.bold,bgYellow.bold\" \"cd algorithmService && npm run dev\" \"cd simulatorService && npm run dev\" \"cd tournamentService && npm run dev\"",
+    "test": "cross-env NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/jasmine-node */spec",
+    "coverage": "cross-env NODE_ENV=testing ./node_modules/babel-cli/bin/babel-node.js ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/jasmine-node */spec",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls && rm -rf ./coverage"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
     "babel-istanbul": "^0.11.0",
+    "concurrently": "^3.1.0",
     "coveralls": "^2.11.14",
+    "cross-env": "^3.1.2",
     "jasmine-node": "^2.0.0"
   }
 }
