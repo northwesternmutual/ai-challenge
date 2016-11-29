@@ -3,7 +3,6 @@ import proxyquire from 'proxyquire';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { data, Mongo } from '../../mock/mongo.js';
-import log from '../../utils/logger';
 
 const app = express();
 const basePath = '/tournament';
@@ -12,10 +11,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const route = proxyquire
-    .noCallThru()
-    .load('../../routes/tournamentsRoute.js', { 
-        '../controllers/mongo.js': Mongo 
-});
+    .noCallThru().load('../../routes/tournamentsRoute.js', { 
+        '../controllers/mongo.js': Mongo
+    });
 
 app.use('/tournament', route);
 
@@ -33,11 +31,11 @@ describe('tournament route', () => {
                 done();
             });
     });
-    it('should return a 204 an algorithms doesn\'t exist', function (done) {
+    it('should return a 204 an algorithms doesn\'t exist', done => {
         request(app)
             .get(`${basePath}/ghi789`)
             .expect(204)
-            .end((err, res) => {
+            .end(err => {
                 if (err) {
                     return done(err);
                 }

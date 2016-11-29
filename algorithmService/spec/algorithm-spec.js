@@ -3,7 +3,6 @@ import proxyquire from 'proxyquire';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { data, Mongo } from '../mock/mongo.js';
-import log from '../utils/logger';
 
 const app = express();
 const basePath = '/algorithm';
@@ -12,10 +11,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const route = proxyquire
-    .noCallThru()
-    .load('../routes/algorithmRoutes.js', { 
-        '../controllers/mongo.js': Mongo 
-});
+    .noCallThru().load('../routes/algorithmRoutes.js', {
+        '../controllers/mongo.js': Mongo
+    });
 
 app.use('/algorithm', route);
 
@@ -33,9 +31,9 @@ describe('algorithm route', () => {
                 done();
             });
     });
-    it('should update an algorithm', function (done) {
+    it('should update an algorithm', done => {
         let item = {
-            name: 'new name',
+            name: 'new name'
         };
         let old = data.items[0];
         request(app)
@@ -43,7 +41,7 @@ describe('algorithm route', () => {
             .send(item)
             .expect(200)
             .expect('Content-Type', /json/)
-            .end(function (err, res) {
+            .end((err, res) => {
                 if (err) {
                     return done(err);
                 }
@@ -51,22 +49,22 @@ describe('algorithm route', () => {
                 done();
             });
     });
-    it('should delete an algorithms', function (done) {
+    it('should delete an algorithms', done => {
         request(app)
             .delete(`${basePath}/test/123abc`)
             .expect(204)
-            .end(function (err, res) {
+            .end((err) => {
                 if (err) {
                     return done(err);
                 }
                 done();
             });
     });
-    it('should return a 204 an algorithms doesn\'t exist', function (done) {
+    it('should return a 204 an algorithms doesn\'t exist', done => {
         request(app)
             .get(`${basePath}/test/abc123`)
             .expect(204)
-            .end((err, res) => {
+            .end((err) => {
                 if (err) {
                     return done(err);
                 }

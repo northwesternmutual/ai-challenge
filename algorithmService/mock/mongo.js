@@ -11,7 +11,7 @@ export let data = {
             startGame: 'this is my function body',
             shoot: 'this is my function body',
             endGame: 'this is my function body',
-            date: Date.now(),
+            date: Date.now()
         },
         {
             _id: '456def',
@@ -22,7 +22,7 @@ export let data = {
             startGame: 'this is my function body',
             shoot: 'this is my function body',
             endGame: 'this is my function body',
-            date: Date.now(),
+            date: Date.now()
         },
         {
             _id: '789ghi',
@@ -33,37 +33,32 @@ export let data = {
             startGame: 'this is my function body',
             shoot: 'this is my function body',
             endGame: 'this is my function body',
-            date: Date.now(),
+            date: Date.now()
         }
-    ],
-    
+    ]
 };
 
 export class Mongo {
-    contructor(db = 'test') {
-        return;
-    }
+    contructor() { }
 
     getOne(collection, _id, callback) {
-        return callback( null, _.find(data.items, {_id}) );
+        return callback(null, _.find(data.items, {_id}));
     }
 
     getAll(collection, callback) {
         _.forEach(data.items, algorithm => {
-            callback( null, algorithm );
-        }).then( callback(null, null) );
+            callback(null, algorithm);
+        }).then(callback(null, null));
     }
 
     insertOne(collection, document, callback) {
         data.items.push(document);
-        return callback( null, document);
+        return callback(null, document);
     }
 
     updateOne(collection, _id, update, callback) {
         let old = _.find(data.items, {_id});
         let index = _.indexOf(data.items, old);
-
-        console.log(index);
 
         data.items.splice(index, 1, Object.assign({}, old, update));
         return callback(null, old, true);
@@ -71,7 +66,7 @@ export class Mongo {
 
     deleteOne(collection, _id, callback) {
         let item = _.find(data.items, {_id});
-        if(!item) {
+        if (!item) {
             return callback(null, null);
         }
         _.remove(data.items, {_id});
@@ -80,6 +75,6 @@ export class Mongo {
 
     deleteAll(collection, callback) {
         data.items = [];
-        return callback( null, data.items );
+        return callback(null, data.items);
     }
 }

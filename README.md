@@ -1,4 +1,4 @@
-# AI Challenge [![Build Status](https://travis-ci.com/northwesternmutual/ai-challenge.svg?token=MkdavBWRqQGB4gWqK2cR&branch=master)](https://travis-ci.org/facebook/react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests)
+# AI Challenge [![Build Status](https://travis-ci.com/northwesternmutual/ai-challenge.svg?token=MkdavBWRqQGB4gWqK2cR&branch=master)](https://travis-ci.com/northwesternmutual/ai-challenge.svg?token=MkdavBWRqQGB4gWqK2cR&branch=master) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests) 
 
 AI Challenge is a framework for fascilitating artificial intelligence (AI) tournaments.
 
@@ -60,7 +60,7 @@ Each component has its own [Swagger](http://swagger.io/) schema. See each compon
 
 ## Example
 
-**NOTE:** The official rules and objectives for the current game engine can be found in [GAME.md](GAME.md). Of course this framework can easily be extended to support more game implementations.
+**NOTE:** The official rules and objectives for the current game engine can be found in [`/simulatorService/GAME.md`](./simulatorService/GAME.md) and the tournament guid can be found in [`/tournamentService/TOURNAMENT.md`](./tournamentService/TOURNAMENT.md). Of course this framework can easily be extended to support more game implementations.
 
 ### Algorithm Component
 In order to fascilitate a tournament, AI implementations are needed. The following illustrates how an implementation might be submitted. See the full [documentation](./algorithmService/README.md) for more details.

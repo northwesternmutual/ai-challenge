@@ -15,14 +15,14 @@
   #GLOBALS
   globals: 
     define: false
-    require: true
-    JSON: true
-    describe: true
-    beforeEach: true
+    require: false
+    JSON: false
+    describe: false
+    beforeEach: false
     afterEach: false
-    expect: true
-    it: true
-    jasmine: true
+    expect: false
+    it: false
+    jasmine: false
     spyOn: false
 
   #PARSER OPTIONS

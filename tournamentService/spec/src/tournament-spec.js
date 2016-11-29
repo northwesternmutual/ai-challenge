@@ -1,22 +1,11 @@
 import proxyquire from 'proxyquire';
-import { 
+import {
 	data,
 	Mongo } from '../../mock/mongo.js';
 import request from '../../mock/request.js';
 import {
-  createTasks,
-  executeTasks,
-  sortResults,
-  parseResults,
-  getMatches,
-  postResults,
-  initialize,
-  postError
-} from '../../src/tournament.js';
-import {
   NoSuchCollectionError,
-  AlgorithmError,
-  InitializationError
+  AlgorithmError
 } from '../../src/errors';
 import fs from 'fs';
 import path from 'path';
@@ -27,10 +16,9 @@ import { scorecard } from '../../mock/data/scorecard.js';
 import { sorted } from '../../mock/data/sorted.js';
 
 const tournament = proxyquire
-	.noCallThru()
-    .load('../../src/tournament.js', { 
+	.noCallThru().load('../../src/tournament.js', { 
 		'../controllers/mongo.js': Mongo,
-		'request': request
+        'request': request
 	});
 
 //const root = process.cwd();

@@ -61,7 +61,7 @@ spec:
     spec:
       containers:
       - name: algorithm
-        image: northwesternmutual/kubernetes-algorithm
+        image: northwesternmutual/aichallenge-algorithm
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -104,7 +104,7 @@ spec:
     spec:
       containers:
       - name: simulator
-        image: northwesternmutual/kubernetes-simulator
+        image: northwesternmutual/aichallenge-simulator
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -147,7 +147,7 @@ spec:
     spec:
       containers:
       - name: tournament
-        image: northwesternmutual/kubernetes-tournament
+        image: northwesternmutual/aichallenge-tournament
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -190,7 +190,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: northwesternmutual/kubernetes-nginx
+        image: northwesternmutual/aichallenge-nginx
         imagePullPolicy: Always
         ports:
         - containerPort: 80

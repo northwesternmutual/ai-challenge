@@ -19,9 +19,6 @@ Player.prototype.initialize = function() {
 
 Player.prototype.shoot = function(x, y) {
 
-	//should this player be able to shoot?
-	//is it their turn to shoot?
-
 	let shotResult = require('./Game.js').shoot(this, x, y);
 
 	return shotResult;

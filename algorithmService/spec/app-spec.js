@@ -5,11 +5,11 @@ import log from '../utils/logger';
 
 const fake = express.Router();
 
-fake.use('/error', function (req, res, next) {
+fake.use('/error', (req, res, next) => {
     next(new Error('test error'));
 });
 
-fake.use('/', function (req, res, next) {
+fake.use('/', (req, res, next) => { // eslint-disable-line no-unused-vars
     res.cookie('cookie', req.cookies);
     res.json({});
 });
@@ -20,13 +20,13 @@ var app = proxyquire('../app', {
     './routes/health': fake
 });
 
-describe('the algorithm application path', function () {
-    it('should be registered for algorithms', function (done) {
+describe('the algorithm application path', () => {
+    it('should be registered for algorithms', done => {
         request(app)
             .get('/algorithms/test')
             .expect(200)
             .expect('Content-Type', /json/)
-            .end(function (err) {
+            .end(err =>  {
                 if (err) {
                     return done(err);
                 }
@@ -34,12 +34,12 @@ describe('the algorithm application path', function () {
             });
     });
 
-    it('should be registered for algorithms by id', function (done) {
+    it('should be registered for algorithms by id', done => {
         request(app)
             .get('/algorithm/test/1')
             .expect('Content-Type', /json/)
             .expect(200)
-            .end(function (err) {
+            .end(err => {
                 if (err) {
                     return done(err);
                 }
@@ -47,12 +47,12 @@ describe('the algorithm application path', function () {
             });
     });
 
-    it('should be registered for health', function (done) {
+    it('should be registered for health', done => {
         request(app)
             .get('/health')
             .expect('Content-Type', /json/)
             .expect(200)
-            .end(function (err) {
+            .end(err => {
                 if (err) {
                     return done(err);
                 }
@@ -60,12 +60,12 @@ describe('the algorithm application path', function () {
             });
     });
 
-    it('should be registered for doc', function (done) {
+    it('should be registered for doc', done => {
         request(app)
             .get('/doc')
             .expect('Content-Type', /json/)
             .expect(200)
-            .end(function (err) {
+            .end(err => {
                 if (err) {
                     return done(err);
                 }
@@ -73,14 +73,14 @@ describe('the algorithm application path', function () {
             });
     });
 
-    it('should set child logger on request', function (done) {
+    it('should set child logger on request', done => {
         spyOn(log, 'child').and.callThrough();
         request(app)
             .get('/health')
             .set('host', 'testHost')
             .expect('Content-Type', /json/)
             .expect(200)
-            .end(function (err) {
+            .end(err => {
                 expect(log.child).toHaveBeenCalledWith({
                     requestPath: '/health',
                     httpVerb: 'GET',
@@ -94,11 +94,11 @@ describe('the algorithm application path', function () {
             });
     });
 
-    it('should provide a 400 response for invalid paths', function (done) {
+    it('should provide a 400 response for invalid paths', done => {
         request(app)
             .get('/badaddress')
             .expect(400)
-            .end(function (err) {
+            .end(err => {
                 if (err) {
                     return done(err);
                 }

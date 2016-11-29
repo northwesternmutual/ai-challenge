@@ -1,4 +1,4 @@
-const shallowValidate = function(data, callback) {
+const shallowValidate = function (data, callback) {
     if (data === undefined) {
         return callback(new Error('field is undefined'));
     } else if (data === null) {
@@ -9,36 +9,36 @@ const shallowValidate = function(data, callback) {
     return callback(null, data);
 };
 
-exports.id = function(id, callback) {
-    return shallowValidate(id, function(err, result) {
+exports.id = function (id, callback) {
+    return shallowValidate(id, function (err, result) {
         //add buisness logic here
         return callback(err ? err : null, err ? null : result);
     });
 }
 
-exports.algorithmOneID = function(algorithmOneID, callback) {
-    return shallowValidate(algorithmOneID, function(err, result) {
+exports.algorithmOneID = function (algorithmOneID, callback) {
+    return shallowValidate(algorithmOneID, function (err, result) {
         //add buisness logic here
         return callback(err ? err : null, err ? null : result);
     });
 }
 
-exports.algorithmTwoID = function(algorithmTwoID, callback) {
-    return shallowValidate(algorithmTwoID, function(err, result) {
+exports.algorithmTwoID = function (algorithmTwoID, callback) {
+    return shallowValidate(algorithmTwoID, function (err, result) {
         //add buisness logic here
         return callback(err ? err : null, err ? null : result);
     });
 }
 
-exports.simulations = function(simulations, callback) {
-    return shallowValidate(simulations, function(err, result) {
+exports.simulations = function (simulations, callback) {
+    return shallowValidate(simulations, function (err, result) {
         //add buisness logic here
         return callback(err ? err : null, err ? null : result);
     });
 }
 
-exports.collection = function(collection, callback) {
-    return shallowValidate(collection, function(err, result) {
+exports.collection = function (collection, callback) {
+    return shallowValidate(collection, function (err, result) {
         //add buisness logic here
         return callback(err ? err : null, err ? null : result);
     });

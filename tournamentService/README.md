@@ -15,8 +15,7 @@ Fascilitaes a tournament of AI implementations
 * `npm run test`: run all `*spec.js` files in the `spec/` directory
 * `npm run coverage`: uses istanbul to determine the code coverage of the unit tests
 * `npm run lint:dev`: cache the results in a `.eslintcache` file so that only changed files are checked  
-* `npm run lint:prod`: lint files without results being cached 
-* `npm run docker:build`: builds your Docker image. [Docker](https://www.docker.com/) is a dependency for this command.
+* `npm run lint:prod`: lint files without results being cached
 
 ## Configuration
 Environment configuration is fasciliated through `./confg/NODE_ENV.json`
@@ -26,4 +25,4 @@ Environment configuration is fasciliated through `./confg/NODE_ENV.json`
 [Swagger Schema](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/northwesternmutual/ai-challenge/master/tournamentService/swagger.json?token=AVjpyT4gpnixGxVyMg1LaSIF0MHpqUllks5YJmtGwA%3D%3D)
 
 ## Docker
-A `Dockerfile` and `.dockerignore` are included that can be used to run this application in a docker container. The base image is [alpine](https://alpinelinux.org/) and is `292.4MB`
+A `Dockerfile` and `.dockerignore` are included that can be used to run this application in a docker container. The offical image can be found [here](https://hub.docker.com/r/northwesternmutual/aichallenge-tournament/).
