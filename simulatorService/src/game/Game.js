@@ -11,6 +11,7 @@ function Game(playerOne, playerTwo, AIOne, AITwo) {
 	one = playerOne;
 	this.AIOne = AIOne;
 	this.AITwo = AITwo;
+	turn = null;
 }
 
 Game.prototype.initialize = function() {

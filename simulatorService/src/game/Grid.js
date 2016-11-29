@@ -4,6 +4,7 @@ const Collection = require('./Collection.js');
 
 function Grid() {
 	this.collection = new Collection();
+    this.cells = [];
 	this.initialize();
 }
 

@@ -31,6 +31,10 @@ A `Dockerfile` and `.dockerignore` are included that can be used to run this app
 Here is the documentation for the game engine source code found in `src/game/*.js`. 
 
 ### AI
+##### `properties`
+```javascript
+/** @type {Object}  player	[an instance to the player that the AI belongs to] */
+```
 ##### `function AI(algObj, player)`
 ```javascript
 /**
@@ -71,6 +75,16 @@ Here is the documentation for the game engine source code found in `src/game/*.j
 ```
 
 ### Block
+##### `properties`
+```javascript
+/** @type {Number}  length 		[represents the length of a Block] */
+/** @type {Number}  type 		[represents the type of a Block. See the Collection object for specific types] */
+/** @type {Number}  damage 		[represents the current damage to the Block. This will never exceed the length of the Block] */
+/** @type {Boolean} isConquered [whether a Block's damage is equal to it's length] */
+/** @type {Boolean} isUsed 		[whether a Block is currently placed on the Grid] */
+/** @type {Object}  location 	[the coordinate and direction of the Block. Note that the coordinate represents the topmost or leftmost cell of the Block. E.g. { x: 0, y: 1, direction: Block.VERTICAL }] */
+/** @type {Array}   cells 		[the Cells on the Grid that a Block comprises] */
+```
 ##### `function Block(type, length)`
 ```javascript
 /**
@@ -101,6 +115,12 @@ Here is the documentation for the game engine source code found in `src/game/*.j
 ```
 
 ### Cell
+##### `properties`
+```javascript
+/** @type {Number}	temperature [how many times this Cell has been hit] */
+/** @type {Number}	state 		[the state of the Block] */
+/** @type {Object}	block 		[a reference to the block that occupies that cell. Null if none] */
+```
 ##### `function Cell()`
 ```javascript
 /**
@@ -137,6 +157,10 @@ All cells the sunk Block uses are updated with this value] */
 ```
 
 ### Collection
+##### `properties`
+```javascript
+/** @type {Object} blocks [a Collection of all of the Blocks.] */
+```
 ##### `function Collection()`
 ```javascript
 /**
@@ -201,6 +225,15 @@ All cells the sunk Block uses are updated with this value] */
 ```
 
 ### Game
+##### `properties`
+```javascript
+/** @type {Object} winner 	[a reference to the player that won. Null if no winner] */
+/** @type {Object} AIOne	[a reference to the AI object associated with player one] */
+/** @type {Object} AITwo 	[a reference to the AI object associated with player two] */
+/** @type {Object} one 		[a reference to player two] */
+/** @type {Object} two 		[a reference to player one] */
+/** @type {Object} turn 	[a reference to the player whos turn it is. Null if any player can go] */
+```
 ##### `function Game(playerOne, playerTwo, AIOne, AITwo)`
 ```javascript
 /**
@@ -249,6 +282,11 @@ All cells the sunk Block uses are updated with this value] */
 ```
 
 ### Grid
+##### `properties`
+```javascript
+/** @type {Object} collection [the Collection of Blocks that belongs to that Player's grid] */
+/** @type {Array}  cells 	  [a 2D array of Cell objects which is the representation of the Grid itself] */
+```
 ##### `function Grid()`
 ```javascript
 /**
@@ -322,6 +360,14 @@ All cells the sunk Block uses are updated with this value] */
 ```
 
 ### Player
+##### `properties`
+```javascript
+/** @type {Number} 	 type 		[the type of the Player] */
+/** @type {Object} 	 grid 		[a reference to that Player's Grid] */
+/** @type {Number} 	 shotsTaken [the number of shots that Player has taken] */
+/** @type {Number} 	 hitsDealt 	[the number of hits that Player has dealt] */
+/** @type {Function} accuracy 	[helper function used to determine the accuracy of a Player's shots] */
+```
 ##### `function Player(type)`
 ```javascript
 /**
@@ -354,6 +400,12 @@ All cells the sunk Block uses are updated with this value] */
 ```
 
 ### Simulation
+##### `properties`
+```javascript
+/** @type {Object} algOneObj [the raw object containing a Player's AI implementation object bodies] */
+/** @type {Object} algTwoObj [the raw object containing a Player's AI implementation object bodies] */
+/** @type {Number} numSims 	 [the number of simulations to run during this simulation] */
+```
 ##### `function Simulator(algOneObj, algTwoObj, numSims)`
 ```javascript
 /**
