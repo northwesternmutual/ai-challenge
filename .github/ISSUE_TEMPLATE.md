@@ -15,7 +15,7 @@ might close your issue.  If we're wrong, PLEASE feel free to reopen it and
 explain why.
 -->
 
-**AI Challenge version** (see `[./package.json](package.json)`):
+**AI Challenge version** (see `./package.json`):
 
 
 **Environment**:
@@ -34,4 +34,3 @@ explain why.
 **How to reproduce it** (as minimally and precisely as possible):
 
 **Anything else do we need to know**:
->>>>>>> Stashed changes
