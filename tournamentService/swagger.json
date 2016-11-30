@@ -169,7 +169,9 @@
   "definitions": {
     "node": {
       "type": "object",
-      "required": ["Node Host"],
+      "required": [
+        "Node Host"
+      ],
       "properties": {
         "Node Host": {
           "description": "the name of the host node",
@@ -248,10 +250,10 @@
       "required": [
         "_id",
         "initializeSimulation",
-        "execute",
         "email",
         "initializeGame",
         "startGame",
+        "endGame",
         "date",
         "name"
       ],
@@ -262,7 +264,7 @@
         "initializeSimulation": {
           "type": "string"
         },
-        "execute": {
+        "shoot": {
           "type": "string"
         },
         "email": {
@@ -272,6 +274,9 @@
           "type": "string"
         },
         "startGame": {
+          "type": "string"
+        },
+        "endGame": {
           "type": "string"
         },
         "date": {

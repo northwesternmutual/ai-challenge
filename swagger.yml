@@ -1,0 +1,481 @@
+---
+swagger: '2.0'
+info:
+  version: 0.1.0
+  contact:
+    name: Frank B Greco Jr
+    email: frankgreco@northwesternmutual.com
+  title: AI Challenge
+  description: A framework for fascilitating artificial intelligence (AI) tournaments
+basePath: "/"
+tags:
+- name: algorithm service
+  description: RESTful API for the algorithm service
+- name: simulator service
+  description: RESTful API for the simulator service
+- name: tournament service
+  description: RESTful API for the tournament service
+- name: utilities
+  description: utility endpoints
+consumes:
+- application/json
+produces:
+- application/json
+schemes:
+- http
+- https
+paths:
+  "/algorithmservice/algorithms/{collection}":
+    get:
+      tags:
+      - algorithm service
+      description: Get all algorithms in the for a given collection
+      parameters:
+      - "$ref": "#/parameters/collectionPath"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: algorithms
+            type: array
+            items:
+              "$ref": "#/definitions/algorithm"
+        '204':
+          description: No algorithms for a given collection
+        '500':
+          description: Databse error
+    post:
+      tags:
+      - algorithm service
+      description: Insert one algorithm into the given collection of algorithms
+      parameters:
+      - "$ref": "#/parameters/algorithm"
+      - "$ref": "#/parameters/collectionPath"
+      responses:
+        '201':
+          description: Successful response
+          headers:
+            location:
+              description: ID retured by the database
+              type: string
+          schema:
+            "$ref": "#/definitions/algorithm"
+        '400':
+          description: The algorithm entry was not valid
+        '500':
+          description: Databse error
+    delete:
+      tags:
+      - algorithm service
+      description: Delete all algorithms from a given collection
+      parameters:
+      - "$ref": "#/parameters/collectionPath"
+      responses:
+        '204':
+          description: Successful response
+        '500':
+          description: Databse error
+  "/algorithmservice/algorithm/{collection}/{id}":
+    get:
+      tags:
+      - algorithm service
+      description: Get one algorithm from a given collection
+      parameters:
+      - "$ref": "#/parameters/algorithmId"
+      - "$ref": "#/parameters/collectionPath"
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            "$ref": "#/definitions/algorithm"
+        '204':
+          description: No algorithm in the given collection by given ID
+        '400':
+          description: Collection may not exist
+        '500':
+          description: Databse error
+    put:
+      tags:
+      - algorithm service
+      description: Update one algorithm in the given collection
+      parameters:
+      - "$ref": "#/parameters/algorithmId"
+      - "$ref": "#/parameters/collectionPath"
+      - "$ref": "#/parameters/algorithm"
+      responses:
+        '201':
+          description: Successful response
+          schema:
+            "$ref": "#/definitions/algorithm"
+        '400':
+          description: The algorithm update entry was not valid
+        '500':
+          description: Databse error
+    delete:
+      tags:
+      - algorithm service
+      description: Delete one algorithm from the given collection
+      parameters:
+      - "$ref": "#/parameters/algorithmId"
+      - "$ref": "#/parameters/collectionPath"
+      responses:
+        '204':
+          description: Successful response
+        '400':
+          description: The `Algorithm` was not deleted
+        '500':
+          description: Databse error
+  "/algorithmservice/doc":
+    get:
+      tags:
+      - utilities
+      description: get the swagger schema
+      responses:
+        '200':
+          description: success
+  "/algorithmservice/health":
+    get:
+      tags:
+      - utilities
+      description: check the health of the host node
+      responses:
+        '200':
+          description: service is up and running
+          schema:
+            "$ref": "#/definitions/node"
+  "/simulatorservice/simulation":
+    get:
+      tags:
+      - simulator service
+      description: preforms a simulation of two AI implementations
+      parameters:
+      - "$ref": "#/parameters/collectionQuery"
+      - "$ref": "#/parameters/algorithmOneID"
+      - "$ref": "#/parameters/algorithmTwoID"
+      - "$ref": "#/parameters/simulations"
+      responses:
+        '200':
+          description: success
+          schema:
+            title: results
+            type: object
+            properties:
+              playerOne:
+                "$ref": "#/definitions/player"
+              playerTwo:
+                "$ref": "#/definitions/player"
+        '204':
+          description: collection does not exist
+        '404':
+          description: validation error
+        '500':
+          description: internal error
+  "/simulatorservice/doc":
+    get:
+      tags:
+      - utilities
+      description: get the swagger schema
+      responses:
+        '200':
+          description: success
+  "/simulatorservice/health":
+    get:
+      tags:
+      - utilities
+      description: check the health of the host node
+      responses:
+        '200':
+          description: service is up and running
+          schema:
+            "$ref": "#/definitions/node"
+  "/tournamentservice/matches/{collection}":
+    get:
+      tags:
+      - tournament service
+      description: get matches for a given collection
+      parameters:
+      - "$ref": "#/parameters/collectionPath"
+      responses:
+        '200':
+          description: success
+          schema:
+            title: matches
+            type: array
+            items:
+              "$ref": "#/definitions/match"
+        '204':
+          description: collection does not exist
+        '500':
+          description: internal error
+  "/tournamentservice/play/{collection}":
+    get:
+      tags:
+      - tournament service
+      description: initiate a tournament
+      parameters:
+      - "$ref": "#/parameters/collectionPath"
+      responses:
+        '202':
+          description: success
+          schema:
+            "$ref": "#/definitions/status"
+        '204':
+          description: collection does not exist
+        '500':
+          description: internal error
+  "/tournamentservice/tournament/{id}":
+    get:
+      tags:
+      - tournament service
+      description: get the status of a tournament
+      parameters:
+      - "$ref": "#/parameters/tournamentId"
+      responses:
+        '202':
+          description: success
+          schema:
+            type: object
+            required:
+            - _id
+            - status
+            - lastUpdated
+            properties:
+              _id:
+                description: The id of the user
+                type: string
+              status:
+                description: The first name of the user
+                type: string
+              lastUpdated:
+                description: The last name of the user
+                type: string
+              results:
+                "$ref": "#/definitions/results"
+        '204':
+          description: collection does not exist
+        '500':
+          description: internal error
+  "/tournamentservice/doc":
+    get:
+      tags:
+      - utilities
+      description: get the swagger schema
+      responses:
+        '200':
+          description: success
+  "/tournamentservice/health":
+    get:
+      tags:
+      - utilities
+      description: check the health of the host node
+      responses:
+        '200':
+          description: service is up and running
+          schema:
+            "$ref": "#/definitions/node"
+definitions:
+  node:
+    type: object
+    required:
+    - Node Host
+    properties:
+      Node Host:
+        description: the name of the host node
+        type: string
+  match:
+    type: object
+    properties:
+      algorithmOne:
+        "$ref": "#/definitions/algorithm"
+      algorithmTwo:
+        "$ref": "#/definitions/algorithm"
+      url:
+        description: url for the simulation
+        type: string
+  status:
+    type: object
+    required:
+    - _id
+    - status
+    - lastUpdated
+    properties:
+      _id:
+        description: The id of the user
+        type: string
+      status:
+        description: The first name of the user
+        type: string
+      lastUpdated:
+        description: The last name of the user
+        type: string
+  results:
+    type: array
+    items:
+      type: object
+      required:
+      - wins
+      - losses
+      - email
+      - id
+      properties:
+        wins:
+          type: integer
+        losses:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        id:
+          type: string
+  player:
+    type: object
+    required:
+    - wins
+    - losses
+    - accuracy
+    - name
+    - id
+    properties:
+      wins:
+        description: number of wins
+        type: integer
+      losses:
+        description: number of losses
+        type: integer
+      accuracy:
+        description: percentage of shots that were hit
+        type: number
+      name:
+        description: name associated with algorithm
+        type: string
+      id:
+        description: id of algorithm
+        type: string
+  algorithm:
+    type: object
+    required:
+    - name
+    - date
+    - initializeSimulation
+    - initializeGame
+    - shoot
+    - startGame
+    - endGame
+    - email
+    properties:
+      _id:
+        description: The ID of the `Algorithm`
+        type: string
+      name:
+        description: The name associated with the `Algorithm`
+        type: string
+      date:
+        description: The date the algorithm was submitted in milliseconds`
+        type: integer
+      initializeSimulation:
+        description: The algorithm for placing ships
+        type: string
+      initializeGame:
+        description: The algorithm for placing ships
+        type: string
+      startGame:
+        description: The algorithm for placing ships
+        type: string
+      endGame:
+        description: The algorithm for placing ships
+        type: string
+      shoot:
+        description: The algorithm for shooting
+        type: string
+      email:
+        description: The email associated with the algorithm
+        type: string
+  new algorithm:
+    type: object
+    required:
+    - name
+    - date
+    - initializeSimulation
+    - initializeGame
+    - shoot
+    - startGame
+    - endGame
+    - email
+    properties:
+      _id:
+        description: The ID of the `Algorithm`
+        type: string
+      name:
+        description: The name associated with the `Algorithm`
+        type: string
+      date:
+        description: The date the algorithm was submitted in milliseconds`
+        type: integer
+      initializeSimulation:
+        description: The algorithm for placing ships
+        type: string
+      initializeGame:
+        description: The algorithm for placing ships
+        type: string
+      startGame:
+        description: The algorithm for placing ships
+        type: string
+      endGame:
+        description: The algorithm for placing ships
+        type: string
+      shoot:
+        description: The algorithm for shooting
+        type: string
+      email:
+        description: The email associated with the algorithm
+parameters:
+  algorithm:
+    name: algorithm
+    in: body
+    description: Algorithm to be added
+    required: true
+    schema:
+      "$ref": "#/definitions/new algorithm"
+  collectionPath:
+    name: collection
+    in: path
+    description: collection where the algorithms live
+    required: true
+    type: string
+  algorithmId:
+    name: id
+    in: path
+    description: id of the algorithm
+    required: true
+    type: integer
+  tournamentId:
+    name: id
+    description: tournament id
+    in: path
+    required: true
+    type: string
+  algorithmOneID:
+    name: algorithmOneID
+    description: id of algorithm
+    in: query
+    required: true
+    type: string
+  algorithmTwoID:
+    name: algorithmTwoID
+    description: id of algorithm
+    in: query
+    required: true
+    type: string
+  simulations:
+    name: simulations
+    description: number of simulations to preform
+    in: query
+    required: false
+    type: integer
+  collectionQuery:
+    name: collection
+    in: query
+    description: collection where the algorithms live
+    required: true
+    type: string

@@ -241,7 +241,9 @@
   "definitions": {
     "node": {
       "type": "object",
-      "required": ["Node Host"],
+      "required": [
+        "Node Host"
+      ],
       "properties": {
         "Node Host": {
           "description": "the name of the host node",
@@ -249,9 +251,60 @@
         }
       }
     },
+    "new algorithm": {
+      "type": "object",
+      "required": [
+        "name",
+        "date",
+        "initializeSimulation",
+        "initializeGame",
+        "shoot",
+        "startGame",
+        "endGame",
+        "email"
+      ],
+      "properties": {
+        "_id": {
+          "description": "The ID of the `Algorithm`",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name associated with the `Algorithm`",
+          "type": "string"
+        },
+        "date": {
+          "description": "The date the algorithm was submitted in milliseconds`",
+          "type": "integer"
+        },
+        "initializeSimulation": {
+          "description": "The algorithm for placing ships",
+          "type": "string"
+        },
+        "initializeGame": {
+          "description": "The algorithm for placing ships",
+          "type": "string"
+        },
+        "startGame": {
+          "description": "The algorithm for placing ships",
+          "type": "string"
+        },
+        "endGame": {
+          "description": "The algorithm for placing ships",
+          "type": "string"
+        },
+        "shoot": {
+          "description": "The algorithm for shooting",
+          "type": "string"
+        },
+        "email": {
+          "description": "The email associated with the algorithm"
+        }
+      }
+    },
     "algorithm": {
       "type": "object",
       "required": [
+        "_id",
         "name",
         "date",
         "initializeSimulation",
@@ -308,7 +361,7 @@
       "description": "Algorithm to be added",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/algorithm"
+        "$ref": "#/definitions/new algorithm"
       }
     },
     "collection": {
