@@ -22,7 +22,7 @@ Environment configuration is fasciliated through `./confg/NODE_ENV.json`
 
 ## API
 #### Documentation
-[Swagger Schema](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/northwesternmutual/ai-challenge/master/algorithmService/swagger.json?token=AVjpyTf2x5v493zN6qI4ZPKyJIso0ulcks5YJma3wA%3D%3D)
+[Swagger Schema](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/northwesternmutual/ai-challenge/master/algorithmService/swagger.json?token=AVjpyW9-dZfnqJdHnyg9z2yYx1lLJVGFks5YSERGwA%3D%3D)
 
 ## Docker
 A `Dockerfile` and `.dockerignore` are included that can be used to run this application in a docker container. The offical image can be found [here](https://hub.docker.com/r/northwesternmutual/aichallenge-algorithm/).
