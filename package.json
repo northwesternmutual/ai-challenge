@@ -1,6 +1,6 @@
 {
   "name": "ai_challenge",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "a framework for fascilitating AI tournaments.",
   "author": "Frank B Greco Jr <frankgreco@northwesternmutual.com>",
   "scripts": {
