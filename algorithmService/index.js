@@ -27,3 +27,14 @@ process.on('SIGTERM', () => {
         process.exit(0);
     });
 });
+
+process.on('SIGUSR2', () => {
+    httpServer.close(() => {
+        log.info('SIGUSR2 issued...app is shutting down');
+        process.exit(0);
+    });
+    httpsServer.close(() => {
+        log.info('SIGUSR2 issued...app is shutting down');
+        process.exit(0);
+    });
+});
