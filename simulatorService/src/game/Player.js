@@ -2,7 +2,7 @@ const Grid = require('./Grid.js');
 const Cell = require('./Cell.js');
 
 function Player(type) {
-	this.type = type;
+    this.type = type;
 	this.grid = new Grid();
 	this.shotsTaken = 0;
 	this.hitsDealt = 0;
