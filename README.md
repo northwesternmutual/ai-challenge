@@ -1,6 +1,6 @@
 # AI Challenge [![Build Status](https://travis-ci.com/northwesternmutual/ai-challenge.svg?token=MkdavBWRqQGB4gWqK2cR&branch=master)](https://travis-ci.com/northwesternmutual/ai-challenge.svg?token=MkdavBWRqQGB4gWqK2cR&branch=master)
 
-AI Challenge is a framework for fascilitating artificial intelligence (AI) tournaments.
+AI Challenge is a framework for facilitating artificial intelligence (AI) tournaments.
 
 * **Microservice Architecture:** The AI Challenge framework conforms to a microservice architecture. As a result, each component can be deployed, swapped, maintained, implemented, tested, and scaled independently.
 * **Component-Based:** This framework is composed of three primary components. While each is needed to utilize all the benefits of AI Challenge, they can be used independently as they each offer a unique set of functionality. Based on how you implement the framework for your application specific needs, you may choose to swap out or modify each component as needed.
@@ -22,6 +22,7 @@ AI Challenge is a framework for fascilitating artificial intelligence (AI) tourn
   * [Docker-Compose](#docker-compose)
   * [Minikube](#minikube)
   * [Kubernetes](#kubernetes)
+  * [Security](#security)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -34,8 +35,8 @@ AI Challenge is a framework for fascilitating artificial intelligence (AI) tourn
 This will install all of the dependencies and start each component in development mode. Each microservice will be accessible from the following endpoints:
 
 component | base path
---------- | ------- 
-algorithm | `http://localhost:8000/` 
+--------- | -------
+algorithm | `http://localhost:8000/`
 simulator | `http://localhost:8001/`  
 tournament | `http://localhost:8002/`
 
@@ -44,26 +45,26 @@ tournament | `http://localhost:8002/`
 Here are some example uses of AI Challenge:
 
 * **Recruiting:** AI Challenge can be used to facilitate the quantitative assessment of a developer’s proficiency in an objective manner.
-* **Kids:** AI Challenge can be used to teach children about artificial intelligence and/or algorithm theory. 
+* **Kids:** AI Challenge can be used to teach children about artificial intelligence and/or algorithm theory.
 * **Competitions:** AI Challenge can be used to conduct competitive programming competitions among developers.
 
 ## Components
 
 AI Challenge is composed of three primary components which are explained below. Note that detailed documentation for each component can be found in their respective README files.
 
-* **Algorithm Service:** Fascilitates create/retrieve/update/delete (CRUD) operations on AI implementations. Each AI conforms to an interface of specific functions. Reference the [documentation](./algorithmService/README.md) for detailed information.
+* **Algorithm Service:** Facilitates create/retrieve/update/delete (CRUD) operations on AI implementations. Each AI conforms to an interface of specific functions. Reference the [documentation](./algorithmService/README.md) for detailed information.
 * **Simulator Service:** Preforms a simulation of two AI implementations. Reference the [documentation](./simulationEngine/README.md) for detailed information.
-* **Tournament Service:** Fascilitaes a tournament of AI implementations. Reference the [documentation](./tournamentEngine/README.md) for detailed information.
+* **Tournament Service:** Fascinates a tournament of AI implementations. Reference the [documentation](./tournamentEngine/README.md) for detailed information.
 
 ## API
-[Swagger](http://swagger.io/) is used to document each component's API. See each component's documentation for more details. In addition, an aggregated Swagger document is availble [here](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/northwesternmutual/ai-challenge/master/swagger.yml?token=AVjpyXumkRz9yyVsZuQScvBV2i32e00Uks5YSEKzwA%3D%3D&docExpansion=full).
+[Swagger](http://swagger.io/) is used to document each component's API. See each component's documentation for more details. In addition, an aggregated Swagger document is available [here](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/northwesternmutual/ai-challenge/master/swagger.yml?token=AVjpyXumkRz9yyVsZuQScvBV2i32e00Uks5YSEKzwA%3D%3D&docExpansion=full).
 
 ## Example
 
 **NOTE:** The official rules and objectives for the current game engine can be found in [`/simulatorService/GAME.md`](./simulatorService/GAME.md) and the tournament guid can be found in [`/tournamentService/TOURNAMENT.md`](./tournamentService/TOURNAMENT.md). Of course this framework can easily be extended to support more game implementations.
 
 ### Algorithm Component
-In order to fascilitate a tournament, AI implementations are needed. The following illustrates how an implementation might be submitted. See the full [documentation](./algorithmService/README.md) for more details.
+In order to facilitate a tournament, AI implementations are needed. The following illustrates how an implementation might be submitted. See the full [documentation](./algorithmService/README.md) for more details.
 
 ```js
 function initializeSimulation() {
@@ -98,7 +99,7 @@ function shoot() {
 }
 
 function endGame() {
-	//optional	
+	//optional
 }
 ```
 The following shows an example of how you might submit the functions that make up an AI to the `algorithm service`
@@ -111,7 +112,7 @@ function getBody(func) {
 $.ajax({
     type: "POST",
     url: "http://< base path >/algorithmservice/algorithms/test",
-    data: { 
+    data: {
         email: 'frankgreco@northwesternmutual.com',
         name: 'Frank B Greco Jr',
         initializeSimulation: getBody(initializeSimulation),
@@ -238,7 +239,7 @@ AI-Challenge offers three solutions for out-of-the-box deployment. All of them d
 ### Docker-Compose
 [Docker-Compose](https://docs.docker.com/compose/) is a great and easy tool for orchestrating a multi-container application. The `deploy/docker-compose.yml` file contains all the necessary configuration to define each microservice and connect them to each other.
 
-Each service is externally exposed through an nginx proxy (basepath's illistrated below). Each service communicates to each other via an overlay network provided by Docker.
+Each service is externally exposed through an Nginx proxy (base path's illustrated below). Each service communicates to each other via an overlay network provided by Docker.
 
 See the [official Docker-Compose documentation](https://docs.docker.com/compose/) to get up and running. Then, use the following command to deploy AI-Challenge.
 
@@ -248,18 +249,18 @@ See the [official Docker-Compose documentation](https://docs.docker.com/compose/
 $ docker-compose up
 ```
 
-*NOTE:* Since the mongodb data is stored inside of a Docker container, it persists only as long as the container is healthy. Consider mapping a data directory outside of the container for more persistency.
+*NOTE:* Since the Mongodb data is stored inside of a Docker container, it persists only as long as the container is healthy. Consider mapping a data directory outside of the container for more persistency.
 
 component | base path
---------- | ------- 
-algorithm | `http://localhost:8080/algorithmservice/` 
+--------- | -------
+algorithm | `http://localhost:8080/algorithmservice/`
 simulator | `http://localhost:8080/simulatorservice/`  
 tournament | `http://localhost:8080/tournamentservice/`
 
 ### Minikube
-[Minikube](https://github.com/kubernetes/minikube) allows you to deploy a kubernetes cluster locally on your machine. The `deploy/kubernetes.yml` file defines how your cluster will be configured.
+[Minikube](https://github.com/kubernetes/minikube) allows you to deploy a Kubernetes cluster locally on your machine. The `deploy/kubernetes.yml` file defines how your cluster will be configured.
 
-Like Docker-Compose, each service is externally exposed through an nginx proxy (basepath's illistrated below). Each service communicates to each other via a pod overlay network provided by Kubernetes.
+Like Docker-Compose, each service is externally exposed through an Nginx proxy (base path's illustrated below). Each service communicates to each other via a pod overlay network provided by Kubernetes.
 
 See the [minikube installation instructions](https://github.com/kubernetes/minikube/releases) to install minikube. You will also need to install the `kubectl` tool:
 ```sh
@@ -270,22 +271,23 @@ $ mv kubectl /usr/local/bin/
 
 Then, create your minikube cluster: `minikube start`
 
-You can either create your kubernetes cluster using the kubernetes dashboard found at `minikube dashboard` or by executing the following commands:
+You can either create your Kubernetes cluster using the Kubernetes dashboard found at `minikube dashboard` or by executing the following commands:
 
 ```sh
 $ kubectl create namespace ai-challenge
 $ kubectl create -f deploy/kubernetes.yml
 ```
 
-**Base Path:** run the following command to determine the basepath for the externally exposed nginx proxy.
+**Base Path:** run the following command to determine the base path for the externally exposed Nginx proxy.
+
 
 ```sh
 $ echo $(minikube ip):$(kubectl get service nginx --namespace=ai-challenge -o jsonpath='{.spec.ports[*].nodePort}')
 ```
 
 component | base path
---------- | ------- 
-algorithm | `http://< base path >/algorithmservice/` 
+--------- | -------
+algorithm | `http://< base path >/algorithmservice/`
 simulator | `http://< base path >/simulatorservice/`  
 tournament | `http://< base path >/tournamentservice/`
 
@@ -304,17 +306,23 @@ $ kubectl create namespace ai-challenge
 $ kubectl create -f deploy/kubernetes.yml
 ```
 
-**Base Path:** The IP address of externally exposed nginx proxy will depend on how implement ingress into your kubernetes cluster. The port that this service is running on can be determined by executing the following command
+**Base Path:** The IP address of externally exposed Nginx proxy will depend on how implement ingress into your Kubernetes cluster. The port that this service is running on can be determined by executing the following command
 
 ```sh
 $ echo $(kubectl get service nginx --namespace=ai-challenge -o jsonpath='{.spec.ports[*].nodePort}')
 ```
 
 component | base path
---------- | ------- 
-algorithm | `http://< ingress endpoint >/algorithmservice/` 
+--------- | -------
+algorithm | `http://< ingress endpoint >/algorithmservice/`
 simulator | `http://< ingress endpoint >/simulatorservice/`  
 tournament | `http://< ingress endpoint >/tournamentservice/`
+
+### Security
+
+Part of AI Challenge involves the `simulatorService` component executing a player's AI implementation code. This involves executing potentially malicious code which can have negative impacts. While the framework does reject implementations that use JavaScript functions/objects that are commonly used in exploits, it is recommended that thoughtful safeguards are implemented in any production deployment.
+
+If you plan on deploying AI Challenge using the recommended container-centric options, consider implementing network isolation so that potentially malicious code cannot penetrate an internal network.
 
 ## Contributing
 

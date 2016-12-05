@@ -14,7 +14,7 @@ function initializeSimulation() {
 
 	this.myHelperFunction = function() {
 		//you can now use this function through your implementation.
-	}	
+	}
 
 }
 ```
@@ -50,3 +50,4 @@ for(var i=0; i<10; ++i) {
 * There will be 1000 simulations per tournament unless otherwise configured.
 * Only code implented in the 5 functions above will be used. Attempts to implement code outside of these functions may results in a breaking AI which will be disqualified.
 * Due to the nature of the JavaScript language, certain object properties can be modified that are not meant to be modified and would result in the game invariants to be broken. While the game engine has been architected to minimize the visibility of objects that an AI should not modify, some still exist. Hence, after every Player's turn, the game engine will determine whether an AI has modified the state of the game in an improper way. If so, that AI will be disqualified.
+* For security purposes, functions/objects such as `require`, `eval`, `exec`, `setInterval`, `setTimeout`, `Function` can not be used.

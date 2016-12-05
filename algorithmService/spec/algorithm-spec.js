@@ -49,6 +49,108 @@ describe('algorithm route', () => {
                 done();
             });
     });
+    it('should reject a new algorithm that might contain malicious code (eval)', done => {
+        let item = {
+            initializeSimulation: 'eval(this is my function body)'
+        };
+        request(app)
+            .put(`${basePath}/test/123abc`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
+            });
+    });
+    it('should reject a new algorithm that might contain malicious code (require)', done => {
+        let item = {
+            initializeSimulation: 'var foo=require("module-name");'
+        };
+        request(app)
+            .put(`${basePath}/test/123abc`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
+            });
+    });
+    it('should reject a new algorithm that might contain malicious code (setInterval)', done => {
+        let item = {
+            initializeSimulation: 'setInterval(function(){console.log()}, 2000)'
+        };
+        request(app)
+            .put(`${basePath}/test/123abc`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
+            });
+    });
+    it('should reject a new algorithm that might contain malicious code (setTimeout)', done => {
+        let item = {
+            initializeSimulation: 'setTimeout(function(){console.log()}, 2000)'
+        };
+        request(app)
+            .put(`${basePath}/test/123abc`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
+            });
+    });
+    it('should reject a new algorithm that might contain malicious code (Function)', done => {
+        let item = {
+            initializeSimulation: 'var foo=new Function();'
+        };
+        request(app)
+            .put(`${basePath}/test/123abc`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
+            });
+    });
+    it('should reject a new algorithm that might contain malicious code (exec)', done => {
+        let item = {
+            initializeSimulation: 'exec(hi);'
+        };
+        request(app)
+            .put(`${basePath}/test/123abc`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
+            });
+    });
     it('should delete an algorithms', done => {
         request(app)
             .delete(`${basePath}/test/123abc`)

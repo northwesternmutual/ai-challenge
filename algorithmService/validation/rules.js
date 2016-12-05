@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 const checkIfUndefined = data => {
     return new Promise((resolve, reject) => {
         if (data === undefined) {
@@ -28,6 +30,18 @@ const checkIfMinLength = data => {
     });
 }
 
+const checkIfMalicious = data => {
+    return new Promise((resolve, reject) => {
+        var badKeywords = [/eval/, /setTimeout/, /setInterval/, /Function/, /exec/, /require/];
+        _.forEach(badKeywords, keyword => {
+            if(data.match(keyword)) {
+                return reject(new Error('this code may be malicious'));
+            }
+        });
+        return resolve(data);
+    });
+}
+
 export function id(id, callback) {
     return checkIfUndefined(id)
         .then(checkIfNull)
@@ -55,6 +69,7 @@ export function name(name, callback) {
 export function initializeSimulation(initializeSimulation, callback) {
     return checkIfUndefined(initializeSimulation)
         .then(checkIfNull)
+        .then(checkIfMalicious)
         .then(data => callback(null, data))
         .catch(err => callback(err));
 }
@@ -62,6 +77,7 @@ export function initializeSimulation(initializeSimulation, callback) {
 export function initializeGame(initializeGame, callback) {
     return checkIfUndefined(initializeGame)
         .then(checkIfNull)
+        .then(checkIfMalicious)
         .then(checkIfMinLength)
         .then(data => callback(null, data))
         .catch(err => callback(err));
@@ -70,6 +86,7 @@ export function initializeGame(initializeGame, callback) {
 export function startGame(startGame, callback) {
     return checkIfUndefined(startGame)
         .then(checkIfNull)
+        .then(checkIfMalicious)
         .then(checkIfMinLength)
         .then(data => callback(null, data))
         .catch(err => callback(err));
@@ -78,6 +95,7 @@ export function startGame(startGame, callback) {
 export function shoot(shoot, callback) {
     return checkIfUndefined(shoot)
         .then(checkIfNull)
+        .then(checkIfMalicious)
         .then(checkIfMinLength)
         .then(data => callback(null, data))
         .catch(err => callback(err));
@@ -86,6 +104,7 @@ export function shoot(shoot, callback) {
 export function endGame(endGame, callback) {
     return checkIfUndefined(endGame)
         .then(checkIfNull)
+        .then(checkIfMalicious)
         .then(data => callback(null, data))
         .catch(err => callback(err));
 }

@@ -25,7 +25,7 @@ describe('algorithms route', () => {
             .expect(200)
             .end((err, res) => {
                 if (err) {
-                    return done(err);
+                    fail();
                 }
                 expect(res.body).toEqual(data.items);
                 done();
@@ -50,10 +50,160 @@ describe('algorithms route', () => {
             .expect(201)
             .end((err, res) => {
                 if (err) {
-                    return done(err);
+                    fail();
                 }
                 expect(res.body).toEqual(item)
                 done();
+            });
+    });
+    it('should reject a new algorithm that might contain malicious code (eval)', done => {
+        let item = {
+            _id: '345mno',
+            email: 'frankgreco@northwesternmutual.com',
+            name: 'frank greco jr',
+            initializeSimulation: 'eval(this is my function body)',
+            initializeGame: 'this is my function body',
+            startGame: 'this is my function body',
+            shoot: 'this is my function body',
+            endGame: 'this is my function body',
+            date: Date.now()
+        };
+        request(app)
+            .post(`${basePath}/test`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
+            });
+    });
+    it('should reject a new algorithm that might contain malicious code (require)', done => {
+        let item = {
+            _id: '345mno',
+            email: 'frankgreco@northwesternmutual.com',
+            name: 'frank greco jr',
+            initializeSimulation: 'this is my function body',
+            initializeGame: 'var foo=require("module-name");',
+            startGame: 'this is my function body',
+            shoot: 'this is my function body',
+            endGame: 'this is my function body',
+            date: Date.now()
+        };
+        request(app)
+            .post(`${basePath}/test`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
+            });
+    });
+    it('should reject a new algorithm that might contain malicious code (setTimeout)', done => {
+        let item = {
+            _id: '345mno',
+            email: 'frankgreco@northwesternmutual.com',
+            name: 'frank greco jr',
+            initializeSimulation: 'this is my function body',
+            initializeGame: 'this is my function body',
+            startGame: 'setTimeout(function(){console.log()}, 2000)',
+            shoot: 'this is my function body',
+            endGame: 'this is my function body',
+            date: Date.now()
+        };
+        request(app)
+            .post(`${basePath}/test`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
+            });
+    });
+    it('should reject a new algorithm that might contain malicious code (setInterval)', done => {
+        let item = {
+            _id: '345mno',
+            email: 'frankgreco@northwesternmutual.com',
+            name: 'frank greco jr',
+            initializeSimulation: 'this is my function body',
+            initializeGame: 'this is my function body',
+            startGame: 'setInterval(function(){console.log()}, 2000)',
+            shoot: 'this is my function body',
+            endGame: 'this is my function body',
+            date: Date.now()
+        };
+        request(app)
+            .post(`${basePath}/test`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
+            });
+    });
+    it('should reject a new algorithm that might contain malicious code (Function)', done => {
+        let item = {
+            _id: '345mno',
+            email: 'frankgreco@northwesternmutual.com',
+            name: 'frank greco jr',
+            initializeSimulation: 'this is my function body',
+            initializeGame: 'this is my function body',
+            startGame: 'var foo=new Function();',
+            shoot: 'this is my function body',
+            endGame: 'this is my function body',
+            date: Date.now()
+        };
+        request(app)
+            .post(`${basePath}/test`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
+            });
+    });
+    it('should reject a new algorithm that might contain malicious code (exec)', done => {
+        let item = {
+            _id: '345mno',
+            email: 'frankgreco@northwesternmutual.com',
+            name: 'frank greco jr',
+            initializeSimulation: 'this is my function body',
+            initializeGame: 'this is my function body',
+            startGame: 'var foo=eval()',
+            shoot: 'this is my function body',
+            endGame: 'this is my function body',
+            date: Date.now()
+        };
+        request(app)
+            .post(`${basePath}/test`)
+            .send(item)
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .end((err, res) => {
+                if (err) {
+                    expect(res.status).toEqual(400);
+                    return done();
+                }
+                fail();
             });
     });
     it('should delete all algorithms', done => {
@@ -62,7 +212,7 @@ describe('algorithms route', () => {
             .expect(204)
             .end((err) => {
                 if (err) {
-                    return done(err);
+                    fail();
                 }
                 done();
             });
@@ -73,7 +223,7 @@ describe('algorithms route', () => {
             .expect(204)
             .end((err) => {
                 if (err) {
-                    return done(err);
+                    fail();
                 }
                 done();
             });
