@@ -54,7 +54,7 @@ AI Challenge is composed of three primary components which are explained below. 
 
 * **Algorithm Service:** Facilitates create/retrieve/update/delete (CRUD) operations on AI implementations. Each AI conforms to an interface of specific functions. Reference the [documentation](./algorithmService/README.md) for detailed information.
 * **Simulator Service:** Preforms a simulation of two AI implementations. Reference the [documentation](./simulationEngine/README.md) for detailed information.
-* **Tournament Service:** Fascinates a tournament of AI implementations. Reference the [documentation](./tournamentEngine/README.md) for detailed information.
+* **Tournament Service:** Facilitates a tournament of AI implementations. Reference the [documentation](./tournamentEngine/README.md) for detailed information.
 
 ## API
 [Swagger](http://swagger.io/) is used to document each component's API. See each component's documentation for more details. In addition, an aggregated Swagger document is available [here](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/northwesternmutual/ai-challenge/master/swagger.yml?token=AVjpyXumkRz9yyVsZuQScvBV2i32e00Uks5YSEKzwA%3D%3D&docExpansion=full).
