@@ -1,5 +1,3 @@
-var _ = require('lodash');
-
 const checkIfUndefined = data => {
     return new Promise((resolve, reject) => {
         if (data === undefined) {
@@ -32,8 +30,14 @@ const checkIfMinLength = data => {
 
 const checkIfMalicious = data => {
     return new Promise((resolve, reject) => {
-        var badKeywords = [/eval/, /setTimeout/, /setInterval/, /Function/, /exec/, /require/];
-        _.forEach(badKeywords, keyword => {
+        [
+          /require\((\n*)(([^\)]|\n)*)(\n*)\)/igm,
+          /setTimeout/,
+          /setInterval/,
+          /Function/,
+          /exec/,
+          /eval/
+        ].forEach(keyword => {
             if(data.match(keyword)) {
                 return reject(new Error('this code may be malicious'));
             }

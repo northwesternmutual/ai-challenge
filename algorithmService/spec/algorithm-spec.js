@@ -66,22 +66,27 @@ describe('algorithm route', () => {
                 fail();
             });
     });
-    it('should reject a new algorithm that might contain malicious code (require)', done => {
-        let item = {
-            initializeSimulation: 'var foo=require("module-name");'
-        };
-        request(app)
-            .put(`${basePath}/test/123abc`)
-            .send(item)
-            .expect('Content-Type', /json/)
-            .expect(400)
-            .end((err, res) => {
-                if (err) {
-                    expect(res.status).toEqual(400);
-                    return done();
-                }
-                fail();
-            });
+    [
+      'var foo=require("module-name");',
+      'var foo=require(\n"module-name"\n);',
+      'var foo=require(\n"module-name");',
+      'var foo=require(\n"module-name"\n\n\n);',
+      'var foo=require(\n\n"module-name"\n);'
+    ].forEach(item => {
+      it('should reject a new algorithm that might contain malicious code (require)', done => {
+          request(app)
+              .put(`${basePath}/test/123abc`)
+              .send({ initializeSimulation: item })
+              .expect('Content-Type', /json/)
+              .expect(400)
+              .end((err, res) => {
+                  if (err) {
+                      expect(res.status).toEqual(400);
+                      return done();
+                  }
+                  fail();
+              });
+        });
     });
     it('should reject a new algorithm that might contain malicious code (setInterval)', done => {
         let item = {
