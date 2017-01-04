@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.1.0",
+    "version": "1.0.0",
     "contact": {
       "name": "Frank B Greco Jr",
       "email": "frankgreco@northwesternmutual.com"
@@ -38,6 +38,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/games"
           }
         ],
         "responses": {
@@ -69,6 +72,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/collection"
+          },
+          {
+            "$ref": "#/parameters/games"
           }
         ],
         "responses": {
@@ -295,6 +301,13 @@
       "in": "path",
       "required": true,
       "type": "string"
+    },
+    "games": {
+      "name": "games",
+      "description": "number of games in a simulation",
+      "in": "query",
+      "required": false,
+      "type": "integer"
     },
     "id": {
       "name": "id",

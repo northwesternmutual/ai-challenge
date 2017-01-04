@@ -195,6 +195,7 @@ paths:
       description: get matches for a given collection
       parameters:
       - "$ref": "#/parameters/collectionPath"
+      - "$ref": "#/parameters/games"
       responses:
         '200':
           description: success
@@ -214,6 +215,7 @@ paths:
       description: initiate a tournament
       parameters:
       - "$ref": "#/parameters/collectionPath"
+      - "$ref": "#/parameters/games"
       responses:
         '202':
           description: success
@@ -479,3 +481,9 @@ parameters:
     description: collection where the algorithms live
     required: true
     type: string
+  games:
+    name: games
+    description: number of games per simulation
+    in: query
+    required: false
+    type: integer
