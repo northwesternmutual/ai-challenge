@@ -1,4 +1,4 @@
-# AI Challenge [![Build Status](https://travis-ci.org/northwesternmutual/ai-challenge.svg?branch=master)](https://travis-ci.org/northwesternmutual/ai-challenge.svg?branch=master)
+# AI Challenge [![Build Status](https://travis-ci.org/northwesternmutual/ai-challenge.svg?branch=master)](https://travis-ci.org/northwesternmutual/ai-challenge)
 
 AI Challenge is a framework for facilitating artificial intelligence (AI) tournaments.
 
@@ -326,7 +326,7 @@ If you plan on deploying AI Challenge using the recommended container-centric op
 
 ## Contributing
 
-AI Challenge welcomes pull requests. See the [contribution guide](./CONTRIBUTING.md) for details.
+AI Challenge welcomes pull requests.
 
 ### License
 
