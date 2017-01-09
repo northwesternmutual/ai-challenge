@@ -1,4 +1,5 @@
-# AI Challenge [![Build Status](https://travis-ci.org/northwesternmutual/ai-challenge.svg?branch=master)](https://travis-ci.org/northwesternmutual/ai-challenge)
+# AI Challenge [![Build Status](https://travis-ci.org/northwesternmutual/ai-challenge.svg?branch=master)](https://travis-ci.org/northwesternmutual/ai-challenge) [![Coverage Status](https://coveralls.io/github/northwesternmutual/ai-challenge/badge.svg)](https://coveralls.io/github/northwesternmutual/ai-challenge?branch=master)
+
 
 AI Challenge is a framework for facilitating artificial intelligence (AI) tournaments.
 
