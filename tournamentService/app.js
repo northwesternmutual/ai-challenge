@@ -11,7 +11,6 @@ import log from './utils/logger';
 
 const app = express();
 
-
 console.log(process.cwd());
 
 //watch for memory leaks
@@ -51,4 +50,3 @@ app.use((req, res, next) => {
 });
 
 module.exports = app;
-

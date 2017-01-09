@@ -14,17 +14,17 @@ const {
 const router = express.Router();
 
 router.route('/')
-  .get(function(req, res, next) {
+  .get(function (req, res, next) {
       Validator.validateIncoming(req.query)
         .then(getAlgorithms)
         .then(conductSimulation)
         .then(parseResponse)
         .then(response => res.status(code.HTTP_OK).json(response))
         .catch(ValidationError, err => {
-          err.status = code.HTTP_BAD_REQUEST;
-          return next(err);
+            err.status = code.HTTP_BAD_REQUEST;
+            return next(err);
         })
-        .catch(NoSuchCollectionError, err => res.sendStatus(code.HTTP_NO_CONTENT))
+        .catch(NoSuchCollectionError, () => res.sendStatus(code.HTTP_NO_CONTENT))
   });
 
 module.exports = router;

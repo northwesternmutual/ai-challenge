@@ -3,9 +3,8 @@ import proxyquire from 'proxyquire';
 import express from 'express';
 import bodyParser from 'body-parser';
 import mockRequest from '../../mock/request';
-import log from '../../utils/logger';
 import { goodQuery, badQueryTwo, invalidQuery } from '../../mock/query';
-import qs from 'qs';  
+import qs from 'qs';
 
 const basePath = '/simulation';
 let app = express();
@@ -14,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let route = proxyquire
-    .load('../../routes/simulationsRoute.js', { 
+    .load('../../routes/simulationsRoute.js', {
         '../src/simulator': proxyquire.load('../../src/simulator', {
             'request': mockRequest
         })

@@ -1,6 +1,6 @@
 # AI Challenge [![Build Status](https://travis-ci.com/northwesternmutual/ai-challenge.svg?token=MkdavBWRqQGB4gWqK2cR&branch=master)](https://travis-ci.com/northwesternmutual/ai-challenge.svg?token=MkdavBWRqQGB4gWqK2cR&branch=master)
 
-AI Challenge is a framework for facilitating artificial intelligence (AI) tournaments. 
+AI Challenge is a framework for facilitating artificial intelligence (AI) tournaments.
 
 * **Microservice Architecture:** The AI Challenge framework conforms to a microservice architecture. As a result, each component can be deployed, swapped, maintained, implemented, tested, and scaled independently.
 * **Component-Based:** This framework is composed of three primary components. While each is needed to utilize all the benefits of AI Challenge, they can be used independently as they each offer a unique set of functionality. Based on how you implement the framework for your application specific needs, you may choose to swap out or modify each component as needed.

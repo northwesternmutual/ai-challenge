@@ -9,7 +9,7 @@ fake.use('/error', function (req, res, next) {
     next(new Error('test error'));
 });
 
-fake.use('/', function (req, res, next) {
+fake.use('/', function (req, res, next) { // eslint-disable-line no-unused-vars
     res.cookie('cookie', req.cookies);
     res.json({});
 });

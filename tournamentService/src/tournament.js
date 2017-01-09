@@ -14,7 +14,7 @@ import {
 	InitializationError
 } from '../src/errors';
 
-export function getMatches(collection, numGames = 1000,) {
+export function getMatches(collection, numGames = 1000) {
 
     let matches = [];
     let algorithms = [];
@@ -29,7 +29,7 @@ export function getMatches(collection, numGames = 1000,) {
                 return reject(new AlgorithmError(`algorithm error ${err.message}`));
             }
             algorithms = JSON.parse(body);
- 
+
             for (let i = 0; i < algorithms.length; ++i) {
                 for (let j = i + 1; j < algorithms.length; ++j) {
                     matches.push({
@@ -104,7 +104,7 @@ export function parseResults({ matches, result, id }) {
     let playerOneWins;
     let playerTwoWins;
 
-    matches.forEach((match, index, arr) => {
+    matches.forEach((match, index) => {
         playerOneWins = JSON.parse(result[`match_${index}`]).playerOne.wins;
         playerTwoWins = JSON.parse(result[`match_${index}`]).playerTwo.wins;
 

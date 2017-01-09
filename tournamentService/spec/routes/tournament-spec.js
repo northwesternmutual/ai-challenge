@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const route = proxyquire
-    .noCallThru().load('../../routes/tournamentsRoute.js', { 
+    .noCallThru().load('../../routes/tournamentsRoute.js', {
         '../controllers/mongo.js': Mongo
     });
 

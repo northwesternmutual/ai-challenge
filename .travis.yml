@@ -19,4 +19,4 @@ install:
   - cd ~/build/northwesternmutual/ai-challenge && npm install
 
 script:
-  - cd ~/build/northwesternmutual/ai-challenge && npm test
+  - cd ~/build/northwesternmutual/ai-challenge && npm test && npm run lint

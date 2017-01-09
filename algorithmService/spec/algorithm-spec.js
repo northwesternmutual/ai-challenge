@@ -67,14 +67,14 @@ describe('algorithm route', () => {
             });
     });
     [
-      'var foo=require("module-name");',
-      'var foo=require(\n"module-name"\n);',
-      'var foo=require(\n"module-name");',
-      'var foo=require(\n"module-name"\n\n\n);',
-      'var foo=require(\n\n"module-name"\n);'
+        'var foo=require("module-name");',
+        'var foo=require(\n"module-name"\n);',
+        'var foo=require(\n"module-name");',
+        'var foo=require(\n"module-name"\n\n\n);',
+        'var foo=require(\n\n"module-name"\n);'
     ].forEach(item => {
-      it('should reject a new algorithm that might contain malicious code (require)', done => {
-          request(app)
+        it('should reject a new algorithm that might contain malicious code (require)', done => {
+            request(app)
               .put(`${basePath}/test/123abc`)
               .send({ initializeSimulation: item })
               .expect('Content-Type', /json/)

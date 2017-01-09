@@ -31,14 +31,14 @@ const checkIfMinLength = data => {
 const checkIfMalicious = data => {
     return new Promise((resolve, reject) => {
         [
-          /require\((\n*)(([^\)]|\n)*)(\n*)\)/igm,
-          /setTimeout/,
-          /setInterval/,
-          /Function/,
-          /exec/,
-          /eval/
+            /require\((\n*)(([^\)]|\n)*)(\n*)\)/igm,
+            /setTimeout/,
+            /setInterval/,
+            /Function/,
+            /exec/,
+            /eval/
         ].forEach(keyword => {
-            if(data.match(keyword)) {
+            if (data.match(keyword)) {
                 return reject(new Error('this code may be malicious'));
             }
         });

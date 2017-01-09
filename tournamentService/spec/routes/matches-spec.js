@@ -2,9 +2,8 @@ import request from 'supertest';
 import proxyquire from 'proxyquire';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { data, getMatches } from '../../mock/tournament.js';
+import { getMatches } from '../../mock/tournament.js';
 import { getMatches as getMatchesError } from '../../mock/errors.js';
-import log from '../../utils/logger';
 import fs from 'fs';
 import path from 'path';
 
@@ -21,8 +20,8 @@ function setupFakeRouter(dependencies) {
 
     route = proxyquire
         .noCallThru()
-        .load('../../routes/matchesRoute.js', { 
-                '../src/tournament.js': dependencies
+        .load('../../routes/matchesRoute.js', {
+            '../src/tournament.js': dependencies
         });
 
     app.use('/matches', route);
@@ -48,7 +47,7 @@ describe('tournament route', () => {
         request(app)
             .get(`${basePath}/ghi789`)
             .expect(204)
-            .end((err, res) => {
+            .end((err, res) => { //eslint-disable-line no-unused-vars
                 if (err) {
                     return done(err);
                 }

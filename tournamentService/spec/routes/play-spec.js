@@ -2,7 +2,7 @@ import request from 'supertest';
 import proxyquire from 'proxyquire';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { 
+import {
   data,
   createTasks,
   executeTasks,
@@ -13,14 +13,13 @@ import {
   initialize,
   postError
 } from '../../mock/tournament.js';
-import { 
+import {
   executeTasks as executeTasksError,
   getMatches as getMatchesError,
   postResults as postResultsError,
   initialize as initializeError,
   postError as postErrorError
 } from '../../mock/errors.js';
-import log from '../../utils/logger';
 
 let app;
 let route;
@@ -35,12 +34,12 @@ function setupFakeRouter(dependencies) {
 
     route = proxyquire
         .noCallThru()
-        .load('../../routes/playRoute.js', { 
-                '../src/tournament.js': Object.assign({}, {
-                    createTasks,
-                    sortResults,
-                    parseResults
-                }, dependencies)
+        .load('../../routes/playRoute.js', {
+            '../src/tournament.js': Object.assign({}, {
+                createTasks,
+                sortResults,
+                parseResults
+            }, dependencies)
         });
 
     app.use('/play', route);
@@ -79,7 +78,7 @@ describe('tournament route', () => {
         request(app)
             .get(`${basePath}/fake`)
             .expect(204)
-            .end((err, res) => {
+            .end((err, res) => { //eslint-disable-line no-unused-vars
                 if (err) {
                     return done(err);
                 }
@@ -97,7 +96,7 @@ describe('tournament route', () => {
         request(app)
             .get(`${basePath}/test`)
             .expect(500)
-            .end((err, res) => {
+            .end((err, res) => { //eslint-disable-line no-unused-vars
                 if (err) {
                     return done(err);
                 }
@@ -115,7 +114,7 @@ describe('tournament route', () => {
         request(app)
             .get(`${basePath}/test`)
             .expect(202)
-            .end((err, res) => {
+            .end((err, res) => { //eslint-disable-line no-unused-vars
                 if (err) {
                     return done(err);
                 }
@@ -133,7 +132,7 @@ describe('tournament route', () => {
         request(app)
             .get(`${basePath}/test`)
             .expect(202)
-            .end((err, res) => {
+            .end((err, res) => { //eslint-disable-line no-unused-vars
                 if (err) {
                     return done(err);
                 }
@@ -151,7 +150,7 @@ describe('tournament route', () => {
         request(app)
             .get(`${basePath}/test`)
             .expect(202)
-            .end((err, res) => {
+            .end((err, res) => { //eslint-disable-line no-unused-vars
                 if (err) {
                     return done(err);
                 }
