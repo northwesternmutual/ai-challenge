@@ -1,3 +1,3 @@
-## 1.0 (December 1, 2016)
+## 1.0 (January 9, 2017)
 
 * Initial public release

@@ -16,13 +16,7 @@ before_install:
   - npm install -g npm@3
 
 install:
-  - cd ~/build/northwesternmutual/ai-challenge/algorithmService && npm install
-  - cd ~/build/northwesternmutual/ai-challenge/simulatorService && npm install
-  - cd ~/build/northwesternmutual/ai-challenge/tournamentService && npm install
+  - cd ~/build/northwesternmutual/ai-challenge && npm install
 
 script:
-  - cd ~/build/northwesternmutual/ai-challenge/algorithmService && npm test
-  - cd ~/build/northwesternmutual/ai-challenge/simulatorService && npm test
-  - cd ~/build/northwesternmutual/ai-challenge/tournamentService && npm test
-
-  
+  - cd ~/build/northwesternmutual/ai-challenge && npm test
