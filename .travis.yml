@@ -17,6 +17,7 @@ before_install:
 
 install:
   - cd ~/build/northwesternmutual/ai-challenge && npm install
+  - cd ~/build/northwesternmutual/ai-challenge && npm run build
 
 script:
   - cd ~/build/northwesternmutual/ai-challenge && npm test
