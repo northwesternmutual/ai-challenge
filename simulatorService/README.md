@@ -1,4 +1,4 @@
-# Simulator Service 
+# Simulator Service
 
 > An AI Challenge microservice for simulations
 
@@ -10,25 +10,25 @@ Preforms a simulation of two AI implementations
 * **yarn** `yarn && yarn run dev`
 
 ## Commands
-* `npm run dev`: transpile es6 -> es5 and handle live changes via [nodemon](http://nodemon.io/) and enable debugging via [node-inspector](http://127.0.0.1:8082/?port=5859) 
-* `npm run start`: transpile es6 -> es5 and start the application 
+* `npm run dev`: transpile es6 -> es5 and handle live changes via [nodemon](http://nodemon.io/) and enable debugging via [node-inspector](http://127.0.0.1:8082/?port=5859)
+* `npm run start`: transpile es6 -> es5 and start the application
 * `npm run test`: run all `*spec.js` files in the `spec/` directory
 * `npm run coverage`: uses istanbul to determine the code coverage of the unit tests
 * `npm run lint:dev`: cache the results in a `.eslintcache` file so that only changed files are checked  
-* `npm run lint:prod`: lint files without results being cached 
+* `npm run lint:prod`: lint files without results being cached
 
 ## Configuration
 Environment configuration is fasciliated through `./confg/NODE_ENV.json`
 
 ## API
 #### Documentation
-[Swagger Schema](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/northwesternmutual/ai-challenge/master/simulatorService/swagger.json?token=AVjpyWYCjln_25UtMMb9_UJ1cPmmEuIZks5YSEQswA%3D%3D)
+[Swagger Schema](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/northwesternmutual/ai-challenge/master/simulatorService/swagger.json)
 
 ## Docker
 A `Dockerfile` and `.dockerignore` are included that can be used to run this application in a docker container. The offical image can be found [here](https://hub.docker.com/r/northwesternmutual/aichallenge-simulator/).
 
 ## Documentation
-Here is the documentation for the game engine source code found in `src/game/*.js`. 
+Here is the documentation for the game engine source code found in `src/game/*.js`.
 
 ### AI
 ##### `properties`
@@ -152,7 +152,7 @@ Here is the documentation for the game engine source code found in `src/game/*.j
 ```
 ##### `Cell.TYPE_CONQUERED`
 ```javascript
-/** @type {Number} [the cell has a Block on it and this 'hit' resulted in conquering the Block. 
+/** @type {Number} [the cell has a Block on it and this 'hit' resulted in conquering the Block.
 All cells the sunk Block uses are updated with this value] */
 ```
 
@@ -328,7 +328,7 @@ All cells the sunk Block uses are updated with this value] */
 ##### `Grid.prototype.doesCollide(x, y, direction, block)`
 ```javascript
 /**
- * [check to see whether a Block placed at the given coordinate and orientation will collide with an already placed Block. 
+ * [check to see whether a Block placed at the given coordinate and orientation will collide with an already placed Block.
  * The x, y are the top cell (if vertical) or left cell (if horizontal)]
  * @param  {Number} x         [x coordinate]
  * @param  {Number} y         [y coordinate]
@@ -349,7 +349,7 @@ All cells the sunk Block uses are updated with this value] */
 ##### `Grid.prototype.inBounds(x, y, direction, block)`
 ```javascript
 /**
- * [check to see whether a Block placed at the given coordinate and orientation will remain in the bounds of the grid. 
+ * [check to see whether a Block placed at the given coordinate and orientation will remain in the bounds of the grid.
  * The x, y are the top cell (if vertical) or left cell (if horizontal)]
  * @param  {Number} x         [x coordinate]
  * @param  {Number} y         [y coordinate]

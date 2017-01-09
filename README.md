@@ -57,7 +57,7 @@ AI Challenge is composed of three primary components which are explained below. 
 * **Tournament Service:** Facilitates a tournament of AI implementations. Reference the [documentation](./tournamentEngine/README.md) for detailed information.
 
 ## API
-[Swagger](http://swagger.io/) is used to document each component's API. See each component's documentation for more details. In addition, an aggregated Swagger document is available [here](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/northwesternmutual/ai-challenge/master/swagger.yml?token=AVjpyXumkRz9yyVsZuQScvBV2i32e00Uks5YSEKzwA%3D%3D&docExpansion=full).
+[Swagger](http://swagger.io/) is used to document each component's API. See each component's documentation for more details. In addition, an aggregated Swagger document is available [here](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/northwesternmutual/ai-challenge/master/swagger.yml&docExpansion=full).
 
 ## Example
 
