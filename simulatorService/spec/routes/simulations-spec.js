@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 let route = proxyquire
     .load('../../routes/simulationsRoute.js', {
-        '../src/simulator': proxyquire.load('../../src/simulator.js', {
+        '../src/simulator': proxyquire.load('../src/simulator.js', {
             'request': mockRequest
         })
     });
