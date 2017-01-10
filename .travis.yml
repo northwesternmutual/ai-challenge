@@ -1,6 +1,12 @@
 language: node_js
+
 node_js:
   - "6"
+
+sudo: required
+
+services:
+  - docker
 
 env:
   global:
