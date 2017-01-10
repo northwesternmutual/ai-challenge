@@ -5,7 +5,7 @@ const {
   getAlgorithms,
   conductSimulation,
   parseResponse
-} = require('../src/simulator.js');
+} = require('../src/simulator');
 const {
   ValidationError,
   NoSuchCollectionError

@@ -13,11 +13,13 @@ fake.use('/', function (req, res, next) { // eslint-disable-line no-unused-vars
     res.cookie('cookie', req.cookies);
     res.json({});
 });
-var app = proxyquire('../../app', {
-    './routes/simulationsRoute.js': fake,
-    './routes/doc': fake,
-    './routes/health': fake
-});
+var app = proxyquire
+    .noCallThru()
+    .load('../../app', {
+        './routes/simulationsRoute.js': fake,
+        './routes/doc': fake,
+        './routes/health': fake
+    });
 
 describe('the application path', function () {
     it('should be registered for simulations', function (done) {
