@@ -6,6 +6,7 @@ import { goodQuery, badQueryOne, badQueryTwo } from '../../mock/query';
 import { getAlgorithmsResult } from '../../mock/algorithms';
 
 const simulator = proxyquire
+    .noCallThru()
     .load('../../src/simulator.js', {
         'request': request
     });
