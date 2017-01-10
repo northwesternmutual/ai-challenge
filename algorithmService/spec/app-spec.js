@@ -85,7 +85,7 @@ describe('the algorithm application path', () => {
                     requestPath: '/health',
                     httpVerb: 'GET',
                     params: {},
-                    headers: { 'host': 'testHost', 'accept-encoding': 'gzip, deflate', 'user-agent': 'node-superagent/1.8.4', connection: 'close' }
+                    headers: { 'host': 'testHost', 'accept-encoding': 'gzip, deflate', 'user-agent': 'node-superagent/1.8.5', connection: 'close' }
                 });
                 if (err) {
                     return done(err);
