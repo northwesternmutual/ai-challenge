@@ -4,6 +4,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mockRequest from '../../mock/request';
 import { goodQuery, badQueryTwo, invalidQuery } from '../../mock/query';
+import path from 'path';
 import qs from 'qs';
 
 const basePath = '/simulation';
@@ -12,7 +13,7 @@ let app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-let simulatorMock = proxyquire.load('../../src/simulator.js', {
+let simulatorMock = proxyquire.load(path.join(__dirname, '../../src/simulator.js'), {
     'request': mockRequest
 });
 
