@@ -41,7 +41,7 @@ after_success:
   - cd ~/build/northwesternmutual/ai-challenge && npm run coveralls
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t northwesternmutual/aichallenge-algorithm:$COMMIT ~/build/northwesternmutual/ai-challenge/algorithmService/
+  - docker build -f Dockerfile -t northwesternmutual/aichallenge-algorithm:$COMMIT ~/build/northwesternmutual/ai-challenge/algorithmService/Dockerfile
   - docker tag northwesternmutual/aichallenge-algorithm:$COMMIT northwesternmutual/aichallenge-algorithm:$TAG
   - docker tag northwesternmutual/aichallenge-algorithm:$COMMIT northwesternmutual/aichallenge-algorithm:travis-$TRAVIS_BUILD_NUMBER
   - docker push northwesternmutual/aichallenge-algorithm
