@@ -36,18 +36,14 @@ after_success:
   - cd ~/build/northwesternmutual/ai-challenge && npm run coveralls
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - cd ~/build/northwesternmutual/ai-challenge/algorithmService && docker build -f Dockerfile -t northwesternmutual/aichallenge-algorithm:$COMMIT .
-  - docker tag northwesternmutual/aichallenge-algorithm:$COMMIT northwesternmutual/aichallenge-algorithm:$TAG
+  - cd ~/build/northwesternmutual/ai-challenge/algorithmService && docker build -f Dockerfile -t northwesternmutual/aichallenge-algorithm:$TAG .
   - docker push northwesternmutual/aichallenge-algorithm
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - cd ~/build/northwesternmutual/ai-challenge/simulatorService && docker build -f Dockerfile -t northwesternmutual/aichallenge-simulator:$COMMIT .
-  - docker tag northwesternmutual/aichallenge-simulator:$COMMIT northwesternmutual/aichallenge-simulator:$TAG
+  - cd ~/build/northwesternmutual/ai-challenge/simulatorService && docker build -f Dockerfile -t northwesternmutual/aichallenge-simulator:$TAG .
   - docker push northwesternmutual/aichallenge-simulator
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - cd ~/build/northwesternmutual/ai-challenge/tournamentService && docker build -f Dockerfile -t northwesternmutual/aichallenge-tournament:$COMMIT .
-  - docker tag northwesternmutual/aichallenge-tournament:$COMMIT northwesternmutual/aichallenge-tournament:$TAG
+  - cd ~/build/northwesternmutual/ai-challenge/tournamentService && docker build -f Dockerfile -t northwesternmutual/aichallenge-tournament:$TAG .
   - docker push northwesternmutual/aichallenge-tournament
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - cd ~/build/northwesternmutual/ai-challenge/nginx && docker build -f Dockerfile -t northwesternmutual/aichallenge-nginx:$COMMIT .
-  - docker tag northwesternmutual/aichallenge-nginx:$COMMIT northwesternmutual/aichallenge-nginx:$TAG
+  - cd ~/build/northwesternmutual/ai-challenge/nginx && docker build -f Dockerfile -t northwesternmutual/aichallenge-nginx:$TAG .
   - docker push northwesternmutual/aichallenge-nginx
