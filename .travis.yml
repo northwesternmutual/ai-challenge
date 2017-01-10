@@ -23,6 +23,11 @@ addons:
     packages:
       - g++-4.8
 
+before_install:
+  - echo $DOCKER_USER
+  - echo $DOCKER_PASS
+  - echo $DOCKER_EMAIL
+
 install:
   - cd ~/build/northwesternmutual/ai-challenge && npm install
   - cd ~/build/northwesternmutual/ai-challenge && npm run build
