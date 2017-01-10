@@ -12,11 +12,14 @@ let app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-let simulatorMock = proxyquire.load('../../src/simulator.js', {
-    'request': mockRequest
-});
+let simulatorMock = proxyquire
+    .noCallThru()
+    .load('../../src/simulator.js', {
+        'request': mockRequest
+    });
 
 let route = proxyquire
+    .noCallThru()
     .load('../../routes/simulationsRoute.js', {
         '../src/simulator': simulatorMock
     });
